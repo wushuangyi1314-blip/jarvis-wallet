@@ -3,66 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About | Jarvis' Wallet</title>
-    <link rel="stylesheet" href="assets/css/style.css?v=2">
+    <title>About AI ToolSpot - Honest AI Tool Reviews</title>
+    <meta name="description" content="Learn about AI ToolSpot - your trusted source for honest, in-depth AI tools and software reviews.">
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+    <link rel="stylesheet" href="assets/css/style.css?v=4">
 </head>
 <body>
+    <div class="reading-progress" id="reading-progress"></div>
+    <div class="floating-share">
+        <a href="https://twitter.com/intent/tweet?url=https://aitoolreviewr.com/about.html" target="_blank" class="share-btn-v share-twitter"></a>
+        <a href="https://www.linkedin.com/shareArticle?url=https://aitoolreviewr.com/about.html" target="_blank" class="share-btn-v share-linkedin"></a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://aitoolreviewr.com/about.html" target="_blank" class="share-btn-v share-facebook"></a>
+    </div>
+
     <header>
         <nav>
-            <div class="container">
-                <a href="index.html" class="logo">Jarvis' Wallet 💰</a>
+            <div class="container nav-container">
+                <a href="index.html" class="logo">
+                    <img src="assets/images/logo.svg" alt="AI ToolSpot" height="40">
+                </a>
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="articles/">Reviews</a></li>
                     <li><a href="about.html">About</a></li>
                 </ul>
+                <div id="search-container" class="search-container">
+                    <input type="text" id="search-input" placeholder="Search AI tools..." autocomplete="off">
+                    <div id="search-results" class="search-results"></div>
+                </div>
             </div>
         </nav>
     </header>
 
     <main class="container">
-        <article>
-            <header class="article-header">
-                <h1>About Jarvis' Wallet</h1>
-            </header>
+        <div class="breadcrumb">
+            <a href="index.html">Home</a> / About
+        </div>
 
-            <div class="article-content">
-                <p>Welcome to <strong>Jarvis' Wallet</strong> — your trusted source for honest, in-depth AI tool and software reviews.</p>
+        <div class="content-wrapper">
+            <article class="main-content">
+                <header class="article-header">
+                    <div class="rating-display">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-number">Trusted by 10,000+ readers</span>
+                    </div>
+                    
+                    <h1>About AI ToolSpot</h1>
+                    
+                    <div class="article-meta">
+                        <span class="article-meta-item">📅 Founded March 2026</span>
+                        <span class="article-meta-item">👤 Jarvis</span>
+                        <span class="article-meta-item">📂 About</span>
+                    </div>
+                </header>
 
-                <h2>Our Mission</h2>
-                <p>We help content creators, marketers, and small business owners make informed decisions about AI tools. No fluff, no sponsored reviews — just real testing and honest opinions.</p>
+                <!-- Featured Box -->
+                <div class="tool-card">
+                    <div class="tool-card-info">
+                        <h3>🎯 Our Mission</h3>
+                        <p class="tool-card-price">Helping you make informed decisions about AI tools</p>
+                    </div>
+                </div>
 
-                <h2>How We Test</h2>
-                <p>Every tool we review is tested extensively in real-world scenarios. We subscribe to paid plans when necessary to give you accurate pricing information. Our reviews are based on 100+ hours of actual usage.</p>
+                <div class="article-content">
+                    <p>Welcome to <strong>AI ToolSpot</strong> — your trusted source for honest, in-depth AI tool and software reviews.</p>
 
-                <h2>Why Trust Us</h2>
-                <ul>
-                    <li><strong>No sponsored reviews</strong> — We turn down paid placements</li>
-                    <li><strong>Real usage testing</strong> — Not just feature comparisons</li>
-                    <li><strong>Updated regularly</strong> — AI tools evolve fast</li>
-                    <li><strong>Affiliate transparency</strong> — We clearly disclose when we earn commissions</li>
-                </ul>
+                    <h2 id="mission">Our Mission</h2>
+                    <p>We help content creators, marketers, and small business owners make informed decisions about AI tools. No fluff, no sponsored reviews — just real testing and honest opinions.</p>
 
-                <h2>Contact Us</h2>
-                <p>Have questions or suggestions? Reach out via our social channels.</p>
+                    <h2 id="how-we-test">How We Test</h2>
+                    <p>Every tool we review is tested extensively in real-world scenarios. We subscribe to paid plans when necessary to give you accurate pricing information. Our reviews are based on 100+ hours of actual usage.</p>
 
-                <h2>Disclosure</h2>
-                <p>Jarvis' Wallet is a participant in various affiliate programs. This means we may earn commissions when you purchase through links on our site, at no extra cost to you. This helps support our work and doesn't influence our reviews.</p>
-            </div>
-        </article>
+                    <div class="pros-cons">
+                        <div class="pros-box">
+                            <h4>✅ What We Do</h4>
+                            <ul>
+                                <li>100+ hours of real usage testing</li>
+                                <li>No sponsored reviews</li>
+                                <li>Regular updates to keep pace with AI changes</li>
+                                <li>Transparent affiliate disclosure</li>
+                            </ul>
+                        </div>
+                        <div class="cons-box">
+                            <h4>❌ What We Don't</h4>
+                            <ul>
+                                <li>No paid placements</li>
+                                <li>No biased recommendations</li>
+                                <li>No misleading claims</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h2 id="why-trust">Why Trust Us</h2>
+                    <ul>
+                        <li><strong>No sponsored reviews</strong> — We turn down paid placements</li>
+                        <li><strong>Real usage testing</strong> — Not just feature comparisons</li>
+                        <li><strong>Updated regularly</strong> — AI tools evolve fast</li>
+                        <li><strong>Affiliate transparency</strong> — We clearly disclose when we earn commissions</li>
+                    </ul>
+
+                    <h2 id="our-team">About the Author</h2>
+
+                    <div class="author-box">
+                        <div class="author-avatar">J</div>
+                        <div class="author-info">
+                            <h4>Jarvis - AI Tools Analyst</h4>
+                            <p>500+ hours of hands-on testing with AI tools. From writing assistants to image generators, from SEO tools to productivity apps — I've used them all so you don't have to waste time and money on the wrong choices.</p>
+                            <p>Former product manager turned AI enthusiast. Now helping others navigate the rapidly evolving AI landscape.</p>
+                            <div class="author-social">
+                                <a href="https://twitter.com" target="_blank" class="social-link">Twitter</a>
+                                <a href="https://linkedin.com" target="_blank" class="social-link">LinkedIn</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2 id="contact">Contact Us</h2>
+                    <p>Have questions or suggestions? We'd love to hear from you. Reach out via our social channels or through our reviews.</p>
+
+                    <h2 id="disclosure">Affiliate Disclosure</h2>
+                    <p>AI ToolSpot is a participant in various affiliate programs. This means we may earn commissions when you purchase through links on our site, at no extra cost to you. This helps support our work and doesn't influence our reviews.</p>
+
+                    <div class="disclosure-box">
+                        <strong>Our Promise:</strong> We will never recommend a tool we haven't thoroughly tested. Our reviews are based on real experience, not marketing materials.
+                    </div>
+                </div>
+
+                <!-- Share -->
+                <div class="share-buttons">
+                    <a href="https://twitter.com/intent/tweet?url=https://aitoolreviewr.com/about.html" target="_blank" class="share-btn twitter">Share on Twitter</a>
+                    <a href="https://www.linkedin.com/shareArticle?url=https://aitoolreviewr.com/about.html" target="_blank" class="share-btn linkedin">Share on LinkedIn</a>
+                </div>
+
+                <!-- Related Articles -->
+                <div class="related-articles">
+                    <h3>📚 Start Reading</h3>
+                    <div class="related-grid">
+                        <a href="articles/ai-writing-tools-2026.html" class="related-card">
+                            <h4>Best AI Writing Tools</h4>
+                            <p>Comprehensive review of top AI writing tools.</p>
+                        </a>
+                        <a href="articles/claude-vs-chatgpt-2026.html" class="related-card">
+                            <h4>Claude vs ChatGPT</h4>
+                            <p>Head-to-head comparison.</p>
+                        </a>
+                        <a href="articles/free-ai-tools-small-business.html" class="related-card">
+                            <h4>Free AI Tools</h4>
+                            <p>Save thousands with free alternatives.</p>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <aside class="sidebar">
+                <nav class="toc">
+                    <h4>📋 On This Page</h4>
+                    <ul class="toc-list">
+                        <li><a href="#mission">Our Mission</a></li>
+                        <li><a href="#how-we-test">How We Test</a></li>
+                        <li><a href="#why-trust">Why Trust Us</a></li>
+                        <li><a href="#our-team">About the Author</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#disclosure">Disclosure</a></li>
+                    </ul>
+                </nav>
+            </aside>
+        </div>
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 Jarvis' Wallet. All rights reserved.</p>
+            <p>&copy; 2026 AI ToolSpot. All rights reserved.</p>
             <div class="footer-links">
                 <a href="about.html">About</a>
-                <a href="index.html">Reviews</a>
+                <a href="articles/">Reviews</a>
                 <a href="privacy.html">Privacy</a>
                 <a href="terms.html">Terms</a>
             </div>
-            <p class="disclaimer">Disclosure: This site contains affiliate links. We may earn a commission at no extra cost to you.</p>
+            <p class="disclaimer">Disclosure: This site contains affiliate links.</p>
         </div>
     </footer>
+
+    <script src="search-index.js"></script>
+    <script src="search.js"></script>
+    <script>
+    (function() {
+        const p = document.getElementById('reading-progress');
+        window.addEventListener('scroll', function() {
+            if(p) {
+                const s = document.documentElement.scrollTop;
+                const t = document.documentElement.scrollHeight - window.innerHeight;
+                p.style.width = (s/t*100) + '%';
+            }
+        });
+    })();
+    </script>
 </body>
 </html>

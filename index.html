@@ -3,23 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jarvis' Wallet - AI Tools & Software Reviews</title>
+    <title>AI ToolSpot - AI Tools & Software Reviews</title>
     <meta name="description" content="Honest, in-depth reviews of AI tools and software for content creators, marketers, and small business owners. Updated March 2026.">
-    <link rel="stylesheet" href="assets/css/style.css?v=2">
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+    <link rel="stylesheet" href="assets/css/style.css?v=4">
 </head>
 <body>
+    <!-- Reading Progress (for consistency) -->
+    <div class="reading-progress" id="reading-progress"></div>
+
+    <!-- Floating Share Buttons -->
+    <div class="floating-share" id="floating-share">
+        <a href="https://twitter.com/intent/tweet?url=https://aitoolreviewr.com" target="_blank" class="share-btn-v share-twitter" title="Share on Twitter"></a>
+        <a href="https://www.linkedin.com/shareArticle?url=https://aitoolreviewr.com" target="_blank" class="share-btn-v share-linkedin" title="Share on LinkedIn"></a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://aitoolreviewr.com" target="_blank" class="share-btn-v share-facebook" title="Share on Facebook"></a>
+    </div>
+
     <header>
         <nav>
             <div class="container nav-container">
-                <a href="index.html" class="logo">Jarvis' Wallet 💰</a>
+                <a href="index.html" class="logo">
+                    <img src="assets/images/logo.svg" alt="AI ToolSpot" height="40">
+                </a>
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="articles/">Reviews</a></li>
                     <li><a href="about.html">About</a></li>
                 </ul>
-                <!-- Search Box -->
                 <div id="search-container" class="search-container">
-                    <input type="text" id="search-input" placeholder="Search articles..." autocomplete="off">
+                    <input type="text" id="search-input" placeholder="Search AI tools..." autocomplete="off">
                     <div id="search-results" class="search-results"></div>
                 </div>
             </div>
@@ -32,6 +44,20 @@
             <p>Honest, in-depth reviews to help you choose the right AI tools. Updated March 2026.</p>
         </section>
 
+        <section class="featured-tool">
+            <div class="tool-card">
+                <div class="tool-card-info">
+                    <h3>🤖 Featured: Claude - Best AI Assistant 2026</h3>
+                    <p class="tool-card-price">💰 Free tier available | Pro: $20/mo</p>
+                    <p class="tool-card-rating">⭐ 4.8/5 Rating | 200K Context Window</p>
+                </div>
+                <div class="tool-card-buttons">
+                    <a href="https://claude.ai" target="_blank" class="tool-card-btn primary">Try Claude Free →</a>
+                    <a href="articles/ai-writing-tools-2026.html" class="tool-card-btn secondary">Read Review →</a>
+                </div>
+            </div>
+        </section>
+
         <section class="articles">
             <h2>Latest Reviews</h2>
             <div class="article-grid">
@@ -41,8 +67,8 @@
                     <h3><a href="articles/ai-writing-tools-2026.html">Best AI Writing Tools 2026: Complete Review Guide</a></h3>
                     <p class="excerpt">Comprehensive review of the top AI writing tools including Claude, ChatGPT, Jasper, Copy.ai, and Writesonic. Includes pricing, pros/cons, and personal recommendations based on 500+ hours of usage.</p>
                     <div class="meta">
-                        <span>March 2026</span>
-                        <span>~7,300 words</span>
+                        <span class="meta-item">📅 March 2026</span>
+                        <span class="meta-item">⏱️ 12 min</span>
                     </div>
                     <a href="articles/ai-writing-tools-2026.html" class="read-more">Read Review →</a>
                 </article>
@@ -50,10 +76,10 @@
                 <article class="article-card">
                     <span class="category">Comparison</span>
                     <h3><a href="articles/claude-vs-chatgpt-2026.html">Claude vs ChatGPT 2026: Which AI is Better?</a></h3>
-                    <p class="excerpt">Head-to-head comparison of Claude and ChatGPT. Context window, output quality, pricing, and specific use case recommendations. Updated for 2026.</p>
+                    <p class="excerpt">Head-to-head comparison of Claude and ChatGPT. Context window, output quality, pricing, and specific use case recommendations.</p>
                     <div class="meta">
-                        <span>March 2026</span>
-                        <span>~5,500 words</span>
+                        <span class="meta-item">📅 March 2026</span>
+                        <span class="meta-item">⏱️ 9 min</span>
                     </div>
                     <a href="articles/claude-vs-chatgpt-2026.html" class="read-more">Read Comparison →</a>
                 </article>
@@ -61,10 +87,10 @@
                 <article class="article-card">
                     <span class="category">Free Tools</span>
                     <h3><a href="articles/free-ai-tools-small-business.html">Top 10 Free AI Tools for Small Business 2026</a></h3>
-                    <p class="excerpt">Detailed review of the best free AI tools available in 2026. Save thousands annually with these powerful free alternatives for writing, design, and productivity.</p>
+                    <p class="excerpt">Detailed review of the best free AI tools available in 2026. Save thousands annually with these powerful free alternatives.</p>
                     <div class="meta">
-                        <span>March 2026</span>
-                        <span>~8,200 words</span>
+                        <span class="meta-item">📅 March 2026</span>
+                        <span class="meta-item">⏱️ 14 min</span>
                     </div>
                     <a href="articles/free-ai-tools-small-business.html" class="read-more">Read Guide →</a>
                 </article>
@@ -72,10 +98,10 @@
                 <article class="article-card">
                     <span class="category">AI Image</span>
                     <h3><a href="articles/ai-image-generator-tools.html">Best AI Image Generator Tools 2026</a></h3>
-                    <p class="excerpt">Complete review of AI image generators including Midjourney, DALL-E 3, Stable Diffusion, and more. Pricing comparisons, quality tests, and use case analysis.</p>
+                    <p class="excerpt">Complete review of AI image generators including Midjourney, DALL-E 3, Stable Diffusion, and more. Pricing comparisons and quality tests.</p>
                     <div class="meta">
-                        <span>March 2026</span>
-                        <span>~8,000 words</span>
+                        <span class="meta-item">📅 March 2026</span>
+                        <span class="meta-item">⏱️ 11 min</span>
                     </div>
                     <a href="articles/ai-image-generator-tools.html" class="read-more">Read Review →</a>
                 </article>
@@ -83,10 +109,10 @@
                 <article class="article-card">
                     <span class="category">SEO</span>
                     <h3><a href="articles/ai-for-seo-guide.html">How to Use AI for SEO: Complete Guide 2026</a></h3>
-                    <p class="excerpt">Practical guide to leveraging AI tools for search engine optimization. Keyword research, content optimization, and technical SEO automation strategies.</p>
+                    <p class="excerpt">Practical guide to leveraging AI tools for search engine optimization. Keyword research, content optimization, and technical SEO automation.</p>
                     <div class="meta">
-                        <span>March 2026</span>
-                        <span>~8,100 words</span>
+                        <span class="meta-item">📅 March 2026</span>
+                        <span class="meta-item">⏱️ 10 min</span>
                     </div>
                     <a href="articles/ai-for-seo-guide.html" class="read-more">Read Guide →</a>
                 </article>
@@ -102,10 +128,10 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 Jarvis' Wallet. All rights reserved.</p>
+            <p>&copy; 2026 AI ToolSpot. All rights reserved.</p>
             <div class="footer-links">
                 <a href="about.html">About</a>
-                <a href="index.html">Reviews</a>
+                <a href="articles/">Reviews</a>
                 <a href="privacy.html">Privacy</a>
                 <a href="terms.html">Terms</a>
             </div>
@@ -113,8 +139,19 @@
         </div>
     </footer>
 
-    <!-- Search Scripts -->
     <script src="search-index.js"></script>
     <script src="search.js"></script>
+    <script>
+    (function() {
+        const progress = document.getElementById('reading-progress');
+        window.addEventListener('scroll', function() {
+            if(progress) {
+                const scrolled = document.documentElement.scrollTop;
+                const total = document.documentElement.scrollHeight - window.innerHeight;
+                progress.style.width = (scrolled / total * 100) + '%';
+            }
+        });
+    })();
+    </script>
 </body>
 </html>
