@@ -998,3 +998,141 @@ footer .disclaimer {
         flex-direction: column;
     }
 }
+
+/* Reading Progress Bar */
+.reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--primary), #667eea);
+    z-index: 9999;
+    transition: width 0.1s ease-out;
+}
+
+/* Floating Share Buttons */
+.floating-share {
+    position: fixed;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 100;
+}
+
+.share-btn-v {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 0;
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.share-btn-v:hover {
+    transform: scale(1.1);
+}
+
+.share-twitter {
+    background: #1da1f2;
+}
+
+.share-linkedin {
+    background: #0077b5;
+}
+
+.share-facebook {
+    background: #1877f2;
+}
+
+/* Social Links in Author Box */
+.author-social {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.75rem;
+}
+
+.social-link {
+    display: inline-block;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    background: var(--bg-alt);
+    color: var(--text);
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+}
+
+.social-link:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* TOC Active State */
+.toc-list a.active {
+    color: var(--primary);
+    border-left-color: var(--primary);
+    background: rgba(37, 99, 235, 0.08);
+}
+
+/* Enhanced Sidebar TOC */
+.toc {
+    position: sticky;
+    top: 100px;
+}
+
+.toc-list li {
+    margin-bottom: 0.35rem;
+}
+
+.toc-list a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 0.88rem;
+    display: block;
+    padding: 0.35rem 0.75rem;
+    border-left: 2px solid transparent;
+    transition: all 0.2s;
+    border-radius: 0 4px 4px 0;
+}
+
+.toc-list a:hover {
+    color: var(--primary);
+    background: rgba(37, 99, 235, 0.05);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .floating-share {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .floating-share {
+        display: none;
+    }
+    
+    .content-wrapper {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        width: 100%;
+        order: -1;
+    }
+    
+    .toc {
+        position: static;
+    }
+}

@@ -19,18 +19,33 @@
     <meta name="twitter:description" content="Comprehensive review of the top AI writing tools.">
     
     <link rel="canonical" href="https://aitoolreviewr.com/articles/ai-writing-tools-2026.html">
-    <link rel="stylesheet" href="../assets/css/style.css?v=2">
+    <link rel="stylesheet" href="../assets/css/style.css?v=3">
 </head>
 <body>
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress" id="reading-progress"></div>
+
+    <!-- Floating Share Buttons -->
+    <div class="floating-share" id="floating-share">
+        <a href="https://twitter.com/intent/tweet?url=https://aitoolreviewr.com/articles/ai-writing-tools-2026.html" target="_blank" class="share-btn-v share-twitter" title="Share on Twitter">Twitter</a>
+        <a href="https://www.linkedin.com/shareArticle?url=https://aitoolreviewr.com/articles/ai-writing-tools-2026.html" target="_blank" class="share-btn-v share-linkedin" title="Share on LinkedIn">LinkedIn</a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://aitoolreviewr.com/articles/ai-writing-tools-2026.html" target="_blank" class="share-btn-v share-facebook" title="Share on Facebook">Facebook</a>
+    </div>
+
     <header>
         <nav>
-            <div class="container">
+            <div class="container nav-container">
                 <a href="../index.html" class="logo">Jarvis' Wallet 💰</a>
                 <ul class="nav-links">
                     <li><a href="../index.html">Home</a></li>
                     <li><a href="../index.html">Reviews</a></li>
                     <li><a href="../about.html">About</a></li>
                 </ul>
+                <!-- Search Box -->
+                <div id="search-container" class="search-container">
+                    <input type="text" id="search-input" placeholder="Search articles..." autocomplete="off">
+                    <div id="search-results" class="search-results"></div>
+                </div>
             </div>
         </nav>
     </header>
@@ -80,7 +95,7 @@
                     <a href="https://claude.ai" target="_blank" class="cta-button">Start Writing with Claude →</a>
                 </div>
 
-                <!-- Social Share -->
+                <!-- Share Buttons (inline) -->
                 <div class="share-buttons">
                     <a href="https://twitter.com/intent/tweet?url=https://aitoolreviewr.com/articles/ai-writing-tools-2026.html" target="_blank" class="share-btn twitter">Twitter</a>
                     <a href="https://www.linkedin.com/shareArticle?url=https://aitoolreviewr.com/articles/ai-writing-tools-2026.html" target="_blank" class="share-btn linkedin">LinkedIn</a>
@@ -318,7 +333,11 @@
                         <div class="author-avatar">J</div>
                         <div class="author-info">
                             <h4>About Jarvis</h4>
-                            <p>AI Tools Analyst with 500+ hours of hands-on testing. Helping you make informed decisions about AI tools since 2026.</p>
+                            <p>AI Tools Analyst with 500+ hours of hands-on testing. Follow me for the latest AI tool reviews and updates.</p>
+                            <div class="author-social">
+                                <a href="https://twitter.com" target="_blank" class="social-link">Twitter</a>
+                                <a href="https://linkedin.com" target="_blank" class="social-link">LinkedIn</a>
+                            </div>
                         </div>
                     </div>
 
@@ -356,7 +375,7 @@
 
             <!-- Sidebar TOC -->
             <aside class="sidebar">
-                <nav class="toc">
+                <nav class="toc" id="toc-sidebar">
                     <h4>📋 Table of Contents</h4>
                     <ul class="toc-list">
                         <li><a href="#what-makes-good">What Makes an AI Tool Good?</a></li>
@@ -384,5 +403,33 @@
             <p class="disclaimer">Disclosure: This site contains affiliate links. We may earn a commission at no extra cost to you.</p>
         </div>
     </footer>
+
+    <!-- Search Scripts -->
+    <script src="../search-index.js"></script>
+    <script src="../search.js"></script>
+    
+    <!-- Reading Progress Script -->
+    <script>
+    (function() {
+        'use strict';
+        const progressBar = document.getElementById('reading-progress');
+        const article = document.querySelector('.article-content');
+        
+        window.addEventListener('scroll', function() {
+            if (!progressBar || !article) return;
+            
+            const articleTop = article.offsetTop;
+            const articleHeight = article.offsetHeight;
+            const windowHeight = window.innerHeight;
+            const scrolled = window.scrollY;
+            
+            const start = articleTop - windowHeight;
+            const end = articleTop + articleHeight - windowHeight;
+            const progress = Math.max(0, Math.min(100, ((scrolled - start) / (end - start)) * 100));
+            
+            progressBar.style.width = progress + '%';
+        });
+    })();
+    </script>
 </body>
 </html>
