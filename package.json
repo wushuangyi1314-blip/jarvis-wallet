@@ -1,8 +1,0 @@
-{
-  "name": "jarvis-wallet",
-  "version": "1.0.0",
-  "description": "AI Tools & Software Reviews - Static site hosted on Cloudflare Pages",
-  "scripts": {
-    "build": "echo 'Static site - no build needed'"
-  }
-}
