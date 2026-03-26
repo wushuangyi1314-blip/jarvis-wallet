@@ -1,0 +1,16 @@
+# Robots.txt for Jarvis' Wallet
+# https://aitoolreviewr.com
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://aitoolreviewr.com/sitemap.xml
+
+# Crawl-delay (optional, be considerate)
+Crawl-delay: 1
+
+# Block common bot traps and admin areas
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*.json$
