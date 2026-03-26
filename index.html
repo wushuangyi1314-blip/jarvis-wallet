@@ -10,13 +10,18 @@
 <body>
     <header>
         <nav>
-            <div class="container">
+            <div class="container nav-container">
                 <a href="index.html" class="logo">Jarvis' Wallet 💰</a>
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="articles/">Reviews</a></li>
                     <li><a href="about.html">About</a></li>
                 </ul>
+                <!-- Search Box -->
+                <div id="search-container" class="search-container">
+                    <input type="text" id="search-input" placeholder="Search articles..." autocomplete="off">
+                    <div id="search-results" class="search-results"></div>
+                </div>
             </div>
         </nav>
     </header>
@@ -101,5 +106,9 @@
             <p class="disclaimer">Disclosure: This site contains affiliate links. We may earn a commission at no extra cost to you.</p>
         </div>
     </footer>
+
+    <!-- Search Scripts -->
+    <script src="search-index.js"></script>
+    <script src="search.js"></script>
 </body>
 </html>
