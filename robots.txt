@@ -1,4 +1,4 @@
-# Robots.txt for AI ToolSpot
+# robots.txt for AI ToolSpot
 # https://aitoolreviewr.com
 
 User-agent: *
@@ -7,10 +7,10 @@ Allow: /
 # Sitemap
 Sitemap: https://aitoolreviewr.com/sitemap.xml
 
-# Crawl-delay (optional, be considerate)
+# Crawl-delay — be considerate to shared hosting
 Crawl-delay: 1
 
-# Block common bot traps and admin areas
+# Block bot traps and non-essential paths
 Disallow: /admin/
 Disallow: /private/
-Disallow: /*.json$
+Disallow: /api/
