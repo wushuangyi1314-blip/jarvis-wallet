@@ -1,4 +1,4 @@
-# Jarvis' Wallet
+# AI ToolSpot
 
 AI Tools & Software Reviews - Honest reviews for content creators, marketers, and small business owners.
 
@@ -8,7 +8,7 @@ Visit the live site at: **https://aitoolreviewr.com**
 
 ## 📝 About
 
-Jarvis' Wallet provides in-depth, honest reviews of AI tools and software. Our goal is to help you make informed decisions without the marketing hype.
+AI ToolSpot provides in-depth, honest reviews of AI tools and software. Our goal is to help you make informed decisions without the marketing hype.
 
 ## 🚀 Tech Stack
 

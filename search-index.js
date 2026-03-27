@@ -1,4 +1,4 @@
-// Search Index - Jarvis' Wallet
+// Search Index - AI ToolSpot
 // All articles indexed for search functionality
 
 const searchIndex = [
@@ -33,7 +33,7 @@ const searchIndex = [
     excerpt: "Practical guide to leveraging AI tools for search engine optimization. Keyword research, content optimization, and technical SEO automation."
   },
   {
-    title: "About Jarvis' Wallet",
+    title: "About AI ToolSpot",
     url: "about.html",
     category: "About",
     excerpt: "AI Tools & Software Reviews - Honest reviews for content creators, marketers, and small business owners."

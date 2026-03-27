@@ -1,4 +1,4 @@
-// Search Functionality - Jarvis' Wallet
+// Search Functionality - AI ToolSpot
 // Simple client-side search for static site
 
 (function() {
