@@ -23,7 +23,7 @@
     <meta name="twitter:description" content="Learn about AI ToolSpot - your trusted source for honest, in-depth AI tools and software reviews.">
     <meta name="twitter:image" content="https://aitoolreviewr.com/assets/images/og-default.jpg">
 
-    <link rel="stylesheet" href="assets/css/style.css?v=5">
+    <link rel="stylesheet" href="assets/css/style.css?v=6">
 </head>
 <body>
     <div class="reading-progress" id="reading-progress"></div>
@@ -33,24 +33,54 @@
         <a href="https://www.facebook.com/sharer/sharer.php?u=https://aitoolreviewr.com/about.html" target="_blank" class="share-btn-v share-facebook"></a>
     </div>
 
-    <header>
-        <nav>
-            <div class="container nav-container">
-                <a href="index.html" class="logo">
-                    <img src="assets/images/logo.svg" alt="AI ToolSpot" height="40">
-                </a>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="articles/">Reviews</a></li>
-                    <li><a href="about.html">About</a></li>
-                </ul>
-                <div id="search-container" class="search-container">
-                    <input type="text" id="search-input" placeholder="Search AI tools..." autocomplete="off">
-                    <div id="search-results" class="search-results"></div>
+    <header class="site-header" id="siteHeader">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
                 </div>
+                <span>AI ToolSpot</span>
+            </a>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html">Home</a>
+                <a href="articles/index.html">Reviews</a>
+                <a href="about.html">About</a>
+            </nav>
+
+            <div class="header-search-wrap" id="searchWrap">
+                <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+                </svg>
+                <input type="text" id="search-input" class="search-input" placeholder="Search AI tools…" autocomplete="off">
+                <div id="search-results" class="search-results"></div>
             </div>
-        </nav>
+
+            <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
     </header>
+
+    <!-- Mobile Nav Drawer -->
+    <nav class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-header">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <span>AI ToolSpot</span>
+            </a>
+            <button class="close-btn" id="closeNavBtn" aria-label="Close menu">✕</button>
+        </div>
+        <a href="index.html">Home</a>
+        <a href="articles/index.html">Reviews</a>
+        <a href="about.html">About</a>
+    </nav>
 
     <main class="container">
         <div class="breadcrumb">
@@ -214,5 +244,30 @@
         });
     })();
     </script>
+
+    <script>
+    (function() {
+        var hamburger = document.getElementById('hamburgerBtn');
+        var mobileNav = document.getElementById('mobileNav');
+        var closeBtn  = document.getElementById('closeNavBtn');
+        if (hamburger && mobileNav && closeBtn) {
+            hamburger.addEventListener('click', function() {
+                mobileNav.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            });
+            closeBtn.addEventListener('click', function() {
+                mobileNav.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+            mobileNav.querySelectorAll('a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    mobileNav.classList.remove('open');
+                    document.body.style.overflow = '';
+                });
+            });
+        }
+    })();
+    </script>
+
 </body>
 </html>
