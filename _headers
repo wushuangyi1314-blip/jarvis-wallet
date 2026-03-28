@@ -7,12 +7,12 @@
   Cache-Control: public, max-age=3600, stale-while-revalidate=86400
   Vary: Accept-Encoding
 
-# ─── Long-term cache for immutable static assets ───────────────────────────
+# ─── Long-term cache for static assets (non-immutable so deployments take effect) ─
 /assets/css/*
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=31536000
 
 /assets/images/*
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=31536000
 
 /search-index.js
   Cache-Control: public, max-age=31536000, immutable
