@@ -1,0 +1,122 @@
+{{/*
+  Category Wall Partial
+  Desktop: shows all categories in flexbox wrap
+  Mobile: shows only 2 rows, with "View All Categories" toggle
+*/}}
+
+<div class="category-wall-wrapper">
+    <div class="category-wall" id="categoryWall">
+        <a href="{{ $.Site.BaseURL }}" class="category-tag{{ if eq "/" $.Page.RelPermalink }} active{{ end }}">Home</a>
+        <a href="{{ $.Site.BaseURL }}articles/" class="category-tag{{ if eq "/articles/" $.Page.RelPermalink }} active{{ end }}">All Reviews</a>
+        {{ range $name, $taxonomy := $.Site.Taxonomies.categories }}
+        <a href="{{ $.Site.BaseURL }}categories/{{ $name | urlize }}/" class="category-tag">{{ $name }}</a>
+        {{ end }}
+    </div>
+    <button class="category-toggle" id="categoryToggle">View All Categories ↓</button>
+</div>
+
+<style>
+.category-wall-wrapper {
+    margin: 1.5rem 0;
+}
+
+.category-wall {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    /* Constrain width so flex items wrap at a reasonable boundary instead of
+       stretching across the full viewport width in one row on large PC screens */
+    max-width: 100%;
+}
+
+.category-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.85rem;
+    background: var(--bg-alt);
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+.category-tag:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: rgba(37, 99, 235, 0.05);
+}
+
+.category-tag.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+.category-toggle {
+    display: none;
+    width: 100%;
+    margin-top: 0.75rem;
+    padding: 0.6rem;
+    background: transparent;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.category-toggle:hover {
+    background: rgba(37, 99, 235, 0.05);
+    border-color: var(--primary);
+}
+
+/* PC large screen: ensure 2-row layout (≤3 cols per row for 10 categories) */
+@media (min-width: 769px) and (max-width: 1200px) {
+    .category-wall {
+        max-width: 800px;
+    }
+}
+
+@media (min-width: 1201px) {
+    .category-wall {
+        max-width: 900px;
+    }
+}
+
+/* Mobile: collapse to 2 rows */
+@media (max-width: 768px) {
+    .category-wall {
+        max-height: calc(2 * 2.8rem);
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+    
+    .category-wall.expanded {
+        max-height: none;
+    }
+    
+    .category-toggle {
+        display: block;
+    }
+}
+</style>
+
+<script>
+(function() {
+    var wall = document.getElementById('categoryWall');
+    var toggle = document.getElementById('categoryToggle');
+    
+    if (!wall || !toggle) return;
+    
+    toggle.addEventListener('click', function() {
+        var isExpanded = wall.classList.toggle('expanded');
+        toggle.textContent = isExpanded ? 'Hide Categories ↑' : 'View All Categories ↓';
+    });
+})();
+</script>

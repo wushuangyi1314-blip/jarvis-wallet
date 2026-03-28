@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>{{ .Title }} | AI ToolSpot</title>
+    <title>{{ .Title }} | AI Tool Review</title>
     <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
     <link rel="canonical" href="{{ .Permalink }}">
 
@@ -11,11 +11,11 @@
     <meta property="og:title" content="{{ .Title }}">
     <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
     <meta property="og:url" content="{{ .Permalink }}">
-    <meta property="og:site_name" content="AI ToolSpot">
+    <meta property="og:site_name" content="AI Tool Review">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@AIToolSpot">
+    <meta name="twitter:site" content="@aitoolreviewr">
     <meta name="twitter:title" content="{{ .Title }}">
 
     {{ block "head" . }}{{ end }}
@@ -23,10 +23,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ .Site.BaseURL }}assets/css/style.css?v=9">
+    <link rel="stylesheet" href="{{ .Site.BaseURL }}assets/css/style.css?v=15">
 
     {{ if .OutputFormats.Get "JSON" }}
-    <link rel="search" type="application/opensearchdescription+json" title="AI ToolSpot Search" href="/index.json" />
+    <link rel="search" type="application/opensearchdescription+json" title="AI Tool Review Search" href="/index.json" />
     {{ end }}
 </head>
 <body>
@@ -96,6 +96,60 @@
                 });
             });
         }
+    })();
+
+    // TOC Scroll-Spy using IntersectionObserver
+    (function() {
+        var tocLinks = document.querySelectorAll('.toc-list a');
+        if (!tocLinks.length) return;
+
+        // Smooth scroll offset: header height + breathing room
+        var HEADER_H = 70;
+
+        function activateLink(id) {
+            tocLinks.forEach(function(a) {
+                var isActive = a.getAttribute('href') === '#' + id;
+                a.classList.toggle('active', isActive);
+            });
+        }
+
+        // Collect all heading elements referenced by TOC links
+        var headingIds = Array.from(tocLinks).map(function(a) {
+            return a.getAttribute('href').replace('#', '');
+        });
+
+        var visibleHeadings = [];
+
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                var id = entry.target.getAttribute('id');
+                if (entry.isIntersecting) {
+                    if (visibleHeadings.indexOf(id) === -1) visibleHeadings.push(id);
+                } else {
+                    visibleHeadings = visibleHeadings.filter(function(h) { return h !== id; });
+                }
+            });
+            // Activate the first visible heading's TOC link
+            if (visibleHeadings.length > 0) {
+                activateLink(visibleHeadings[0]);
+            }
+        }, {
+            rootMargin: '-' + HEADER_H + 'px 0px -60% 0px',
+            threshold: 0
+        });
+
+        headingIds.forEach(function(id) {
+            var el = document.getElementById(id);
+            if (el) observer.observe(el);
+        });
+
+        // Click a TOC link → immediately mark it active
+        tocLinks.forEach(function(a) {
+            a.addEventListener('click', function() {
+                tocLinks.forEach(function(l) { l.classList.remove('active'); });
+                a.classList.add('active');
+            });
+        });
     })();
     </script>
 
