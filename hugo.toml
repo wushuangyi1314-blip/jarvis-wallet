@@ -1,0 +1,43 @@
+baseURL = "https://aitoolreviewr.com/"
+languageCode = "en"
+title = "AI ToolSpot"
+publishDir = "public"
+
+# Disable default taxonomy pages we don't need
+[frontmatter]
+  date = ["date"]
+  lastmod = ["lastmod"]
+
+# Keep /articles/ URL structure
+[permalinks]
+  articles = "/articles/:filename/"
+  page = "/:filename/"
+
+# Output formats
+[outputs]
+  home = ["HTML", "JSON"]
+  page = ["HTML"]
+
+[mediaTypes]
+  [mediaTypes."application/json"]
+    suffixes = ["json"]
+
+[outputFormats]
+  [outputFormats.JSON]
+    mediaType = "application/json"
+    isPlainText = true
+    isHTML = false
+
+# Hugo stats (for search)
+[build]
+  writeStats = true
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+# Site params
+[params]
+  description = "Honest, in-depth reviews of AI tools and software for content creators, marketers, and small business owners. Updated weekly."
+  siteName = "AI ToolSpot"
+  twitterHandle = "@AIToolSpot"

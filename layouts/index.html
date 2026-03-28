@@ -1,0 +1,122 @@
+{{ define "main" }}
+{{ $pages := .Site.RegularPages }}
+{{ $featured := where $pages "Section" "articles" | first 1 }}
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-badge">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            Honest · Thorough · Weekly Updates
+        </div>
+        <h1>Find the Right AI Tool,<br>Every Single Time</h1>
+        <p>Expert reviews and comparisons of 500+ AI tools — updated weekly. No fluff, just signal.</p>
+        <div class="hero-search">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+            </svg>
+            <input type="text" id="hero-search-input" placeholder="Try 'Claude', 'Midjourney', or 'best for coding'…">
+        </div>
+    </div>
+</section>
+
+<!-- ===================== FEATURED ===================== -->
+{{ with $featured }}
+<section class="container">
+    <div class="section-header">
+        <span class="section-title">Featured This Week</span>
+        <a href="{{ $.Site.BaseURL }}articles/" class="section-link">View all →</a>
+    </div>
+
+    {{ range . }}
+    <div class="featured-card">
+        <div class="featured-info">
+            <div class="featured-label">
+                <svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+                Featured
+            </div>
+            <div class="featured-name">{{ .Title }}</div>
+            <p class="featured-desc">{{ .Description }}</p>
+            <div class="featured-meta">
+                <div class="meta-item">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                    </svg>
+                    {{ .Lastmod.Format "Jan 2, 2006" }}
+                </div>
+                <div class="meta-item">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                    {{ .Params.readingTime | default "8" }} min read
+                </div>
+                {{ with .Params.rating }}
+                <div class="rating-badge">
+                    <svg viewBox="0 0 24 24" width="11" height="11" fill="#F5A623"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    {{ . }} / 5
+                </div>
+                {{ end }}
+            </div>
+        </div>
+        <div class="featured-actions">
+            <a href="{{ .Params.featuredLink | default "https://claude.ai" }}" target="_blank" class="btn-primary">Try {{ .Params.featuredTool | default "Claude" }} Free →</a>
+            <a href="{{ .Permalink }}" class="btn-secondary">Read Full Review</a>
+        </div>
+    </div>
+    {{ end }}
+</section>
+{{ end }}
+
+<!-- ===================== ARTICLES ===================== -->
+<section class="container articles">
+    <div class="section-header">
+        <span class="section-title">Latest Reviews</span>
+        <a href="{{ .Site.BaseURL }}articles/" class="section-link">Browse all →</a>
+    </div>
+
+    <div class="article-grid">
+        {{ range (where $pages "Section" "articles").ByLastmod.Reverse | first 6 }}
+        <article class="article-card">
+            {{ with .Params.heroImage }}
+            <img class="tool-logo" src="{{ $.Site.BaseURL }}assets/images/{{ . }}" alt="{{ $.Title }}" width="44" height="44" loading="lazy">
+            {{ else }}
+            <img class="tool-logo" src="https://placehold.co/88x88/5B4FE9/FFFFFF?text=AI" alt="{{ .Title }}" width="44" height="44" loading="lazy">
+            {{ end }}
+            <div class="card-top">
+                <div class="tool-info">
+                    <span class="tool-category">{{ range first 1 .Params.categories }}{{ . }}{{ end }}</span>
+                    <div class="tool-name">{{ .Title }}</div>
+                    <div class="tool-rating">
+                        <svg viewBox="0 0 24 24" width="11" height="11" fill="#F5A623"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        {{ .Params.rating | default "4.5" }} · Updated {{ .Lastmod.Format "Jan 2, 2006" }}
+                    </div>
+                </div>
+            </div>
+            <p class="tool-desc">{{ .Description }}</p>
+            <div class="card-footer">
+                <span class="card-date">
+                    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                    </svg>
+                    {{ .Lastmod.Format "Jan 2, 2006" }}
+                </span>
+                <a href="{{ .Permalink }}" class="card-link">Read Review →</a>
+            </div>
+        </article>
+        {{ end }}
+    </div>
+</section>
+
+<!-- ===================== CTA ===================== -->
+<section class="container">
+    <div class="cta-section">
+        <h3>Start Your AI Journey</h3>
+        <p>Get our latest reviews and guides delivered to you. No spam, unsubscribe anytime.</p>
+    </div>
+</section>
+
+{{ end }}

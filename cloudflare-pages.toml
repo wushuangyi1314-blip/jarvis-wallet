@@ -1,0 +1,37 @@
+# Cloudflare Pages Configuration
+# Build command: hugo --gc --minify
+# Output directory: public
+
+[build]
+  command = "hugo --gc --minify"
+  directory = "public"
+
+[builds]
+  [builds.environment]
+    HUGO_VERSION = "0.123"
+
+[[redirects]]
+  from = "/articles/*.html"
+  to = "/articles/:slug/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/about.html"
+  to = "/about/"
+  status = 301
+
+[[redirects]]
+  from = "/privacy.html"
+  to = "/privacy/"
+  status = 301
+
+[[redirects]]
+  from = "/terms.html"
+  to = "/terms/"
+  status = 301
+
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
