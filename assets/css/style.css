@@ -2324,3 +2324,9 @@ body::after {
 
 /* Lazy loading already in HTML; ensure no broken icon glyphs */
 svg { display: inline-block; vertical-align: middle; }
+
+/* Article meta labels (emoji→text fix) */
+.meta-label {
+    font-weight: 600;
+    color: var(--text-light);
+}
