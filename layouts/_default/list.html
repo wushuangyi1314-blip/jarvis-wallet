@@ -1,45 +1,67 @@
 {{ define "main" }}
+{{ $pages := .Site.RegularPages }}
+{{ $articles := where $pages "Section" "articles" }}
+
 <main class="container">
     <div class="breadcrumb">
-        <a href="{{ .Site.BaseURL }}">Home</a> / Reviews
+        <a href="{{ .Site.BaseURL }}">Home</a> / <a href="{{ .Site.BaseURL }}articles/">Reviews</a>
     </div>
 
     <div class="section-header" style="margin: 2rem 0 1rem;">
-        <span class="section-title">All AI Tool Reviews</span>
+        <span class="section-title">Latest AI Tool Reviews</span>
     </div>
 
-    <div class="article-grid">
-        {{ range .Site.RegularPages }}
-        {{ if eq .Section "articles" }}
-        <article class="article-card">
-            {{ with .Params.heroImage }}
-            <img class="tool-logo" src="{{ $.Site.BaseURL }}assets/images/{{ . }}" alt="{{ $.Title }}" width="44" height="44" loading="lazy">
-            {{ else }}
-            <img class="tool-logo" src="https://placehold.co/88x88/5B4FE9/FFFFFF?text=AI" alt="{{ .Title }}" width="44" height="44" loading="lazy">
-            {{ end }}
-            <div class="card-top">
-                <div class="tool-info">
-                    <span class="tool-category">{{ range first 1 .Params.categories }}{{ . }}{{ end }}</span>
-                    <div class="tool-name">{{ .Title }}</div>
-                    <div class="tool-rating">
-                        <svg viewBox="0 0 24 24" width="11" height="11" fill="#F5A623"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        {{ .Params.rating | default "4.5" }} · Updated {{ .Lastmod.Format "Jan 2, 2006" }}
-                    </div>
-                </div>
+    <!-- Category Filter -->
+    <div class="category-filter-wrapper">
+        <div class="category-filter" id="categoryFilter">
+            <button class="category-tab active" data-cat="All">All</button>
+            <button class="category-tab" data-cat="AI Writing">AI Writing</button>
+            <button class="category-tab" data-cat="AI Image">AI Image</button>
+            <button class="category-tab" data-cat="Comparison">Comparison</button>
+            <button class="category-tab" data-cat="Free Tools">Free Tools</button>
+            <button class="category-tab" data-cat="SEO">SEO</button>
+            <button class="category-tab" data-cat="Marketing">Marketing</button>
+            <button class="category-tab" data-cat="Video">Video</button>
+            <button class="category-tab" data-cat="Audio">Audio</button>
+            <button class="category-tab" data-cat="Coding">Coding</button>
+        </div>
+        <button class="category-filter-toggle" id="categoryToggle">View All Categories <span style="font-size:10px">&#8595;</span></button>
+    </div>
+
+    <div class="article-grid" id="articleGrid">
+        {{ range $articles.ByLastmod.Reverse }}
+        <article class="article-card" data-category="{{ with index .Params.categories 0 }}{{ . }}{{ end }}}">
+            <div class="card-image-wrap">
+                {{ with .Params.heroImage }}
+                <img class="card-image" src="{{ $.Site.BaseURL }}assets/images/{{ . }}" alt="{{ $.Title }}" loading="lazy">
+                {{ else }}
+                <img class="card-image" src="https://placehold.co/640x360/5B4FE9/FFFFFF?text=AI+Review" alt="{{ .Title }}" loading="lazy">
+                {{ end }}
             </div>
-            <p class="tool-desc">{{ .Description }}</p>
-            <div class="card-footer">
-                <span class="card-date">
-                    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
-                    </svg>
-                    {{ .Lastmod.Format "Jan 2, 2006" }}
-                </span>
-                <a href="{{ .Permalink }}" class="card-link">Read Review →</a>
+            <div class="card-body">
+                <div class="card-title"><a href="{{ .Permalink }}">{{ .Title }}</a></div>
+                <div class="card-rating">
+                    <svg viewBox="0 0 24 24" width="12" height="12" fill="#F5A623"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <span class="rating-num">{{ .Params.rating | default "4.5" }}/5</span>
+                    {{ with .Params.ratingCount }}<span class="rating-count">· {{ . }} reviews</span>{{ end }}
+                </div>
+                <div class="card-date-row">Updated {{ .Lastmod.Format "Mar 27, 2006" }}</div>
+                <p class="card-desc">{{ .Description }}</p>
+                <div class="card-footer">
+                    <div class="card-footer-left">
+                        <span class="card-cat-tag">{{ with index .Params.categories 0 }}{{ . }}{{ end }}}</span>
+                        <span class="card-read-time">{{ .Params.readingTime | default "8" }} min read</span>
+                    </div>
+                    <a href="{{ .Permalink }}" class="card-link">Read Review →</a>
+                </div>
             </div>
         </article>
         {{ end }}
-        {{ end }}
+    </div>
+
+    <div class="load-more-wrap">
+        <button class="load-more-btn" id="loadMoreBtn">Load More Articles ↓</button>
     </div>
 </main>
+
 {{ end }}

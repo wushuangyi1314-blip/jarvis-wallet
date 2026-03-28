@@ -3,30 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>{{ .Title }} | AI ToolSpot</title>
+    <title>{{ .Title }} | AI Tool Review</title>
     <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
     <link rel="canonical" href="{{ .Permalink }}">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="{{ .Title }}">
+    <meta property="og:title" content="{{ .Title }} | AI Tool Review">
     <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
     <meta property="og:url" content="{{ .Permalink }}">
-    <meta property="og:site_name" content="AI ToolSpot">
+    <meta property="og:site_name" content="AI Tool Review">
+    <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+    {{ if .IsPage }}
+    {{ with .Params.heroImage }}
+    <meta property="og:image" content="{{ $.Site.BaseURL }}assets/images/{{ . }}">
+    {{ end }}
+    {{ end }}
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@AIToolSpot">
-    <meta name="twitter:title" content="{{ .Title }}">
+    <meta name="twitter:site" content="@aitoolreviewr">
+    <meta name="twitter:title" content="{{ .Title }} | AI Tool Review">
+    <meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
 
     {{ block "head" . }}{{ end }}
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ .Site.BaseURL }}assets/css/style.css?v=9">
+    <link rel="stylesheet" href="{{ .Site.BaseURL }}assets/css/style.css?v=10">
 
     {{ if .OutputFormats.Get "JSON" }}
-    <link rel="search" type="application/opensearchdescription+json" title="AI ToolSpot Search" href="/index.json" />
+    <link rel="search" type="application/opensearchdescription+json" title="AI Tool Review Search" href="/index.json" />
+    {{ end }}
+
+    <!-- JSON-LD Structured Data -->
+    {{ if .IsPage }}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "{{ .Title }}",
+        "description": "{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}",
+        "datePublished": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
+        "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
+        {{ with .Params.heroImage }}"image": "{{ $.Site.BaseURL }}assets/images/{{ . }}",{{ end }}
+        "url": "{{ .Permalink }}",
+        "publisher": {
+            "@type": "Organization",
+            "name": "AI Tool Review",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "{{ .Site.BaseURL }}assets/images/logo.svg"
+            }
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "{{ .Permalink }}"
+        }
+    }
+    </script>
+    {{ else }}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "AI Tool Review",
+        "url": "{{ .Site.BaseURL }}",
+        "description": "{{ .Site.Params.description }}",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "{{ .Site.BaseURL }}search/?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
     {{ end }}
 </head>
 <body>
@@ -36,7 +86,7 @@
     <!-- Floating Share Buttons -->
     {{ if .IsPage }}
     <div class="floating-share" id="floating-share">
-        <a href="https://twitter.com/intent/tweet?url={{ .Permalink }}" target="_blank" class="share-btn-v share-twitter" title="Share on Twitter">Twitter</a>
+        <a href="https://twitter.com/intent/tweet?url={{ .Permalink }}&text={{ .Title }}" target="_blank" class="share-btn-v share-twitter" title="Share on Twitter">Twitter</a>
         <a href="https://www.linkedin.com/shareArticle?url={{ .Permalink }}" target="_blank" class="share-btn-v share-linkedin" title="Share on LinkedIn">LinkedIn</a>
         <a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" target="_blank" class="share-btn-v share-facebook" title="Share on Facebook">Facebook</a>
     </div>
@@ -52,7 +102,7 @@
     <script src="{{ .Site.BaseURL }}search-index.js"></script>
     <script src="{{ .Site.BaseURL }}search.js"></script>
 
-    <!-- Reading Progress Script -->
+    <!-- Reading Progress + Mobile Nav Scripts -->
     <script>
     (function() {
         'use strict';
@@ -79,7 +129,7 @@
     (function() {
         var hamburger = document.getElementById('hamburgerBtn');
         var mobileNav = document.getElementById('mobileNav');
-        var closeBtn  = document.getElementById('closeNavBtn');
+        var closeBtn = document.getElementById('closeNavBtn');
         if (hamburger && mobileNav && closeBtn) {
             hamburger.addEventListener('click', function() {
                 mobileNav.classList.add('open');
@@ -96,6 +146,108 @@
                 });
             });
         }
+    })();
+
+    // Mobile category filter toggle
+    (function() {
+        var toggle = document.querySelector('.category-filter-toggle');
+        var filter = document.querySelector('.category-filter');
+        if (toggle && filter) {
+            toggle.addEventListener('click', function() {
+                filter.classList.toggle('hidden-rows');
+                var isHidden = filter.classList.contains('hidden-rows');
+                toggle.innerHTML = isHidden
+                    ? 'View All Categories <span style="font-size:10px">&#8595;</span>'
+                    : 'Hide <span style="font-size:10px">&#8593;</span>';
+            });
+        }
+    })();
+
+    // Category tab filtering
+    (function() {
+        var tabs = document.querySelectorAll('.category-tab');
+        var cards = document.querySelectorAll('[data-category]');
+        tabs.forEach(function(tab) {
+            tab.addEventListener('click', function(e) {
+                if (tab.getAttribute('href') && tab.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                }
+                var cat = tab.getAttribute('data-cat') || tab.textContent.trim();
+                tabs.forEach(function(t) { t.classList.remove('active'); });
+                tab.classList.add('active');
+                cards.forEach(function(card) {
+                    var cardCat = card.getAttribute('data-category');
+                    if (!cat || cat === 'All' || cardCat === cat) {
+                        card.style.display = '';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    })();
+
+    // TOC scroll highlighting
+    (function() {
+        var tocLinks = document.querySelectorAll('.toc-list a');
+        if (!tocLinks.length) return;
+        var headings = [];
+        tocLinks.forEach(function(link) {
+            var id = link.getAttribute('href');
+            if (id) {
+                var el = document.querySelector(id);
+                if (el) headings.push({ link: link, el: el });
+            }
+        });
+
+        function highlightTOC() {
+            var scrollY = window.scrollY + 100;
+            var current = null;
+            headings.forEach(function(item) {
+                if (item.el.offsetTop <= scrollY) {
+                    current = item;
+                }
+            });
+            tocLinks.forEach(function(link) { link.classList.remove('active'); });
+            if (current) current.link.classList.add('active');
+        }
+
+        window.addEventListener('scroll', highlightTOC);
+        highlightTOC();
+    })();
+
+    // Load More / Infinite scroll
+    (function() {
+        var loadBtn = document.getElementById('loadMoreBtn');
+        if (!loadBtn) return;
+        var page = 2;
+        loadBtn.addEventListener('click', function() {
+            loadBtn.disabled = true;
+            loadBtn.textContent = 'Loading...';
+            var url = new URL(window.location.href);
+            url.searchParams.set('page', page);
+            fetch(url.toString())
+                .then(function(r) { return r.text(); })
+                .then(function(html) {
+                    var parser = new DOMParser();
+                    var doc = parser.parseFromString(html, 'text/html');
+                    var newCards = doc.querySelectorAll('.article-card[data-category]');
+                    var grid = document.querySelector('.article-grid');
+                    if (newCards.length && grid) {
+                        newCards.forEach(function(card) { grid.appendChild(card); });
+                        page++;
+                        loadBtn.disabled = false;
+                        loadBtn.textContent = 'Load More';
+                    } else {
+                        loadBtn.textContent = 'No More Articles';
+                        loadBtn.disabled = true;
+                    }
+                })
+                .catch(function() {
+                    loadBtn.disabled = false;
+                    loadBtn.textContent = 'Load More';
+                });
+        });
     })();
     </script>
 

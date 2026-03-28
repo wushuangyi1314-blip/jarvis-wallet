@@ -1,19 +1,16 @@
 baseURL = "https://aitoolreviewr.com/"
 languageCode = "en"
-title = "AI ToolSpot"
+title = "AI Tool Review"
 publishDir = "public"
 
-# Disable default taxonomy pages we don't need
 [frontmatter]
   date = ["date"]
   lastmod = ["lastmod"]
 
-# Keep /articles/ URL structure
 [permalinks]
   articles = "/articles/:filename/"
   page = "/:filename/"
 
-# Output formats
 [outputs]
   home = ["HTML", "JSON"]
   page = ["HTML"]
@@ -28,7 +25,6 @@ publishDir = "public"
     isPlainText = true
     isHTML = false
 
-# Hugo stats (for search)
 [build]
   writeStats = true
 
@@ -36,8 +32,7 @@ publishDir = "public"
   category = "categories"
   tag = "tags"
 
-# Site params
 [params]
-  description = "Honest, in-depth reviews of AI tools and software for content creators, marketers, and small business owners. Updated weekly."
-  siteName = "AI ToolSpot"
-  twitterHandle = "@AIToolSpot"
+  description = "Honest, expert AI tool reviews. In-depth analysis of the best AI tools in 2026 — Claude, ChatGPT, Midjourney, Jasper & more. Updated weekly."
+  siteName = "AI Tool Review"
+  twitterHandle = "@aitoolreviewr"
