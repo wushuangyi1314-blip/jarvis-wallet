@@ -1,0 +1,12 @@
+# Cloudflare Pages Redirects
+# Redirect old .html URLs to new clean URLs (SEO preservation)
+
+/articles/ai-writing-tools-2026.html /articles/ai-writing-tools-2026/ 301
+/articles/ai-image-generator-tools.html /articles/ai-image-generator-tools/ 301
+/articles/claude-vs-chatgpt-2026.html /articles/claude-vs-chatgpt-2026/ 301
+/articles/free-ai-tools-small-business.html /articles/free-ai-tools-small-business/ 301
+/articles/ai-for-seo-guide.html /articles/ai-for-seo-guide/ 301
+/about.html /about/ 301
+/privacy.html /privacy/ 301
+/terms.html /terms/ 301
+/index.html / 301

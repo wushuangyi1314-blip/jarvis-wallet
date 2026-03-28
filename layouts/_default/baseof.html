@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>{{ .Title }} | AI ToolSpot</title>
+    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+    <link rel="canonical" href="{{ .Permalink }}">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="{{ .Title }}">
+    <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+    <meta property="og:url" content="{{ .Permalink }}">
+    <meta property="og:site_name" content="AI ToolSpot">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@AIToolSpot">
+    <meta name="twitter:title" content="{{ .Title }}">
+
+    {{ block "head" . }}{{ end }}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ .Site.BaseURL }}assets/css/style.css?v=9">
+
+    {{ if .OutputFormats.Get "JSON" }}
+    <link rel="search" type="application/opensearchdescription+json" title="AI ToolSpot Search" href="/index.json" />
+    {{ end }}
+</head>
+<body>
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress" id="reading-progress"></div>
+
+    <!-- Floating Share Buttons -->
+    {{ if .IsPage }}
+    <div class="floating-share" id="floating-share">
+        <a href="https://twitter.com/intent/tweet?url={{ .Permalink }}" target="_blank" class="share-btn-v share-twitter" title="Share on Twitter">Twitter</a>
+        <a href="https://www.linkedin.com/shareArticle?url={{ .Permalink }}" target="_blank" class="share-btn-v share-linkedin" title="Share on LinkedIn">LinkedIn</a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" target="_blank" class="share-btn-v share-facebook" title="Share on Facebook">Facebook</a>
+    </div>
+    {{ end }}
+
+    {{ partial "header.html" . }}
+
+    {{ block "main" . }}{{ end }}
+
+    {{ partial "footer.html" . }}
+
+    <!-- Search Scripts -->
+    <script src="{{ .Site.BaseURL }}search-index.js"></script>
+    <script src="{{ .Site.BaseURL }}search.js"></script>
+
+    <!-- Reading Progress Script -->
+    <script>
+    (function() {
+        'use strict';
+        var progressBar = document.getElementById('reading-progress');
+        var article = document.querySelector('.article-content');
+
+        function updateProgress() {
+            if (!progressBar || !article) return;
+            var articleTop = article.offsetTop;
+            var articleHeight = article.offsetHeight;
+            var windowHeight = window.innerHeight;
+            var scrolled = window.scrollY;
+            var start = articleTop - windowHeight;
+            var end = articleTop + articleHeight - windowHeight;
+            var progress = Math.max(0, Math.min(100, ((scrolled - start) / (end - start)) * 100));
+            progressBar.style.width = progress + '%';
+        }
+
+        window.addEventListener('scroll', updateProgress);
+        updateProgress();
+    })();
+
+    // Hamburger menu
+    (function() {
+        var hamburger = document.getElementById('hamburgerBtn');
+        var mobileNav = document.getElementById('mobileNav');
+        var closeBtn  = document.getElementById('closeNavBtn');
+        if (hamburger && mobileNav && closeBtn) {
+            hamburger.addEventListener('click', function() {
+                mobileNav.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            });
+            closeBtn.addEventListener('click', function() {
+                mobileNav.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+            mobileNav.querySelectorAll('a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    mobileNav.classList.remove('open');
+                    document.body.style.overflow = '';
+                });
+            });
+        }
+    })();
+    </script>
+
+    {{ block "scripts" . }}{{ end }}
+</body>
+</html>
