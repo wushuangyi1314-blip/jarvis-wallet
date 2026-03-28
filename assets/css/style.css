@@ -1477,9 +1477,9 @@ html {
     margin: 20px 0;
     box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     display: block;
-    /* Force proper GPU compositing layer so image scrolls correctly on iOS Safari */
-    transform: translateZ(0);
-    will-change: transform;
+    /* DO NOT add transform:translateZ(0) or will-change here — on iOS Safari these
+       create a GPU compositing layer that causes the image to visually "float" over
+       scrolling content, appearing fixed-position when it should scroll normally. */
 }
 
 /* Quick Nav / Callout Box */
