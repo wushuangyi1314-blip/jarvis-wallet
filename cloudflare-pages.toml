@@ -6,9 +6,8 @@
   command = "hugo --gc --minify"
   directory = "public"
 
-[builds]
-  [builds.environment]
-    HUGO_VERSION = "0.123"
+[build.environment]
+  HUGO_VERSION = "0.123"
 
 [[redirects]]
   from = "/articles/*.html"
