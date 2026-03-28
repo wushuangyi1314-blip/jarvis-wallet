@@ -2,6 +2,9 @@
 {{ $pages := .Site.RegularPages }}
 {{ $featured := where $pages "Section" "articles" | first 1 }}
 
+<!-- ===================== CATEGORY WALL ===================== -->
+{{ partial "category-wall.html" . }}
+
 <!-- ===================== HERO ===================== -->
 <section class="hero">
     <div class="container">
