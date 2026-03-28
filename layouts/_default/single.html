@@ -20,11 +20,11 @@
                 <h1>{{ .Title }}</h1>
 
                 <div class="article-meta">
-                    <span class="article-meta-item">📅 {{ .Lastmod.Format "January 2006" }}</span>
-                    {{ with .Params.readingTime }}<span class="article-meta-item">⏱️ {{ . }} min read</span>{{ end }}
-                    <span class="article-meta-item">👤 Jarvis</span>
+                    <span class="article-meta-item"><span class="meta-label">Date:</span> {{ .Lastmod.Format "January 2006" }}</span>
+                    {{ with .Params.readingTime }}<span class="article-meta-item"><span class="meta-label">Read:</span> {{ . }} min</span>{{ end }}
+                    <span class="article-meta-item"><span class="meta-label">By:</span> Jarvis</span>
                     {{ with .Params.categories }}
-                    <span class="article-meta-item">📂 {{ range first 1 . }}{{ . }}{{ end }}</span>
+                    <span class="article-meta-item"><span class="meta-label">Category:</span> {{ range first 1 . }}{{ . }}{{ end }}</span>
                     {{ end }}
                 </div>
 

@@ -736,6 +736,11 @@ nav .container {
     gap: 0.35rem;
 }
 
+.meta-label {
+    font-weight: 600;
+    color: var(--text-light);
+}
+
 .article-content {
     max-width: 800px;
     padding: 2rem 0;
@@ -971,6 +976,10 @@ footer .disclaimer {
         text-align: center;
     }
     
+    .tool-card-info {
+        width: 100%;
+    }
+    
     .tool-card-buttons {
         flex-direction: column;
         width: 100%;
@@ -983,6 +992,18 @@ footer .disclaimer {
     
     .pros-cons {
         grid-template-columns: 1fr;
+    }
+    
+    .pros-box,
+    .cons-box {
+        padding: 1rem;
+    }
+    
+    .pros-box li,
+    .cons-box li {
+        overflow-wrap: break-word;
+        word-break: break-word;
+        line-height: 1.6;
     }
     
     .toc {
@@ -1218,6 +1239,10 @@ footer .disclaimer {
         padding: 1rem;
     }
     
+    .tool-card-info {
+        width: 100%;
+    }
+    
     .tool-card-info h3 {
         font-size: 1rem;
     }
@@ -1288,6 +1313,18 @@ footer .disclaimer {
     
     .pros-cons {
         grid-template-columns: 1fr;
+    }
+    
+    .pros-box,
+    .cons-box {
+        padding: 1rem;
+    }
+    
+    .pros-box li,
+    .cons-box li {
+        overflow-wrap: break-word;
+        word-break: break-word;
+        line-height: 1.6;
     }
     
     .comparison-table {
