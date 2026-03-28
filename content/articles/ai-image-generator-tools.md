@@ -50,7 +50,7 @@ Whether you need photorealistic product shots, artistic illustrations, game asse
 - **Best for Adobe users:** Adobe Firefly ($5/mo)
 </div>
 
-## The Best AI Image Generators Ranked
+## The Best AI Image Generators Ranked {#top-tools}
 
 ### #1: Midjourney — Best Overall Quality
 
@@ -185,7 +185,7 @@ Leonardo.ai has emerged as the **best free AI image generator**. It combines qua
 
 If you're already in the Adobe ecosystem, Firefly is a natural choice — especially the generative fill feature in Photoshop which is genuinely transformative.
 
-## Quick Comparison
+## Quick Comparison {#comparison}
 
 | Tool | Best For | Free Tier | Paid From | Quality |
 |------|----------|-----------|-----------|---------|
@@ -195,7 +195,7 @@ If you're already in the Adobe ecosystem, Firefly is a natural choice — especi
 | **Leonardo.ai** | Free + quality | ✅ 150-450/day | $12/mo | ⭐⭐⭐⭐ |
 | **Adobe Firefly** | Adobe users | Limited | $5/mo | ⭐⭐⭐ |
 
-## Prompt Engineering Tips
+## Prompt Engineering Tips {#prompts}
 
 Regardless of which **AI image generator** you use, good prompts matter:
 
@@ -216,7 +216,7 @@ Regardless of which **AI image generator** you use, good prompts matter:
 
 ---
 
-## Frequently Asked Questions: AI Image Generators
+## Frequently Asked Questions: AI Image Generators {#faq}
 
 **What is the best free AI image generator in 2026?**
 
@@ -236,7 +236,7 @@ It depends on the tool's terms: **DALL-E 3** and **Adobe Firefly** explicitly gr
 
 ---
 
-## My Personal AI Image Generation Stack
+## My Personal AI Image Generation Stack {#recommendation}
 
 **For professional marketing content:**
 

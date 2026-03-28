@@ -1473,12 +1473,14 @@ footer .disclaimer {
     }
 
     .article-hero-img {
-        /* On mobile, cap hero image height for better performance and scroll behavior */
+        /* On mobile, force 16:9 ratio + cover fit to prevent square crop */
+        width: 100%;
+        height: auto;
         max-height: 300px;
+        aspect-ratio: 16/9;
+        object-fit: cover;
         /* Align to top so the top of the image isn't cropped when object-fit:cover clips */
         object-position: top center;
-        /* Enforce 16:9 ratio on all viewports — prevents mobile squish to 335×335 */
-        aspect-ratio: 16/9;
     }
 
     .tool-card {
@@ -1500,243 +1502,6 @@ html {
 /* ============================================================
    DARK MODE — follows system preference
    ============================================================ */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --primary:       #60a5fa;
-        --primary-dark:  #3b82f6;
-        --text:          #e5e7eb;
-        --text-light:    #9ca3af;
-        --bg:            #0f1117;
-        --bg-alt:        #1a1d27;
-        --border:        #2d3143;
-        --accent:        #818cf8;
-        --cta-bg:        #3b82f6;
-        --cta-hover:     #2563eb;
-        --text-1:        #e5e7eb;
-        --text-2:        #9ca3af;
-        --text-3:        #6b7280;
-        --accent-dim:    rgba(129, 140, 248, 0.15);
-        --green:         #34d399;
-        --surface:        #1a1d27;
-        --shadow:         0 1px 3px rgba(0,0,0,.4), 0 1px 2px rgba(0,0,0,.3);
-        --shadow-lg:      0 4px 16px rgba(0,0,0,.5), 0 2px 6px rgba(0,0,0,.3);
-    }
-
-    body {
-        background: var(--bg);
-        color: var(--text-1);
-    }
-
-    /* Article card dark mode */
-    .article-card {
-        background: var(--surface);
-        border-color: var(--border);
-    }
-
-    .article-card:hover {
-        border-color: #4b5563;
-    }
-
-    /* TOC dark mode */
-    .toc {
-        background: var(--bg-alt);
-        border-color: var(--border);
-    }
-
-    .toc-list a {
-        color: var(--text-2);
-    }
-
-    .toc-list a:hover,
-    .toc-list a.active {
-        color: var(--accent);
-        border-left-color: var(--accent);
-        background: rgba(129, 140, 248, 0.08);
-    }
-
-    /* Header dark mode */
-    .site-header {
-        background: rgba(15, 17, 23, 0.92);
-        border-bottom-color: var(--border);
-    }
-
-    /* Footer dark mode */
-    footer {
-        background: var(--bg-alt) !important;
-        color: var(--text-2) !important;
-        border-top: 1px solid var(--border) !important;
-    }
-
-    footer a { color: var(--text-2) !important; }
-    footer p { color: var(--text-2) !important; }
-
-    /* Cards dark mode */
-    .card-v4 {
-        background: var(--surface);
-        border-color: var(--border);
-    }
-
-    .card-v4-title { color: var(--text-1); }
-    .card-v4-desc  { color: var(--text-2); }
-    .card-v4-pubdate { color: var(--text-3); }
-    .card-v4-link { color: var(--accent); }
-
-    /* Featured card dark mode */
-    .featured-card {
-        background: var(--surface);
-        border-color: var(--border);
-    }
-
-    .featured-desc { color: var(--text-2); }
-    .featured-name { color: var(--text-1); }
-
-    /* Search dark mode */
-    .search-input {
-        background: var(--bg-alt);
-        border-color: var(--border);
-        color: var(--text-1);
-    }
-
-    /* Affiliate CTA dark */
-    .affiliate-cta {
-        background: linear-gradient(135deg, #1d4ed8 0%, #1e3a8a 100%);
-    }
-
-    /* Disclosure / pros-cons dark */
-    .disclosure-box {
-        background: var(--bg-alt);
-        border-color: var(--border);
-    }
-
-    .pros-box {
-        background: rgba(52, 211, 153, 0.08);
-        border-color: rgba(52, 211, 153, 0.25);
-    }
-
-    .cons-box {
-        background: rgba(248, 113, 113, 0.08);
-        border-color: rgba(248, 113, 113, 0.25);
-    }
-
-    /* Quick nav / FAQ dark */
-    .quick-nav-box {
-        background: linear-gradient(135deg, #1a1d27 0%, #1e2235 100%);
-        border-left-color: var(--accent);
-    }
-
-    .faq-item {
-        background: var(--bg-alt);
-        border-color: var(--border);
-    }
-
-    /* Tool card dark */
-    .tool-card {
-        background: linear-gradient(135deg, #2d3280 0%, #3b2070 100%);
-    }
-
-    /* Newsletter dark */
-    .newsletter {
-        background: var(--bg-alt);
-        border-color: var(--border);
-    }
-
-    /* Article content dark */
-    .article-content h2 { color: var(--text-1); }
-    .article-content h3 { color: var(--text-1); }
-    .article-content p  { color: var(--text-1); }
-    .article-content li { color: var(--text-1); }
-    .article-content blockquote {
-        color: var(--text-2);
-        border-left-color: var(--accent);
-    }
-    .article-content code {
-        background: var(--bg-alt);
-        color: var(--accent);
-    }
-    .article-content pre {
-        background: var(--bg-alt);
-    }
-    .article-content th {
-        background: var(--bg-alt);
-    }
-    .article-content td {
-        border-color: var(--border);
-    }
-
-    /* Mobile nav dark */
-    .mobile-nav {
-        background: var(--bg);
-    }
-
-    .mobile-nav a {
-        color: var(--text-1);
-        border-bottom-color: var(--border);
-    }
-
-    .hamburger span {
-        background: var(--text-1);
-    }
-
-    /* Share buttons dark */
-    .share-btn-v {
-        box-shadow: 0 2px 8px rgba(0,0,0,.4);
-    }
-
-    /* Author box dark */
-    .author-box {
-        background: var(--bg-alt);
-        border-color: var(--border);
-    }
-
-    /* Related card dark */
-    .related-card {
-        background: var(--surface);
-        border-color: var(--border);
-        color: var(--text-1);
-    }
-
-    .related-card:hover {
-        border-color: var(--accent);
-    }
-
-    /* Rating/category pills dark */
-    .rating-display-sm { color: var(--text-2); }
-    .category-filter .category {
-        background: var(--surface);
-        border-color: var(--border);
-        color: var(--text-1);
-    }
-
-    /* Comparison table dark */
-    .comparison-table th { background: var(--bg-alt); }
-    .comparison-table td { border-color: var(--border); }
-    .comparison-table tr:nth-child(even) { background: var(--bg-alt); }
-
-    /* Article meta dark */
-    .article-meta { color: var(--text-2); }
-
-    /* Breadcrumb dark */
-    .breadcrumb { color: var(--text-2); }
-    .breadcrumb a { color: var(--accent); }
-
-    /* Section header dark */
-    .section-title { color: var(--text-1); }
-    .section-link { color: var(--accent); }
-
-    /* CTA section dark */
-    .cta-section {
-        background: var(--surface);
-        border-color: var(--border);
-    }
-
-    .cta-section h3 { color: var(--text-1); }
-    .cta-section p  { color: var(--text-2); }
-
-    /* Footer brand dark */
-    .footer-brand { color: var(--text-1); }
-    .footer-links a { color: var(--text-2) !important; }
-    .footer-copy   { color: var(--text-3) !important; border-top-color: var(--border) !important; }
-}
 
 /* Better focus states for accessibility */
 @media (max-width: 768px) {
@@ -2922,4 +2687,241 @@ article.card-v4 .card-v4-category,
     .card-v4-desc {
         font-size: 12px;
     }
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary:       #60a5fa;
+        --primary-dark:  #3b82f6;
+        --text:          #e5e7eb;
+        --text-light:    #9ca3af;
+        --bg:            #0f1117;
+        --bg-alt:        #1a1d27;
+        --border:        #2d3143;
+        --accent:        #818cf8;
+        --cta-bg:        #3b82f6;
+        --cta-hover:     #2563eb;
+        --text-1:        #e5e7eb;
+        --text-2:        #9ca3af;
+        --text-3:        #6b7280;
+        --accent-dim:    rgba(129, 140, 248, 0.15);
+        --green:         #34d399;
+        --surface:        #1a1d27;
+        --shadow:         0 1px 3px rgba(0,0,0,.4), 0 1px 2px rgba(0,0,0,.3);
+        --shadow-lg:      0 4px 16px rgba(0,0,0,.5), 0 2px 6px rgba(0,0,0,.3);
+    }
+
+    body {
+        background: var(--bg);
+        color: var(--text-1);
+    }
+
+    /* Article card dark mode */
+    .article-card {
+        background: var(--surface);
+        border-color: var(--border);
+    }
+
+    .article-card:hover {
+        border-color: #4b5563;
+    }
+
+    /* TOC dark mode */
+    .toc {
+        background: var(--bg-alt);
+        border-color: var(--border);
+    }
+
+    .toc-list a {
+        color: var(--text-2);
+    }
+
+    .toc-list a:hover,
+    .toc-list a.active {
+        color: var(--accent);
+        border-left-color: var(--accent);
+        background: rgba(129, 140, 248, 0.08);
+    }
+
+    /* Header dark mode */
+    .site-header {
+        background: rgba(15, 17, 23, 0.92);
+        border-bottom-color: var(--border);
+    }
+
+    /* Footer dark mode */
+    footer {
+        background: var(--bg-alt) !important;
+        color: var(--text-2) !important;
+        border-top: 1px solid var(--border) !important;
+    }
+
+    footer a { color: var(--text-2) !important; }
+    footer p { color: var(--text-2) !important; }
+
+    /* Cards dark mode */
+    .card-v4 {
+        background: var(--surface);
+        border-color: var(--border);
+    }
+
+    .card-v4-title { color: var(--text-1); }
+    .card-v4-desc  { color: var(--text-2); }
+    .card-v4-pubdate { color: var(--text-3); }
+    .card-v4-link { color: var(--accent); }
+
+    /* Featured card dark mode */
+    .featured-card {
+        background: var(--surface);
+        border-color: var(--border);
+    }
+
+    .featured-desc { color: var(--text-2); }
+    .featured-name { color: var(--text-1); }
+
+    /* Search dark mode */
+    .search-input {
+        background: var(--bg-alt);
+        border-color: var(--border);
+        color: var(--text-1);
+    }
+
+    /* Affiliate CTA dark */
+    .affiliate-cta {
+        background: linear-gradient(135deg, #1d4ed8 0%, #1e3a8a 100%);
+    }
+
+    /* Disclosure / pros-cons dark */
+    .disclosure-box {
+        background: var(--bg-alt);
+        border-color: var(--border);
+    }
+
+    .pros-box {
+        background: rgba(52, 211, 153, 0.08);
+        border-color: rgba(52, 211, 153, 0.25);
+    }
+
+    .cons-box {
+        background: rgba(248, 113, 113, 0.08);
+        border-color: rgba(248, 113, 113, 0.25);
+    }
+
+    /* Quick nav / FAQ dark */
+    .quick-nav-box {
+        background: linear-gradient(135deg, #1a1d27 0%, #1e2235 100%);
+        border-left-color: var(--accent);
+    }
+
+    .faq-item {
+        background: var(--bg-alt);
+        border-color: var(--border);
+    }
+
+    /* Tool card dark */
+    .tool-card {
+        background: linear-gradient(135deg, #2d3280 0%, #3b2070 100%);
+    }
+
+    /* Newsletter dark */
+    .newsletter {
+        background: var(--bg-alt);
+        border-color: var(--border);
+    }
+
+    /* Article content dark */
+    .article-content h2 { color: var(--text-1); }
+    .article-content h3 { color: var(--text-1); }
+    .article-content p  { color: var(--text-1); }
+    .article-content li { color: var(--text-1); }
+    .article-content blockquote {
+        color: var(--text-2);
+        border-left-color: var(--accent);
+    }
+    .article-content code {
+        background: var(--bg-alt);
+        color: var(--accent);
+    }
+    .article-content pre {
+        background: var(--bg-alt);
+    }
+    .article-content th {
+        background: var(--bg-alt);
+    }
+    .article-content td {
+        border-color: var(--border);
+    }
+
+    /* Mobile nav dark */
+    .mobile-nav {
+        background: var(--bg);
+    }
+
+    .mobile-nav a {
+        color: var(--text-1);
+        border-bottom-color: var(--border);
+    }
+
+    .hamburger span {
+        background: var(--text-1);
+    }
+
+    /* Share buttons dark */
+    .share-btn-v {
+        box-shadow: 0 2px 8px rgba(0,0,0,.4);
+    }
+
+    /* Author box dark */
+    .author-box {
+        background: var(--bg-alt);
+        border-color: var(--border);
+    }
+
+    /* Related card dark */
+    .related-card {
+        background: var(--surface);
+        border-color: var(--border);
+        color: var(--text-1);
+    }
+
+    .related-card:hover {
+        border-color: var(--accent);
+    }
+
+    /* Rating/category pills dark */
+    .rating-display-sm { color: var(--text-2); }
+    .category-filter .category {
+        background: var(--surface);
+        border-color: var(--border);
+        color: var(--text-1);
+    }
+
+    /* Comparison table dark */
+    .comparison-table th { background: var(--bg-alt); }
+    .comparison-table td { border-color: var(--border); }
+    .comparison-table tr:nth-child(even) { background: var(--bg-alt); }
+
+    /* Article meta dark */
+    .article-meta { color: var(--text-2); }
+
+    /* Breadcrumb dark */
+    .breadcrumb { color: var(--text-2); }
+    .breadcrumb a { color: var(--accent); }
+
+    /* Section header dark */
+    .section-title { color: var(--text-1); }
+    .section-link { color: var(--accent); }
+
+    /* CTA section dark */
+    .cta-section {
+        background: var(--surface);
+        border-color: var(--border);
+    }
+
+    .cta-section h3 { color: var(--text-1); }
+    .cta-section p  { color: var(--text-2); }
+
+    /* Footer brand dark */
+    .footer-brand { color: var(--text-1); }
+    .footer-links a { color: var(--text-2) !important; }
+    .footer-copy   { color: var(--text-3) !important; border-top-color: var(--border) !important; }
 }

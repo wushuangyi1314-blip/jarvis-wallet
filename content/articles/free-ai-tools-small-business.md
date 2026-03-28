@@ -55,7 +55,7 @@ Here's my tested, ranked list of the **best free AI tools for small business** i
 - **Product images:** Pixelcut Free
 </div>
 
-## Why Free AI Tools Matter for Small Business
+## Why Free AI Tools Matter for Small Business {#why-ai-tools}
 
 Enterprise companies spend tens of thousands on AI tools. As a small business owner, you can't justify that — but you also can't afford to fall behind.
 
@@ -63,7 +63,7 @@ The good news: The **democratization of AI** means capabilities that were enterp
 
 This guide covers only tools with **genuinely permanent free tiers**. No 14-day trials. No "free" tiers designed to bait-and-switch. These are tools you can rely on as your business grows.
 
-## The Top 10 Free AI Tools for Small Business in 2026
+## The Top 10 Free AI Tools for Small Business in 2026 {#top-10}
 
 ### #1: Claude — Best Overall Free AI Tool
 
@@ -176,7 +176,7 @@ Not strictly "AI" in the generative sense, but Hemingway's AI-powered readabilit
 
 Copy.ai specializes in the exact **marketing content small businesses** need most — ad copy, social posts, product descriptions, email sequences. The free tier lets you test it properly before committing.
 
-## How to Combine These Tools
+## How to Combine These Tools {#workflow}
 
 The real power comes from chaining these tools together:
 
@@ -191,7 +191,7 @@ The real power comes from chaining these tools together:
 - **Product images:** Pixelcut
 </div>
 
-## When to Upgrade to Paid
+## When to Upgrade to Paid {#when-to-upgrade}
 
 The free tiers are genuine, but you'll hit limits eventually. Here's when to consider paying:
 
@@ -204,7 +204,7 @@ Only upgrade when free tiers genuinely limit your output. Don't pre-purchase "fo
 
 ---
 
-## Frequently Asked Questions: Free AI Tools for Small Business
+## Frequently Asked Questions: Free AI Tools for Small Business {#faq}
 
 **Are these free AI tools really free to use for business?**
 

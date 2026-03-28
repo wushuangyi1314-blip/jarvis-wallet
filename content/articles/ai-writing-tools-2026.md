@@ -63,7 +63,7 @@ In this guide, you'll learn:
 - The hidden costs and limitations nobody talks about
 - My personal recommendations based on **500+ hours of real usage**
 
-## What Makes an AI Writing Tool Actually Good?
+## What Makes an AI Writing Tool Actually Good? {#what-makes-good}
 
 Before diving into specific products, let's establish what truly matters:
 
@@ -89,7 +89,7 @@ Before diving into specific products, let's establish what truly matters:
 
 Some tools excel at marketing copy, others at technical writing. Pick a tool that matches your primary use case.
 
-## Top AI Writing Tools Ranked
+## Top AI Writing Tools Ranked {#top-tools}
 
 ### #1: Claude (Anthropic)
 
@@ -184,7 +184,7 @@ Ready to try **Claude**? Start for free — no credit card needed.
 
 **Best for:** SEO-focused content creation
 
-## Comparison Table
+## Comparison Table {#comparison}
 
 | Tool | Best For | Free Tier | Paid Starting | Rating |
 |------|----------|-----------|--------------|--------|
@@ -200,7 +200,7 @@ Ready to try **Claude**? Start for free — no credit card needed.
 <a href="https://claude.ai" target="_blank" class="cta-button">Try Claude Free — No Card Required →</a>
 </div>
 
-## How to Choose the Right AI Writing Tool
+## How to Choose the Right AI Writing Tool {#how-to-choose}
 
 ### Your Budget
 
@@ -215,7 +215,7 @@ Ready to try **Claude**? Start for free — no credit card needed.
 - **General assistance:** ChatGPT
 - **Technical writing:** Claude
 
-## Common Mistakes to Avoid
+## Common Mistakes to Avoid {#mistakes}
 
 ### 1. Relying Too Heavily on AI
 

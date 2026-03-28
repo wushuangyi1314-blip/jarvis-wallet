@@ -50,7 +50,7 @@ The **Claude vs ChatGPT** debate is the question I get asked most — and the ho
 - **Best strategy:** Use both — they're complementary tools
 </div>
 
-## Claude vs ChatGPT: Key Differences at a Glance
+## Claude vs ChatGPT: Key Differences at a Glance {#key-differences}
 
 | Feature | Claude | ChatGPT |
 |---------|--------|---------|
@@ -60,7 +60,7 @@ The **Claude vs ChatGPT** debate is the question I get asked most — and the ho
 | **Image Analysis** | ✅ Yes | ✅ Yes |
 | **Internet Access** | ❌ No (via plugins) | ✅ Yes (Plus) |
 
-## When Claude Wins
+## When Claude Wins {#claude-wins}
 
 ### Long Document Analysis
 
@@ -74,7 +74,7 @@ Claude consistently produces more nuanced, well-reasoned responses. For complex 
 
 For large coding projects, Claude's extended context helps maintain consistency across large codebases.
 
-## When ChatGPT Wins
+## When ChatGPT Wins {#chatgpt-wins}
 
 ### Internet Research
 
@@ -88,7 +88,7 @@ ChatGPT's plugin ecosystem and GPT Store offer specialized assistants for virtua
 
 DALL-E 3 integration in ChatGPT provides excellent image generation capabilities.
 
-## My Recommendation
+## My Recommendation {#recommendation}
 
 **Best overall:** Claude for quality, ChatGPT for accessibility
 
@@ -105,7 +105,7 @@ DALL-E 3 integration in ChatGPT provides excellent image generation capabilities
 
 ---
 
-## Frequently Asked Questions: Claude vs ChatGPT
+## Frequently Asked Questions: Claude vs ChatGPT {#faq}
 
 **Is Claude better than ChatGPT for writing?**
 

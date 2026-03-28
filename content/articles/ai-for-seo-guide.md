@@ -61,7 +61,7 @@ This guide shows you exactly how to **use AI for SEO** in 2026 — the workflows
 5. **Monitor:** Claude — diagnose ranking changes
 </div>
 
-## Why AI is a Game-Changer for SEO
+## Why AI is a Game-Changer for SEO {#why-ai-seo}
 
 Before diving into workflows, let's be clear about what AI actually does well for SEO:
 
@@ -81,7 +81,7 @@ Before diving into workflows, let's be clear about what AI actually does well fo
 - Providing accurate, current factual information
 - Replacing your unique perspective and experience
 
-## Part 1: Keyword Research with AI
+## Part 1: Keyword Research with AI {#keyword-research}
 
 Traditional keyword research is slow. AI can cut hours off this process.
 
@@ -109,7 +109,7 @@ Traditional keyword research is slow. AI can cut hours off this process.
 
 This takes an hour manually. AI does it in minutes.
 
-## Part 2: Content Outlines with AI
+## Part 2: Content Outlines with AI {#outlines}
 
 Most SEO content fails because the outline is weak. AI is excellent at structuring content for both readers and search engines.
 
@@ -139,7 +139,7 @@ Most SEO content fails because the outline is weak. AI is excellent at structuri
 
 This prompt consistently produces better outlines than writing from scratch.
 
-## Part 3: Writing Content with AI
+## Part 3: Writing Content with AI {#writing}
 
 **Critical rule: Don't let AI write alone.**
 
@@ -202,7 +202,7 @@ AI writes alone → publish → wonder why rankings drop
 > 5. Readability score
 > 6. Related questions for FAQ section"
 
-## Part 4: Technical SEO with AI
+## Part 4: Technical SEO with AI {#technical-seo}
 
 ### Meta Description Generation
 
