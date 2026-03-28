@@ -1438,6 +1438,13 @@ footer .disclaimer {
     .article-hero-img {
         /* On mobile, cap hero image height for better performance and scroll behavior */
         max-height: 300px;
+        /* Align to top so the top of the image isn't cropped when object-fit:cover clips */
+        object-position: top center;
+    }
+
+    .tool-card {
+        /* Override white text inherited from desktop gradient — on mobile bg is white/surface */
+        color: var(--text-1);
     }
 
     .excerpt {
@@ -2250,6 +2257,7 @@ body {
         border: 1px solid var(--border) !important;
         flex-direction: column !important;
         text-align: center !important;
+        color: var(--text-1) !important;
     }
 
     .tool-card-btn {
