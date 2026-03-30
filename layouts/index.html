@@ -1,141 +1,187 @@
 {{ define "main" }}
 {{ $pages := .Site.RegularPages }}
-{{ $featured := where $pages "Section" "articles" | first 1 }}
 {{ $articles := where $pages "Section" "articles" }}
 
-<!-- HERO -->
-<section class="hero">
+<!-- HERO v2 (Redesign) -->
+<section class="hero-v2">
     <div class="container">
-        <div class="hero-badge">
+        <div class="hero-v2-badge">
             <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
             </svg>
             Honest · Expert · Weekly Updates
         </div>
-        <h1>Find the Best AI Tools —<br>Expert Reviews</h1>
-        <p>Honest, expert AI tool reviews. No fluff, just signal.</p>
-        <div class="hero-search">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <h1>Find the Best AI Tools —<br><em>Expert Reviews</em></h1>
+        <p class="hero-v2-sub">Honest, expert AI tool reviews. No fluff, just signal. Updated weekly.</p>
+        <div class="hero-v2-search">
+            <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
             </svg>
             <input type="text" id="hero-search-input" placeholder="Search by tool name or category..." autocomplete="off">
+            <button class="search-btn" onclick="document.getElementById('hero-search-input').focus()">Search</button>
         </div>
     </div>
 </section>
 
-<!-- FEATURED -->
-{{ with $featured }}
-<section class="container">
-    <div class="section-header">
-        <span class="section-title">Featured This Week</span>
-        <a href="{{ $.Site.BaseURL }}articles/" class="section-link">View all →</a>
+<!-- CATEGORY NAV (Redesign) -->
+<nav class="cat-nav">
+    <div class="cat-nav-inner">
+        <button class="cat-tab active" data-cat="All">All</button>
+        <button class="cat-tab" data-cat="AI Writing">AI Writing</button>
+        <button class="cat-tab" data-cat="AI Image">AI Image</button>
+        <button class="cat-tab" data-cat="AI Video">AI Video</button>
+        <button class="cat-tab" data-cat="AI Programming">AI Programming</button>
+        <button class="cat-tab" data-cat="Comparison">Comparison</button>
+        <button class="cat-tab" data-cat="Free Tools">Free Tools</button>
+        <button class="cat-tab" data-cat="SEO">SEO</button>
+        <button class="cat-tab" data-cat="Audio">Audio</button>
+        <button class="cat-tab" data-cat="Marketing">Marketing</button>
     </div>
-    {{ range . }}
-    <a href="{{ .Permalink }}" class="featured-card" style="text-decoration:none">
-        <div class="featured-info">
-            <div class="featured-label">
-                <svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                </svg>
+</nav>
+
+<!-- FEATURED ARTICLE -->
+{{ $featured := where $articles "Section" "articles" | first 1 }}
+{{ with $featured }}
+<section class="container" style="padding-top: 40px;">
+    <div class="section-head">
+        <span class="section-title">Featured This Week</span>
+    </div>
+    {{ range first 1 . }}
+    <a href="{{ .Permalink }}" class="featured-card" style="display:flex;gap:24px;background:var(--c-surface,var(--surface));border:1px solid var(--c-border-sub,var(--border));border-radius:var(--r-lg);overflow:hidden;text-decoration:none;transition:all .2s;box-shadow:var(--sh-sm)">
+        <div style="flex:1;padding:28px;">
+            <div style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;background:var(--c-accent-s);color:var(--c-accent-d);border-radius:var(--r-full);font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-bottom:12px;">
+                <svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                 Featured
             </div>
-            <div class="featured-name">{{ .Title }}</div>
-            <p class="featured-desc">{{ .Description }}</p>
-            <div class="featured-meta">
-                <div class="meta-item">
-                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
-                    </svg>
-                    Updated {{ .Lastmod.Format "January 2, 2006" }}
-                </div>
-                <div class="meta-item">
-                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-                    </svg>
-                    {{ .Params.readingTime | default "8" }} min read
-                </div>
+            <div style="font-size:20px;font-weight:700;color:var(--c-text,var(--text-1));margin-bottom:8px;line-height:1.3;">{{ .Title }}</div>
+            <p style="font-size:14px;color:var(--c-text-2);margin-bottom:16px;line-height:1.6;">{{ .Description }}</p>
+            <div style="display:flex;align-items:center;gap:16px;font-size:13px;color:var(--c-text-3);">
+                <span>Updated {{ .Lastmod.Format "January 2, 2006" }}</span>
+                <span>·</span>
+                <span>{{ .Params.readingTime | default "8" }} min read</span>
                 {{ with .Params.rating }}
-                <div class="rating-badge">
+                <span style="display:inline-flex;align-items:center;gap:3px;font-weight:600;color:#F5A623;">
                     <svg viewBox="0 0 24 24" width="11" height="11" fill="#F5A623"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                     {{ . }}/5
-                </div>
+                </span>
                 {{ end }}
             </div>
         </div>
-        <div class="featured-actions">
-            <a href="{{ .Params.featuredLink | default "https://claude.ai" }}" target="_blank" class="btn-primary" onclick="event.stopPropagation()">Try {{ .Params.featuredTool | default "Claude" }} Free →</a>
-            <a href="{{ .Permalink }}" class="btn-secondary">Read Review</a>
+        {{ with .Params.heroImage }}
+        <div style="width:280px;flex-shrink:0;">
+            <img src="{{ $.Site.BaseURL }}assets/images/{{ . }}" alt="{{ $.Title }}" style="width:100%;height:100%;object-fit:cover;" loading="eager">
         </div>
+        {{ end }}
     </a>
     {{ end }}
 </section>
 {{ end }}
 
-<!-- CATEGORY TABS + ARTICLES -->
-<section class="container">
-    <!-- Category Filter -->
-    <div class="category-filter-wrapper">
-        <div class="category-filter" id="categoryFilter">
-            <button class="category-tab active" data-cat="All">All</button>
-            <button class="category-tab" data-cat="AI Writing">AI Writing</button>
-            <button class="category-tab" data-cat="AI Image">AI Image</button>
-            <button class="category-tab" data-cat="Comparison">Comparison</button>
-            <button class="category-tab" data-cat="Free Tools">Free Tools</button>
-            <button class="category-tab" data-cat="SEO">SEO</button>
-            <button class="category-tab" data-cat="Marketing">Marketing</button>
-            <button class="category-tab" data-cat="Video">Video</button>
-            <button class="category-tab" data-cat="Audio">Audio</button>
-            <button class="category-tab" data-cat="Coding">Coding</button>
+<!-- ARTICLES GRID (Redesign v2) -->
+<section class="container articles-v2">
+    <div class="section-head">
+        <span class="section-title">Latest Reviews <span>({{ len $articles }} articles)</span></span>
+        <div class="sort-tabs">
+            <button class="sort-tab active" data-sort="new">Newest</button>
+            <button class="sort-tab" data-sort="hot">Most Popular</button>
+            <button class="sort-tab" data-sort="rating">Top Rated</button>
         </div>
-        <button class="category-filter-toggle" id="categoryToggle">View All Categories <span style="font-size:10px">&#8595;</span></button>
     </div>
 
-    <div class="section-header">
-        <span class="section-title">Latest Reviews</span>
-    </div>
-
-    <div class="article-grid" id="articleGrid">
+    <div class="article-grid-v2" id="articleGrid">
         {{ range $articles.ByLastmod.Reverse }}
-        <article class="article-card" data-category="{{ range first 1 .Params.categories }}{{ . }}{{ end }}">
-            <div class="card-image-wrap">
+        <a href="{{ .Permalink }}" class="article-card-v2">
+            <div class="card-v2-thumb">
                 {{ with .Params.heroImage }}
-                <img class="card-image" src="{{ $.Site.BaseURL }}assets/images/{{ . }}" alt="{{ $.Title }}" loading="lazy">
+                <img src="{{ $.Site.BaseURL }}assets/images/{{ . }}" alt="{{ .Title }}" loading="lazy">
                 {{ else }}
-                <img class="card-image" src="https://placehold.co/640x360/5B4FE9/FFFFFF?text=AI+Review" alt="{{ .Title }}" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=640&q=80" alt="{{ .Title }}" loading="lazy">
                 {{ end }}
             </div>
-            <div class="card-body">
-                <div class="card-title"><a href="{{ .Permalink }}">{{ .Title }}</a></div>
-                <div class="card-rating">
-                    <svg viewBox="0 0 24 24" width="12" height="12" fill="#F5A623"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                    <span class="rating-num">{{ .Params.rating | default "4.5" }}/5</span>
-                    {{ with .Params.ratingCount }}<span class="rating-count">· {{ . }} reviews</span>{{ end }}
-                </div>
-                <div class="card-date-row">Updated {{ .Lastmod.Format "January 2, 2006" }}</div>
-                <p class="card-desc">{{ .Description }}</p>
-                <div class="card-footer">
-                    <div class="card-footer-left">
-                        <span class="card-cat-tag">{{ range first 1 .Params.categories }}{{ . }}{{ end }}</span>
-                        <span class="card-read-time">{{ .Params.readingTime | default "8" }} min read</span>
+            <div class="card-v2-body">
+                <div class="card-v2-cat">{{ range first 1 .Params.categories }}{{ . }}{{ end }}</div>
+                <div class="card-v2-title">{{ .Title }}</div>
+                <div class="card-v2-excerpt">{{ .Description }}</div>
+                <div class="card-v2-foot">
+                    <span class="card-v2-date">{{ .Lastmod.Format "Jan 2, 2006" }}</span>
+                    <div style="display:flex;align-items:center;gap:10px;">
+                        {{ with .Params.rating }}
+                        <span style="display:flex;align-items:center;gap:2px;font-size:11px;font-weight:600;color:#F5A623;">
+                            <svg viewBox="0 0 24 24" width="10" height="10" fill="#F5A623"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            {{ . }}
+                        </span>
+                        {{ end }}
+                        <span class="card-v2-link">Read →</span>
                     </div>
-                    <a href="{{ .Permalink }}" class="card-link">Read Review →</a>
                 </div>
             </div>
-        </article>
+        </a>
         {{ end }}
     </div>
 
-    <div class="load-more-wrap">
-        <button class="load-more-btn" id="loadMoreBtn">Load More Articles ↓</button>
+    <div class="pagination">
+        <a href="#" class="page-btn active">1</a>
+        <a href="#" class="page-btn">2</a>
+        <a href="#" class="page-btn">3</a>
+        <a href="#" class="page-btn">→</a>
     </div>
 </section>
 
-<!-- CTA -->
-<section class="container">
-    <div class="cta-section">
-        <h3>Start Your AI Journey</h3>
-        <p>Get our latest reviews and guides delivered to you. No spam, unsubscribe anytime.</p>
+<!-- CTA SECTION -->
+<section class="container" style="padding-bottom: 64px;">
+    <div class="cta-section" style="background:linear-gradient(135deg,var(--c-accent) 0%,#9333EA 100%);border-radius:var(--r-xl);padding:40px;text-align:center;color:#fff;">
+        <h3 style="font-size:22px;font-weight:700;margin-bottom:8px;">Start Your AI Journey</h3>
+        <p style="font-size:15px;opacity:.9;margin-bottom:20px;">Get our latest reviews and guides delivered to you. No spam, unsubscribe anytime.</p>
+        <a href="#" style="display:inline-block;padding:10px 24px;background:#fff;color:var(--c-accent);border-radius:var(--r-md);font-weight:600;font-size:14px;text-decoration:none;">Subscribe Free →</a>
     </div>
 </section>
 
+{{ end }}
+
+{{ define "scripts" }}
+<script>
+// Category tab filtering
+(function() {
+    var tabs = document.querySelectorAll('.cat-tab');
+    var cards = document.querySelectorAll('.article-card-v2');
+    tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+            var cat = tab.getAttribute('data-cat') || 'All';
+            tabs.forEach(function(t) { t.classList.remove('active'); });
+            tab.classList.add('active');
+            cards.forEach(function(card) {
+                var cardCat = card.querySelector('.card-v2-cat');
+                var cardCatText = cardCat ? cardCat.textContent.trim() : '';
+                if (!cat || cat === 'All' || cardCatText === cat) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    // Sort tabs
+    var sortTabs = document.querySelectorAll('.sort-tab');
+    sortTabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+            sortTabs.forEach(function(t) { t.classList.remove('active'); });
+            tab.classList.add('active');
+        });
+    });
+
+    // Hero search — focus main search input
+    var heroInput = document.getElementById('hero-search-input');
+    if (heroInput) {
+        heroInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                var q = heroInput.value.trim();
+                if (q) {
+                    window.location.href = '/search/?q=' + encodeURIComponent(q);
+                }
+            }
+        });
+    }
+})();
+</script>
 {{ end }}
