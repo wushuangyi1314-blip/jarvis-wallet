@@ -1,165 +1,177 @@
 {{ define "main" }}
-<!DOCTYPE html>
-<html lang="{{ .Site.Language.Lang }}">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{{ .Title }} | {{ .Site.Title }}</title>
-<meta name="description" content="{{ .Description }}">
-<link rel="canonical" href="{{ .Permalink }}">
-{{ template "_internal/opengraph.html" . }}
-{{ template "_internal/twitter_cards.html" . }}
-<link rel="stylesheet" href="/assets/css/style.css?v=12">
-</head>
-<body>
+{{ $related := where .Site.RegularPages "Section" "articles" | complement (slice .) | first 4 }}
 
-<!-- Top Navigation -->
-<nav class="top-nav">
-  <a href="{{ .Site.BaseURL }}" class="logo">
-    <div class="logo-icon">AI</div>
-    {{ .Site.Title }}
-  </a>
-  <div class="nav-links">
-    <a href="{{ .Site.BaseURL }}" class="nav-link">Home</a>
-    <a href="{{ .Site.BaseURL }}about/" class="nav-link">About</a>
-  </div>
-  <div class="nav-search">
-    <span class="nav-search-icon">🔍</span>
-    <input type="text" class="nav-search-box" placeholder="Search AI tools..." id="navSearchInput">
-  </div>
+<!-- BREADCRUMB -->
+<nav class="breadcrumb">
+    <a href="{{ $.Site.BaseURL }}">Home</a>
+    <span class="breadcrumb-sep">›</span>
+    <a href="{{ $.Site.BaseURL }}articles/">Articles</a>
+    {{ with index .Params.categories 0 }}
+    <span class="breadcrumb-sep">›</span>
+    <a href="{{ $.Site.BaseURL }}categories/{{ . | urlize }}/">{{ . }}</a>
+    {{ end }}
+    <span class="breadcrumb-sep">›</span>
+    <span class="breadcrumb-current">{{ .Title }}</span>
 </nav>
 
-<!-- Breadcrumb -->
-<div class="breadcrumb">
-  <a href="{{ .Site.BaseURL }}">Home</a>
-  <span class="breadcrumb-sep">›</span>
-  <a href="{{ .Site.BaseURL }}">{{ .Section }}</a>
-  <span class="breadcrumb-sep">›</span>
-  <span class="breadcrumb-current">{{ .Title }}</span>
+<!-- HERO IMAGE -->
+{{ if .Params.heroImage }}
+<div class="article-hero" style="margin-top:0;">
+    <div class="hero-pattern"></div>
+    <img src="{{ $.Site.BaseURL }}assets/images/{{ .Params.heroImage }}" alt="{{ .Title }}" style="width:100%;height:100%;object-fit:cover;">
 </div>
-
-{{ with .Params.heroImage }}
-<!-- Hero Image — 16:4.5 -->
+{{ else }}
 <div class="article-hero">
-  <img src="{{ $.Site.BaseURL }}assets/images/{{ . }}" alt="{{ $.Title }}" class="hero-img" loading="eager">
+    <div class="hero-pattern"></div>
+    <div class="hero-label">Hero Image</div>
 </div>
 {{ end }}
 
-<!-- Content Tags -->
+<!-- TAG PILLS -->
 {{ with .Params.tags }}
 <div class="article-tags">
-  {{ range . }}
-  <span class="tag-pill tag-{{ . }}">{{ . }}</span>
-  {{ end }}
+    {{ range first 4 . }}
+    <span class="tag-pill tag-ai">{{ . }}</span>
+    {{ end }}
 </div>
 {{ end }}
 
-<!-- Article Header -->
+<!-- ARTICLE HEADER -->
 <div class="article-header">
-  <h1 class="article-title">{{ .Title }}</h1>
-  <div class="article-meta">
-    <span class="meta-item">📅 {{ .Lastmod.Format "Jan 2, 2006" }}</span>
-    <span class="meta-item-static" id="metaStats">👍 <span id="likeCount">0</span> likes · 👁 <span id="viewCount">0</span> views</span>
-  </div>
+    <h1 class="article-title">{{ .Title }}</h1>
+    <div class="article-meta">
+        <span class="meta-item">
+            📅 {{ .Lastmod.Format "Jan 2, 2006" }}
+        </span>
+        {{ with .Params.readingTime }}
+        <span class="meta-item">⏱ {{ . }} min read</span>
+        {{ end }}
+        {{ with .Params.likes }}
+        <span class="meta-item-static">👍 {{ . }} likes</span>
+        {{ end }}
+        {{ with index .Params.categories 0 }}
+        <span class="meta-item">📁 {{ . }}</span>
+        {{ end }}
+        <button class="like-btn" id="likeBtn" onclick="this.classList.toggle('liked')">
+            👍 Like
+        </button>
+    </div>
 </div>
 
-<!-- Share Buttons -->
-<div class="share-section">
-  <span class="share-label">Share:</span>
-  <button class="share-btn share-twitter" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(document.title),'_blank')">Twitter</button>
-  <button class="share-btn share-facebook" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank')">Facebook</button>
-  <button class="share-btn share-linkedin" onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(location.href),'_blank')">LinkedIn</button>
-  <button class="share-btn share-copy" onclick="navigator.clipboard.writeText(location.href)">Copy Link</button>
-</div>
-
-<!-- Article Body -->
+<!-- ARTICLE BODY -->
 <div class="article-body">
 
-  <!-- Table of Contents (LEFT sidebar) -->
-  {{ with .Params.toc }}
-  <div class="toc-panel">
-    <div class="toc-title">📑 Contents</div>
-    {{ range . }}
-    <a href="#{{ .id }}" class="toc-item{{ if .h3 }} h3{{ end }}">{{ .title }}</a>
+    <!-- TABLE OF CONTENTS -->
+    {{ with .Params.toc }}
+    <aside class="toc-panel" id="toc-panel">
+        <div class="toc-title">📑 Contents</div>
+        <nav class="toc-nav" id="toc-nav">
+            {{ range . }}
+            <a href="#{{ .id }}" class="toc-item" data-id="{{ .id }}">{{ .title }}</a>
+            {{ end }}
+        </nav>
+    </aside>
     {{ end }}
-  </div>
-  {{ end }}
 
-  <!-- Article Content -->
-  <div class="article-content">
-    {{ .Content }}
-  </div>
+    <!-- ARTICLE CONTENT -->
+    <div class="article-content">
 
+        <!-- Affiliate Card -->
+        {{ with .Params.affiliateName }}
+        <div class="affiliate-card">
+            <div class="affiliate-info">
+                <div class="affiliate-label">[AI Tool]</div>
+                <div class="affiliate-name">{{ . }}</div>
+                {{ with $.Params.affiliateDesc }}
+                <div class="affiliate-desc">{{ . }}</div>
+                {{ end }}
+            </div>
+            <a href="{{ $.Params.affiliateUrl | default "#" }}" class="affiliate-cta" target="_blank" rel="noopener">
+                🌐 Visit Official Website
+            </a>
+        </div>
+        {{ end }}
+
+        <!-- Page Content -->
+        {{ .Content }}
+
+        <!-- BOTTOM LIKE SECTION -->
+        <div class="bottom-like-section">
+            <div class="bottom-like-divider"></div>
+            <button class="bottom-like-btn" id="bottomLikeBtn" onclick="this.classList.toggle('liked')">
+                👍 <span id="bottomLikeCount">{{ with .Params.likes }}{{ . }}{{ else }}0{{ end }}</span> Likes
+            </button>
+            <p class="bottom-like-hint">Like this article? Show your support! ❤️</p>
+        </div>
+
+    </div>
 </div>
 
-<!-- Bottom Like Button -->
-<div class="bottom-like-section">
-  <div class="bottom-like-divider"></div>
-  <button class="bottom-like-btn" id="bottomLikeBtn" onclick="toggleLike(this)">
-    👍 <span id="bottomLikeCount">0</span> Likes
-  </button>
-  <p class="bottom-like-hint">Like this article? Show your support! ❤️</p>
-</div>
-
-<!-- Related Articles -->
-{{ with .Site.RegularPages.Related . | first 4 }}
-<section class="related-section">
-  <div class="related-header">
+<!-- RELATED ARTICLES -->
+{{ if $related }}
+<div class="related-section">
     <h2 class="related-title">More Reviews You Might Like</h2>
-  </div>
-  <div class="related-grid">
-    {{ range . }}
-    <a href="{{ .Permalink }}" class="related-card">
-      {{ with .Params.heroImage }}
-      <img src="{{ $.Site.BaseURL }}assets/images/{{ . }}" alt="{{ $.Title }}" class="related-card-img">
-      {{ end }}
-      <div class="related-card-body">
-        <span class="related-card-cat">{{ .Section }}</span>
-        <h3 class="related-card-title">{{ .Title }}</h3>
-      </div>
-    </a>
-    {{ end }}
-  </div>
-</section>
+    <div class="related-grid">
+        {{ range $related }}
+        <a href="{{ .Permalink }}" class="related-card">
+            <div class="related-card-img">
+                {{ if .Params.heroImage }}
+                <img src="{{ $.Site.BaseURL }}assets/images/{{ .Params.heroImage }}" alt="{{ .Title }}" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
+                {{ else }}
+                {{ .Title }}
+                {{ end }}
+            </div>
+            <div class="related-card-body">
+                <div class="related-card-tag">{{ range first 1 .Params.categories }}{{ . }}{{ end }}</div>
+                <div class="related-card-title">{{ .Title }}</div>
+                <div class="related-card-meta">
+                    <span class="related-card-date">{{ .Lastmod.Format "Jan 2, 2006" }}</span>
+                    <div class="related-card-stats">
+                        <span class="related-card-stat">👍 {{ with .Params.likes }}{{ . }}{{ else }}0{{ end }}</span>
+                        <span class="related-card-stat">👁 {{ with .Params.views }}{{ . }}{{ else }}0{{ end }}</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+        {{ end }}
+    </div>
+</div>
 {{ end }}
 
-<!-- Footer -->
-<footer class="footer">
-  <div class="footer-links">
-    <a href="{{ .Site.BaseURL }}" class="footer-link">Home</a>
-    <a href="{{ .Site.BaseURL }}about/" class="footer-link">About</a>
-    <a href="{{ .Site.BaseURL }}privacy/" class="footer-link">Privacy</a>
-    <a href="{{ .Site.BaseURL }}terms/" class="footer-link">Terms</a>
-  </div>
-  <p class="footer-copy">© 2026 {{ .Site.Title }}. All rights reserved.</p>
-</footer>
+{{ end }}
 
+{{ define "scripts" }}
 <script>
-// Random likes/views on load
-document.getElementById('likeCount').textContent = Math.floor(Math.random() * 5) + 1;
-document.getElementById('viewCount').textContent = Math.floor(Math.random() * 30) + 20;
-document.getElementById('bottomLikeCount').textContent = document.getElementById('likeCount').textContent;
+// Sync like button across header and bottom
+(function() {
+    var likeBtn = document.getElementById('likeBtn');
+    var bottomLikeBtn = document.getElementById('bottomLikeBtn');
+    if (likeBtn && bottomLikeBtn) {
+        likeBtn.addEventListener('click', function() {
+            bottomLikeBtn.classList.toggle('liked', likeBtn.classList.contains('liked'));
+        });
+        bottomLikeBtn.addEventListener('click', function() {
+            likeBtn.classList.toggle('liked', bottomLikeBtn.classList.contains('liked'));
+        });
+    }
 
-// Like toggle
-function toggleLike(btn) {
-  btn.classList.toggle('liked');
-  let count = parseInt(document.getElementById('bottomLikeCount').textContent);
-  if (btn.classList.contains('liked')) {
-    count++;
-  } else {
-    count--;
-  }
-  document.getElementById('bottomLikeCount').textContent = count;
-}
-
-// Nav search
-document.getElementById('navSearchInput').addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') {
-    window.location.href = '/search?q=' + encodeURIComponent(this.value);
-  }
-});
+    // TOC scroll highlighting
+    var tocLinks = document.querySelectorAll('.toc-item');
+    if (tocLinks.length) {
+        function highlightTOC() {
+            var scrollY = window.scrollY + 120;
+            var current = null;
+            tocLinks.forEach(function(link) {
+                var id = link.getAttribute('data-id') || link.getAttribute('href').replace('#', '');
+                var el = document.getElementById(id);
+                if (el && el.offsetTop <= scrollY) current = link;
+            });
+            tocLinks.forEach(function(l) { l.classList.remove('active'); });
+            if (current) current.classList.add('active');
+        }
+        window.addEventListener('scroll', highlightTOC);
+        highlightTOC();
+    }
+})();
 </script>
-
-</body>
-</html>
 {{ end }}

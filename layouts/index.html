@@ -4,22 +4,6 @@
 {{ $paginator := .Paginate ($articles.ByLastmod.Reverse) 20 }}
 {{ $currentPage := .Paginator.PageNumber }}
 
-<!-- TOP NAV -->
-<nav class="top-nav">
-  <a href="{{ $.Site.BaseURL }}" class="logo">
-    <div class="logo-icon">AI</div>
-    {{ $.Site.Title }}
-  </a>
-  <div class="nav-links">
-    <a href="{{ $.Site.BaseURL }}" class="nav-link {{ if eq $currentPage 1 }}active{{ end }}">Home</a>
-    <a href="{{ $.Site.BaseURL }}about/" class="nav-link">About</a>
-  </div>
-  <div class="nav-search">
-    <span class="nav-search-icon">🔍</span>
-    <input type="text" class="nav-search-box" id="navSearchBox" placeholder="Search AI tools..." onkeydown="if(event.key==='Enter'){var q=this.value.trim();if(q)window.location.href='/search/?q='+encodeURIComponent(q);}">
-  </div>
-</nav>
-
 <!-- HERO -->
 <div class="home-hero">
   <div class="home-search-container">
@@ -34,7 +18,7 @@
 
 <!-- CATEGORY NAV -->
 <div class="category-nav-wrap">
-  <div class="category-nav page-wrap">
+  <div class="category-nav">
     <div class="cat-item active" onclick="filterArticles('All', this)">Trending</div>
     <div class="cat-item" onclick="filterArticles('Latest', this)">Latest</div>
     <div class="cat-item" onclick="filterArticles('AI Coding', this)">AI Coding</div>
@@ -100,17 +84,6 @@
   {{ end }}
 </div>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-links">
-    <a href="{{ $.Site.BaseURL }}about/" class="footer-link">About Us</a>
-    <a href="{{ $.Site.BaseURL }}contact/" class="footer-link">Contact</a>
-    <a href="{{ $.Site.BaseURL }}privacy/" class="footer-link">Privacy Policy</a>
-    <a href="{{ $.Site.BaseURL }}terms/" class="footer-link">Terms of Service</a>
-  </div>
-  <div class="footer-copy">© {{ now.Year }} {{ $.Site.Title }}. All rights reserved.</div>
-</footer>
-
 {{ end }}
 
 {{ define "scripts" }}
@@ -120,7 +93,6 @@ function filterArticles(category, el) {
   var tabs = document.querySelectorAll('.cat-item');
   tabs.forEach(function(t) { t.classList.remove('active'); });
   el.classList.add('active');
-
   cards.forEach(function(card) {
     var cat = card.getAttribute('data-category') || '';
     if (category === 'All' || category === 'Trending' || category === 'Latest' || cat === category) {
