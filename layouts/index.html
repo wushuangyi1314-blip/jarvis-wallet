@@ -92,8 +92,8 @@
         {{ range $articles.ByLastmod.Reverse }}
         <a href="{{ .Permalink }}" class="article-card-v2">
             <div class="card-v2-thumb">
-                {{ with .Params.heroImage }}
-                <img src="{{ $.Site.BaseURL }}assets/images/{{ . }}" alt="{{ .Title }}" loading="lazy">
+                {{ if .Params.heroImage }}
+                <img src="{{ $.Site.BaseURL }}assets/images/{{ .Params.heroImage }}" alt="{{ .Title }}" loading="lazy">
                 {{ else }}
                 <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=640&q=80" alt="{{ .Title }}" loading="lazy">
                 {{ end }}
