@@ -1,14 +1,60 @@
 {{ define "main" }}
 {{ $related := .Site.RegularPages }}
 <main class="container">
+
     <!-- Breadcrumb -->
-    <div class="breadcrumb">
-        <a href="{{ $.Site.BaseURL }}">Home</a> / <a href="{{ $.Site.BaseURL }}articles/">Reviews</a> / {{ .Title }}
-    </div>
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="{{ $.Site.BaseURL }}">Home</a>
+        <span class="breadcrumb-sep">/</span>
+        <a href="{{ $.Site.BaseURL }}articles/">Articles</a>
+        <span class="breadcrumb-sep">/</span>
+        <span class="breadcrumb-current">{{ .Title }}</span>
+    </nav>
 
     <div class="content-wrapper">
         <article class="main-content">
+
+            <!-- Hero Section — 16:4.5 -->
+            {{ with .Params.heroImage }}
+            <div class="hero-section">
+                <img src="{{ $.Site.BaseURL }}assets/images/{{ . }}" alt="{{ $.Title }}" class="hero-img" loading="eager">
+            </div>
+            {{ end }}
+
+            <!-- Tag Pills -->
+            {{ with .Params.tags }}
+            <div class="tag-pills">
+                {{ range first 3 . }}
+                <span class="tag-pill">{{ . }}</span>
+                {{ end }}
+            </div>
+            {{ end }}
+
             <header class="article-header">
+                <h1 class="article-title">{{ .Title }}</h1>
+
+                <div class="article-meta-row">
+                    <span class="meta-item">
+                        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                        {{ .Lastmod.Format "Jan 2, 2006" }}
+                    </span>
+                    {{ with .Params.readingTime }}
+                    <span class="meta-sep">·</span>
+                    <span class="meta-item">{{ . }} min read</span>
+                    {{ end }}
+                    {{ with .Params.rating }}
+                    <span class="meta-sep">·</span>
+                    <span class="meta-item meta-rating">
+                        <svg viewBox="0 0 24 24" width="11" height="11" fill="#F5A623"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        {{ . }}/5
+                    </span>
+                    {{ end }}
+                    {{ with index .Params.categories 0 }}
+                    <span class="meta-sep">·</span>
+                    <span class="meta-item">{{ . }}</span>
+                    {{ end }}
+                </div>
+
                 {{ with .Params.rating }}
                 <div class="rating-display">
                     <span class="stars">★★★★★</span>
@@ -16,57 +62,35 @@
                     {{ with $.Params.ratingCount }}<span class="rating-count">· Based on {{ . }} reviews</span>{{ end }}
                 </div>
                 {{ end }}
-
-                <h1>{{ .Title }}</h1>
-
-                <div class="article-meta">
-                    <span class="article-meta-item">
-                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                        {{ .Lastmod.Format "March 2006" }}
-                    </span>
-                    {{ with .Params.readingTime }}<span class="article-meta-item">
-                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                        {{ . }} min read
-                    </span>{{ end }}
-                    <span class="article-meta-item">
-                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-                        {{ with index .Params.categories 0 }}{{ . }}{{ end }}
-                    </span>
-                </div>
-
-                <!-- Hero Image — 16:9 -->
-                {{ with .Params.heroImage }}
-                <img src="{{ $.Site.BaseURL }}assets/images/{{ . }}" alt="{{ $.Title }}" class="article-hero-img" loading="eager">
-                {{ end }}
-
-                <!-- Article Tags -->
-                {{ with .Params.tags }}
-                <div class="article-tags">
-                    {{ range . }}
-                    <a href="{{ $.Site.BaseURL }}tags/{{ . | urlize }}/" class="article-tag">{{ . }}</a>
-                    {{ end }}
-                </div>
-                {{ end }}
             </header>
 
-            <!-- Inline Share Buttons -->
-            <div class="share-buttons">
-                <a href="https://twitter.com/intent/tweet?url={{ .Permalink }}&text={{ .Title }}" target="_blank" class="share-btn twitter">Twitter</a>
-                <a href="https://www.linkedin.com/shareArticle?url={{ .Permalink }}" target="_blank" class="share-btn linkedin">LinkedIn</a>
-                <a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" target="_blank" class="share-btn facebook">Facebook</a>
+            <!-- Share Buttons (top) -->
+            <div class="share-buttons share-buttons-top">
+                <a href="https://twitter.com/intent/tweet?url={{ .Permalink }}&text={{ .Title }}" target="_blank" class="share-btn twitter">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    Twitter
+                </a>
+                <a href="https://www.linkedin.com/shareArticle?url={{ .Permalink }}" target="_blank" class="share-btn linkedin">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                    LinkedIn
+                </a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" target="_blank" class="share-btn facebook">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    Facebook
+                </a>
             </div>
 
-            <!-- Tool Card -->
+            <!-- Tool Card / AI Tool Jump -->
             {{ with .Params.toolCard }}
-            <div class="tool-card">
-                <div class="tool-card-info">
+            <div class="affiliate-card">
+                <div class="affiliate-card-info">
                     <h3>{{ .title | safeHTML }}</h3>
-                    {{ with .price }}<p class="tool-card-price">{{ . | safeHTML }}</p>{{ end }}
-                    {{ with .rating }}<p class="tool-card-rating">{{ . | safeHTML }}</p>{{ end }}
+                    {{ with .price }}<p class="affiliate-card-price">{{ . | safeHTML }}</p>{{ end }}
+                    {{ with .rating }}<p class="affiliate-card-rating">{{ . | safeHTML }}</p>{{ end }}
                 </div>
-                <div class="tool-card-buttons">
-                    {{ with .primaryLink }}<a href="{{ .url }}" target="_blank" class="tool-card-btn primary">{{ .text }}</a>{{ end }}
-                    {{ with .secondaryLink }}<a href="{{ .url }}" class="tool-card-btn secondary">{{ .text }}</a>{{ end }}
+                <div class="affiliate-card-actions">
+                    {{ with .primaryLink }}<a href="{{ .url }}" target="_blank" class="affiliate-card-btn primary">{{ .text }}</a>{{ end }}
+                    {{ with .secondaryLink }}<a href="{{ .url }}" class="affiliate-card-btn secondary">{{ .text }}</a>{{ end }}
                 </div>
             </div>
             {{ end }}
@@ -89,8 +113,6 @@
                 {{ .Content }}
             </div>
 
-            <!-- NO author box — per PRD v3 requirement -->
-
             <!-- Final CTA -->
             {{ with .Params.finalCta }}
             <div class="affiliate-cta">
@@ -99,39 +121,75 @@
             </div>
             {{ end }}
 
-            <!-- Share Buttons -->
-            <div class="share-buttons">
-                <a href="https://twitter.com/intent/tweet?url={{ .Permalink }}&text={{ .Title }}" target="_blank" class="share-btn twitter">Share on Twitter</a>
-                <a href="https://www.linkedin.com/shareArticle?url={{ .Permalink }}" target="_blank" class="share-btn linkedin">Share on LinkedIn</a>
-            </div>
-
             <!-- Final Disclosure -->
             <div class="disclosure-box">
                 <strong>Disclosure:</strong> This site contains affiliate links. We may earn a commission at no extra cost to you if you make a purchase through our links. Our reviews are based on real testing and honest opinions.
             </div>
 
-            <!-- Related Articles -->
-            {{ $relatedPages := where $related "Section" "articles" | intersect (where $related "Title" "!=" .Title) | first 3 }}
+            <!-- Like Button (article bottom, centered) -->
+            <div class="footer-like-wrap">
+                <button class="footer-like-btn" onclick="alert('Thank you for your support! ❤️')">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    <span class="like-count">{{ .Params.likes | default "42" }} Likes</span>
+                </button>
+            </div>
+
+            <!-- Share Buttons (bottom) -->
+            <div class="share-buttons share-buttons-bottom">
+                <span class="share-prompt">Like this article? Show your support!</span>
+                <a href="https://twitter.com/intent/tweet?url={{ .Permalink }}&text={{ .Title }}" target="_blank" class="share-btn twitter">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    Share on Twitter
+                </a>
+                <a href="https://www.linkedin.com/shareArticle?url={{ .Permalink }}" target="_blank" class="share-btn linkedin">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                    Share on LinkedIn
+                </a>
+            </div>
+
+            <!-- Related Articles — 4-column grid -->
+            {{ $relatedPages := where $related "Section" "articles" | intersect (where $related "Title" "!=" .Title) | first 4 }}
             {{ if $relatedPages }}
-            <div class="related-articles">
-                <h3>📚 Related Articles</h3>
-                <div class="related-grid">
+            <section class="related-section">
+                <div class="section-head">
+                    <span class="section-title">More Reviews You Might Like</span>
+                </div>
+                <div class="related-posts-grid">
                     {{ range $relatedPages }}
                     <a href="{{ .Permalink }}" class="related-card">
-                        <h4>{{ .Title }}</h4>
-                        <p>{{ .Description }}</p>
+                        {{ with .Params.heroImage }}
+                        <div class="related-card-img">
+                            <img src="{{ $.Site.BaseURL }}assets/images/{{ . }}" alt="{{ .Title }}" loading="lazy">
+                        </div>
+                        {{ end }}
+                        <div class="related-card-body">
+                            {{ with index .Params.categories 0 }}
+                            <span class="related-card-cat">{{ . }}</span>
+                            {{ end }}
+                            <h4 class="related-card-title">{{ .Title }}</h4>
+                            <div class="related-card-meta">
+                                <span>{{ .Lastmod.Format "Jan 2" }}</span>
+                                <span>·</span>
+                                <span>{{ .Params.readingTime | default "5" }} min</span>
+                                {{ with .Params.likes }}
+                                <span>·</span>
+                                <span>{{ . }} likes</span>
+                                {{ end }}
+                            </div>
+                        </div>
                     </a>
                     {{ end }}
                 </div>
-            </div>
+            </section>
             {{ end }}
+
         </article>
 
         <!-- Sidebar TOC — Sticky -->
         {{ with .Params.toc }}
-        <aside class="sidebar">
+        <aside class="sidebar-toc">
             <nav class="toc" id="toc-sidebar">
-                <h4>📋 Table of Contents</h4>
+                <h4 class="toc-title">📋 Contents</h4>
                 <ul class="toc-list">
                     {{ range . }}
                     <li><a href="#{{ .id }}">{{ .title }}</a></li>
@@ -140,6 +198,255 @@
             </nav>
         </aside>
         {{ end }}
+
     </div>
 </main>
+
+<style>
+/* ---- Single Article Page Specific ---- */
+
+/* Hero: 16:4.5 ratio */
+.hero-section {
+    width: 100%;
+    aspect-ratio: 16 / 4.5;
+    overflow: hidden;
+    border-radius: var(--radius);
+    margin-bottom: 1.25rem;
+    background: var(--surface-2, #f5f5f5);
+}
+.hero-section .hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Tag Pills */
+.tag-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 1rem;
+}
+.tag-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--text-2);
+}
+.tag-pill:hover { border-color: var(--accent-color); color: var(--accent-color); }
+
+/* Article Header */
+.article-header { margin-bottom: 1.5rem; }
+.article-title {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--text-1);
+    margin-bottom: .75rem;
+}
+.article-meta-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    font-size: .85rem;
+    color: var(--text-3);
+    margin-bottom: .75rem;
+}
+.meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+}
+.meta-sep { color: var(--text-3); }
+.meta-rating { color: #F5A623; font-weight: 600; }
+
+/* Share buttons */
+.share-buttons {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 1.25rem 0;
+}
+.share-buttons-top { margin-top: .5rem; }
+.share-buttons-bottom {
+    flex-direction: column;
+    align-items: center;
+    margin: 1.5rem 0;
+}
+.share-prompt {
+    font-size: .88rem;
+    color: var(--text-3);
+    margin-bottom: .5rem;
+}
+
+/* Affiliate Card */
+.affiliate-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid var(--accent-color);
+    border-radius: var(--radius-lg);
+    background: var(--accent-dim);
+    margin: 1.5rem 0;
+}
+.affiliate-card-info h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: .25rem;
+    color: var(--accent-color);
+}
+.affiliate-card-price,
+.affiliate-card-rating { font-size: .85rem; color: var(--text-2); margin: 0; }
+.affiliate-card-actions { display: flex; gap: .5rem; flex-shrink: 0; }
+.affiliate-card-btn {
+    padding: .6rem 1.25rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: .85rem;
+    transition: all .2s;
+    display: inline-block;
+}
+.affiliate-card-btn.primary {
+    background: var(--accent-color);
+    color: #fff;
+}
+.affiliate-card-btn.primary:hover { opacity: .85; transform: translateY(-1px); }
+.affiliate-card-btn.secondary {
+    background: transparent;
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+}
+.affiliate-card-btn.secondary:hover { background: var(--accent-color); color: #fff; }
+
+/* Footer Like Button */
+.footer-like-wrap {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0 1.5rem;
+}
+.footer-like-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    border: 1.5px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    font-size: .95rem;
+    font-weight: 600;
+    color: var(--text-1);
+    cursor: pointer;
+    transition: all .25s;
+    box-shadow: var(--shadow-sm);
+}
+.footer-like-btn:hover {
+    border-color: #e74c3c;
+    color: #e74c3c;
+    box-shadow: 0 4px 16px rgba(231, 76, 60, .15);
+    transform: translateY(-2px);
+}
+.like-count { color: inherit; }
+
+/* Related Section */
+.related-section { margin-top: 2.5rem; }
+.section-head {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-1);
+}
+
+/* Related posts: 4-column grid */
+.related-posts-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+.related-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--text-1);
+    background: var(--surface);
+    transition: all .2s;
+    display: flex;
+    flex-direction: column;
+}
+.related-card:hover {
+    border-color: var(--accent-color);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+}
+.related-card-img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--accent-dim);
+}
+.related-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.related-card-body { padding: .875rem; flex: 1; display: flex; flex-direction: column; gap: 4px; }
+.related-card-cat {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    color: var(--accent-color);
+}
+.related-card-title {
+    font-size: .9rem;
+    font-weight: 700;
+    color: var(--text-1);
+    line-height: 1.35;
+    margin: 0;
+    flex: 1;
+}
+.related-card-meta {
+    display: flex;
+    gap: 5px;
+    font-size: .78rem;
+    color: var(--text-3);
+    margin-top: auto;
+}
+
+/* Sidebar TOC */
+.sidebar-toc {
+    width: 240px;
+    flex-shrink: 0;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+    .related-posts-grid { grid-template-columns: repeat(2, 1fr); }
+    .sidebar-toc { display: none; }
+}
+@media (max-width: 700px) {
+    .related-posts-grid { grid-template-columns: 1fr; }
+    .affiliate-card { flex-direction: column; align-items: flex-start; }
+    .affiliate-card-actions { width: 100%; }
+    .affiliate-card-btn { flex: 1; text-align: center; }
+    .hero-section { aspect-ratio: 16 / 9; }
+}
+</style>
 {{ end }}
