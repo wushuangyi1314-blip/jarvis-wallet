@@ -1,187 +1,134 @@
 {{ define "main" }}
 {{ $pages := .Site.RegularPages }}
 {{ $articles := where $pages "Section" "articles" }}
+{{ $paginator := .Paginate ($articles.ByLastmod.Reverse) 20 }}
+{{ $currentPage := .Paginator.PageNumber }}
 
-<!-- HERO v2 (Redesign) -->
-<section class="hero-v2">
-    <div class="container">
-        <div class="hero-v2-badge">
-            <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-            </svg>
-            Honest · Expert · Weekly Updates
-        </div>
-        <h1>Find the Best AI Tools —<br><em>Expert Reviews</em></h1>
-        <p class="hero-v2-sub">Honest, expert AI tool reviews. No fluff, just signal. Updated weekly.</p>
-        <div class="hero-v2-search">
-            <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-            </svg>
-            <input type="text" id="hero-search-input" placeholder="Search by tool name or category..." autocomplete="off">
-            <button class="search-btn" onclick="document.getElementById('hero-search-input').focus()">Search</button>
-        </div>
-    </div>
-</section>
-
-<!-- CATEGORY NAV (Redesign) -->
-<nav class="cat-nav">
-    <div class="cat-nav-inner">
-        <button class="cat-tab active" data-cat="All">All</button>
-        <button class="cat-tab" data-cat="AI Writing">AI Writing</button>
-        <button class="cat-tab" data-cat="AI Image">AI Image</button>
-        <button class="cat-tab" data-cat="AI Video">AI Video</button>
-        <button class="cat-tab" data-cat="AI Programming">AI Programming</button>
-        <button class="cat-tab" data-cat="Comparison">Comparison</button>
-        <button class="cat-tab" data-cat="Free Tools">Free Tools</button>
-        <button class="cat-tab" data-cat="SEO">SEO</button>
-        <button class="cat-tab" data-cat="Audio">Audio</button>
-        <button class="cat-tab" data-cat="Marketing">Marketing</button>
-    </div>
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <a href="{{ $.Site.BaseURL }}" class="logo">
+    <div class="logo-icon">AI</div>
+    {{ $.Site.Title }}
+  </a>
+  <div class="nav-links">
+    <a href="{{ $.Site.BaseURL }}" class="nav-link {{ if eq $currentPage 1 }}active{{ end }}">Home</a>
+    <a href="{{ $.Site.BaseURL }}about/" class="nav-link">About</a>
+  </div>
+  <div class="nav-search">
+    <span class="nav-search-icon">🔍</span>
+    <input type="text" class="nav-search-box" id="navSearchBox" placeholder="Search AI tools..." onkeydown="if(event.key==='Enter'){var q=this.value.trim();if(q)window.location.href='/search/?q='+encodeURIComponent(q);}">
+  </div>
 </nav>
 
-<!-- FEATURED ARTICLE -->
-{{ $featured := where $articles "Section" "articles" | first 1 }}
-{{ with $featured }}
-<section class="container" style="padding-top: 40px;">
-    <div class="section-head">
-        <span class="section-title">Featured This Week</span>
+<!-- HERO -->
+<div class="home-hero">
+  <div class="home-search-container">
+    <div class="home-slogan">Discover the Best AI Tools for Your Workflow</div>
+    <div class="home-search-bar">
+      <span class="home-search-icon">🔍</span>
+      <input type="text" class="home-search-input" id="heroSearchInput" placeholder="Search AI tools, categories, reviews...">
+      <button class="home-search-btn" onclick="var q=document.getElementById('heroSearchInput').value.trim();if(q)window.location.href='/search/?q='+encodeURIComponent(q);">Search</button>
     </div>
-    {{ range first 1 . }}
-    <a href="{{ .Permalink }}" class="article-card-v2" style="display:flex;gap:24px;background:var(--c-surface,var(--surface));border:1px solid var(--c-border-sub,var(--border));border-radius:var(--r-lg);overflow:hidden;text-decoration:none;transition:all .2s;box-shadow:var(--sh-sm)">
-        <div style="flex:1;padding:28px;">
-            <div style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;background:var(--c-accent-s);color:var(--c-accent-d);border-radius:var(--r-full);font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-bottom:12px;">
-                <svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                Featured
-            </div>
-            <div style="font-size:20px;font-weight:700;color:var(--c-text,var(--text-1));margin-bottom:8px;line-height:1.3;">{{ .Title }}</div>
-            <p style="font-size:14px;color:var(--c-text-2);margin-bottom:16px;line-height:1.6;">{{ .Description }}</p>
-            <div style="display:flex;align-items:center;gap:16px;font-size:13px;color:var(--c-text-3);">
-                <span>Updated {{ .Lastmod.Format "January 2, 2006" }}</span>
-                <span>·</span>
-                <span>{{ .Params.readingTime | default "8" }} min read</span>
-                {{ with .Params.rating }}
-                <span style="display:inline-flex;align-items:center;gap:3px;font-weight:600;color:#F5A623;">
-                    <svg viewBox="0 0 24 24" width="11" height="11" fill="#F5A623"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                    {{ . }}/5
-                </span>
-                {{ end }}
-            </div>
-        </div>
-        {{ with .Params.heroImage }}
-        <div style="width:280px;flex-shrink:0;">
-            <img src="{{ $.Site.BaseURL }}assets/images/{{ . }}" alt="{{ $.Title }}" style="width:100%;height:100%;object-fit:cover;" loading="eager">
-        </div>
+  </div>
+</div>
+
+<!-- CATEGORY NAV -->
+<div class="category-nav-wrap">
+  <div class="category-nav page-wrap">
+    <div class="cat-item active" onclick="filterArticles('All', this)">Trending</div>
+    <div class="cat-item" onclick="filterArticles('Latest', this)">Latest</div>
+    <div class="cat-item" onclick="filterArticles('AI Coding', this)">AI Coding</div>
+    <div class="cat-item" onclick="filterArticles('AI Productivity', this)">AI Productivity</div>
+    <div class="cat-item" onclick="filterArticles('AI Image', this)">AI Image</div>
+    <div class="cat-item" onclick="filterArticles('AI Video', this)">AI Video</div>
+    <div class="cat-item" onclick="filterArticles('AI Design', this)">AI Design</div>
+    <div class="cat-item" onclick="filterArticles('AI Writing', this)">AI Writing</div>
+    <div class="cat-item" onclick="filterArticles('AI Audio', this)">AI Audio</div>
+  </div>
+</div>
+
+<!-- ARTICLE GRID -->
+<div class="page-wrap">
+  <div class="article-grid" id="articleGrid">
+    {{ range $paginator.Pages }}
+    <a href="{{ .Permalink }}" class="article-card" data-category="{{ range first 1 .Params.categories }}{{ . }}{{ end }}">
+      <div class="card-img">
+        {{ if .Params.heroImage }}
+        <img src="{{ $.Site.BaseURL }}assets/images/{{ .Params.heroImage }}" alt="{{ .Title }}" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
+        {{ else }}
+        <div class="card-img-inner">16:9 Cover Image</div>
         {{ end }}
+      </div>
+      <div class="card-body">
+        <div class="card-title">{{ .Title }}</div>
+        <div class="card-desc">{{ .Description }}</div>
+        <div class="card-meta">
+          <span class="card-tag">{{ range first 1 .Params.categories }}{{ . }}{{ end }}</span>
+          <span class="card-date">{{ .Lastmod.Format "Jan 2, 2006" }}</span>
+        </div>
+      </div>
     </a>
     {{ end }}
-</section>
-{{ end }}
+  </div>
 
-<!-- ARTICLES GRID (Redesign v2) -->
-<section class="container articles-v2">
-    <div class="section-head">
-        <span class="section-title">Latest Reviews <span>({{ len $articles }} articles)</span></span>
-        <div class="sort-tabs">
-            <button class="sort-tab active" data-sort="new">Newest</button>
-            <button class="sort-tab" data-sort="hot">Most Popular</button>
-            <button class="sort-tab" data-sort="rating">Top Rated</button>
-        </div>
-    </div>
+  <!-- PAGINATION -->
+  {{ if gt $paginator.TotalPages 1 }}
+  <div class="pagination">
+    {{ if $paginator.HasPrev }}
+    <a href="{{ $paginator.Prev.URL }}" class="page-btn">‹</a>
+    {{ else }}
+    <span class="page-btn disabled">‹</span>
+    {{ end }}
 
-    <div class="article-grid-v2" id="articleGrid">
-        {{ range $articles.ByLastmod.Reverse }}
-        <a href="{{ .Permalink }}" class="article-card-v2">
-            <div class="card-v2-thumb">
-                {{ if .Params.heroImage }}
-                <img src="{{ $.Site.BaseURL }}assets/images/{{ .Params.heroImage }}" alt="{{ .Title }}" loading="lazy">
-                {{ else }}
-                <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=640&q=80" alt="{{ .Title }}" loading="lazy">
-                {{ end }}
-            </div>
-            <div class="card-v2-body">
-                <div class="card-v2-cat">{{ range first 1 .Params.categories }}{{ . }}{{ end }}</div>
-                <div class="card-v2-title">{{ .Title }}</div>
-                <div class="card-v2-excerpt">{{ .Description }}</div>
-                <div class="card-v2-foot">
-                    <span class="card-v2-date">{{ .Lastmod.Format "Jan 2, 2006" }}</span>
-                    <div style="display:flex;align-items:center;gap:10px;">
-                        {{ with .Params.rating }}
-                        <span style="display:flex;align-items:center;gap:2px;font-size:11px;font-weight:600;color:#F5A623;">
-                            <svg viewBox="0 0 24 24" width="10" height="10" fill="#F5A623"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                            {{ . }}
-                        </span>
-                        {{ end }}
-                        <span class="card-v2-link">Read →</span>
-                    </div>
-                </div>
-            </div>
-        </a>
-        {{ end }}
-    </div>
+    {{ range $paginator.Pagers }}
+      {{ if eq .PageNumber $currentPage }}
+      <span class="page-btn active">{{ .PageNumber }}</span>
+      {{ else if or (le .PageNumber (add $currentPage 2)) (ge .PageNumber (sub $currentPage 2)) }}
+      <a href="{{ .URL }}" class="page-btn">{{ .PageNumber }}</a>
+      {{ else if or (eq .PageNumber 1) (eq .PageNumber $paginator.TotalPages) }}
+      <a href="{{ .URL }}" class="page-btn">{{ .PageNumber }}</a>
+      {{ end }}
+    {{ end }}
 
-    <div class="pagination">
-        <a href="#" class="page-btn active">1</a>
-        <a href="#" class="page-btn">2</a>
-        <a href="#" class="page-btn">3</a>
-        <a href="#" class="page-btn">→</a>
-    </div>
-</section>
+    {{ if $paginator.HasNext }}
+    <a href="{{ $paginator.Next.URL }}" class="page-btn">›</a>
+    {{ else }}
+    <span class="page-btn disabled">›</span>
+    {{ end }}
+    <span class="page-info">{{ len $articles }} articles</span>
+  </div>
+  {{ end }}
+</div>
 
-<!-- CTA SECTION -->
-<section class="container" style="padding-bottom: 64px;">
-    <div class="cta-section" style="background:linear-gradient(135deg,var(--c-accent) 0%,#9333EA 100%);border-radius:var(--r-xl);padding:40px;text-align:center;color:#fff;">
-        <h3 style="font-size:22px;font-weight:700;margin-bottom:8px;">Start Your AI Journey</h3>
-        <p style="font-size:15px;opacity:.9;margin-bottom:20px;">Get our latest reviews and guides delivered to you. No spam, unsubscribe anytime.</p>
-        <a href="#" style="display:inline-block;padding:10px 24px;background:#fff;color:var(--c-accent);border-radius:var(--r-md);font-weight:600;font-size:14px;text-decoration:none;">Subscribe Free →</a>
-    </div>
-</section>
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-links">
+    <a href="{{ $.Site.BaseURL }}about/" class="footer-link">About Us</a>
+    <a href="{{ $.Site.BaseURL }}contact/" class="footer-link">Contact</a>
+    <a href="{{ $.Site.BaseURL }}privacy/" class="footer-link">Privacy Policy</a>
+    <a href="{{ $.Site.BaseURL }}terms/" class="footer-link">Terms of Service</a>
+  </div>
+  <div class="footer-copy">© {{ now.Year }} {{ $.Site.Title }}. All rights reserved.</div>
+</footer>
 
 {{ end }}
 
 {{ define "scripts" }}
 <script>
-// Category tab filtering
-(function() {
-    var tabs = document.querySelectorAll('.cat-tab');
-    var cards = document.querySelectorAll('.article-card-v2');
-    tabs.forEach(function(tab) {
-        tab.addEventListener('click', function() {
-            var cat = tab.getAttribute('data-cat') || 'All';
-            tabs.forEach(function(t) { t.classList.remove('active'); });
-            tab.classList.add('active');
-            cards.forEach(function(card) {
-                var cardCat = card.querySelector('.card-v2-cat');
-                var cardCatText = cardCat ? cardCat.textContent.trim() : '';
-                if (!cat || cat === 'All' || cardCatText === cat) {
-                    card.style.display = '';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-    });
+function filterArticles(category, el) {
+  var cards = document.querySelectorAll('.article-card');
+  var tabs = document.querySelectorAll('.cat-item');
+  tabs.forEach(function(t) { t.classList.remove('active'); });
+  el.classList.add('active');
 
-    // Sort tabs
-    var sortTabs = document.querySelectorAll('.sort-tab');
-    sortTabs.forEach(function(tab) {
-        tab.addEventListener('click', function() {
-            sortTabs.forEach(function(t) { t.classList.remove('active'); });
-            tab.classList.add('active');
-        });
-    });
-
-    // Hero search — focus main search input
-    var heroInput = document.getElementById('hero-search-input');
-    if (heroInput) {
-        heroInput.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                var q = heroInput.value.trim();
-                if (q) {
-                    window.location.href = '/search/?q=' + encodeURIComponent(q);
-                }
-            }
-        });
+  cards.forEach(function(card) {
+    var cat = card.getAttribute('data-category') || '';
+    if (category === 'All' || category === 'Trending' || category === 'Latest' || cat === category) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
     }
-})();
+  });
+}
 </script>
 {{ end }}

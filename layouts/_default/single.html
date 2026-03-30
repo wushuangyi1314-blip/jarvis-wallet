@@ -1,622 +1,165 @@
 {{ define "main" }}
-{{ $related := .Site.RegularPages }}
-<main class="container">
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang }}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ .Title }} | {{ .Site.Title }}</title>
+<meta name="description" content="{{ .Description }}">
+<link rel="canonical" href="{{ .Permalink }}">
+{{ template "_internal/opengraph.html" . }}
+{{ template "_internal/twitter_cards.html" . }}
+<link rel="stylesheet" href="/assets/css/style.css?v=12">
+</head>
+<body>
 
-    <!-- Breadcrumb -->
-    <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="{{ $.Site.BaseURL }}">Home</a>
-        <span class="breadcrumb-sep">›</span>
-        <a href="{{ $.Site.BaseURL }}articles/">Articles</a>
-        <span class="breadcrumb-sep">›</span>
-        <span class="breadcrumb-current">{{ .Title }}</span>
-    </nav>
+<!-- Top Navigation -->
+<nav class="top-nav">
+  <a href="{{ .Site.BaseURL }}" class="logo">
+    <div class="logo-icon">AI</div>
+    {{ .Site.Title }}
+  </a>
+  <div class="nav-links">
+    <a href="{{ .Site.BaseURL }}" class="nav-link">Home</a>
+    <a href="{{ .Site.BaseURL }}about/" class="nav-link">About</a>
+  </div>
+  <div class="nav-search">
+    <span class="nav-search-icon">🔍</span>
+    <input type="text" class="nav-search-box" placeholder="Search AI tools..." id="navSearchInput">
+  </div>
+</nav>
 
-    <div class="content-wrapper">
+<!-- Breadcrumb -->
+<div class="breadcrumb">
+  <a href="{{ .Site.BaseURL }}">Home</a>
+  <span class="breadcrumb-sep">›</span>
+  <a href="{{ .Site.BaseURL }}">{{ .Section }}</a>
+  <span class="breadcrumb-sep">›</span>
+  <span class="breadcrumb-current">{{ .Title }}</span>
+</div>
 
-        <!-- LEFT: TOC Panel (sticky) -->
-        {{ with .Params.toc }}
-        <aside class="toc-panel" id="toc-panel">
-            <div class="toc-title">CONTENTS</div>
-            <nav class="toc-nav" id="toc-nav">
-                {{ range . }}
-                <a href="#{{ .id }}" class="toc-item" data-id="{{ .id }}">{{ .title }}</a>
-                {{ end }}
-            </nav>
-        </aside>
-        {{ end }}
+{{ with .Params.heroImage }}
+<!-- Hero Image — 16:4.5 -->
+<div class="article-hero">
+  <img src="{{ $.Site.BaseURL }}assets/images/{{ . }}" alt="{{ $.Title }}" class="hero-img" loading="eager">
+</div>
+{{ end }}
 
-        <!-- MAIN: Article -->
-        <article class="main-content">
+<!-- Content Tags -->
+{{ with .Params.tags }}
+<div class="article-tags">
+  {{ range . }}
+  <span class="tag-pill tag-{{ . }}">{{ . }}</span>
+  {{ end }}
+</div>
+{{ end }}
 
-            <!-- Hero Section — 16:4.5 -->
-            {{ with .Params.heroImage }}
-            <div class="article-hero">
-                <div class="hero-pattern"></div>
-                <div class="hero-label">Hero Image: {{ . }}</div>
-                <img src="{{ $.Site.BaseURL }}assets/images/{{ . }}" alt="{{ $.Title }}" loading="eager">
-            </div>
-            {{ else }}
-            <div class="article-hero">
-                <div class="hero-pattern"></div>
-                <div class="hero-label">Hero Image</div>
-            </div>
-            {{ end }}
+<!-- Article Header -->
+<div class="article-header">
+  <h1 class="article-title">{{ .Title }}</h1>
+  <div class="article-meta">
+    <span class="meta-item">📅 {{ .Lastmod.Format "Jan 2, 2006" }}</span>
+    <span class="meta-item-static" id="metaStats">👍 <span id="likeCount">0</span> likes · 👁 <span id="viewCount">0</span> views</span>
+  </div>
+</div>
 
-            <!-- Tag Pills -->
-            {{ with .Params.tags }}
-            <div class="article-tags">
-                {{ range first 3 . }}
-                <span class="tag-pill">{{ . }}</span>
-                {{ end }}
-            </div>
-            {{ end }}
+<!-- Share Buttons -->
+<div class="share-section">
+  <span class="share-label">Share:</span>
+  <button class="share-btn share-twitter" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(document.title),'_blank')">Twitter</button>
+  <button class="share-btn share-facebook" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank')">Facebook</button>
+  <button class="share-btn share-linkedin" onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(location.href),'_blank')">LinkedIn</button>
+  <button class="share-btn share-copy" onclick="navigator.clipboard.writeText(location.href)">Copy Link</button>
+</div>
 
-            <header class="article-header">
-                <h1 class="article-title">{{ .Title }}</h1>
+<!-- Article Body -->
+<div class="article-body">
 
-                <div class="article-meta">
-                    <span class="meta-item">
-                        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                        {{ .Lastmod.Format "Jan 2, 2006" }}
-                    </span>
-                    <span class="meta-sep">·</span>
-                    {{ with .Params.readingTime }}
-                    <span class="meta-item">{{ . }} min read</span>
-                    <span class="meta-sep">·</span>
-                    {{ end }}
-                    {{ with .Params.likes }}
-                    <span class="meta-item-static">{{ . }} Likes · {{ $.Params.readingTime | default "5" }} min read</span>
-                    {{ end }}
-                    {{ with index .Params.categories 0 }}
-                    <span class="meta-sep">·</span>
-                    <span class="meta-item">{{ . }}</span>
-                    {{ end }}
-                </div>
-            </header>
+  <!-- Table of Contents (LEFT sidebar) -->
+  {{ with .Params.toc }}
+  <div class="toc-panel">
+    <div class="toc-title">📑 Contents</div>
+    {{ range . }}
+    <a href="#{{ .id }}" class="toc-item{{ if .h3 }} h3{{ end }}">{{ .title }}</a>
+    {{ end }}
+  </div>
+  {{ end }}
 
-            <!-- Share Section -->
-            <div class="share-section">
-                <div class="share-label">Share this article</div>
-                <div class="share-buttons">
-                    <a href="https://twitter.com/intent/tweet?url={{ .Permalink }}&text={{ .Title }}" target="_blank" class="share-btn twitter" aria-label="Share on Twitter">
-                        <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                        Twitter
-                    </a>
-                    <a href="https://www.linkedin.com/shareArticle?url={{ .Permalink }}" target="_blank" class="share-btn linkedin" aria-label="Share on LinkedIn">
-                        <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-                        LinkedIn
-                    </a>
-                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" target="_blank" class="share-btn facebook" aria-label="Share on Facebook">
-                        <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-                        Facebook
-                    </a>
-                    <button class="share-btn copy" onclick="navigator.clipboard.writeText(window.location.href); this.textContent='Copied!';" aria-label="Copy link">
-                        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-                        Copy Link
-                    </button>
-                </div>
-            </div>
+  <!-- Article Content -->
+  <div class="article-content">
+    {{ .Content }}
+  </div>
 
-            <!-- Tool Card / AI Tool Jump -->
-            {{ with .Params.toolCard }}
-            <div class="affiliate-card">
-                <div class="affiliate-label">AI TOOL AFFILIATE CARD</div>
-                <div class="affiliate-info">
-                    <div class="affiliate-name">{{ .title | safeHTML }}</div>
-                    {{ with .price }}<div class="affiliate-desc">{{ . | safeHTML }}</div>{{ end }}
-                </div>
-                <div class="affiliate-cta" onclick="window.open('{{ with .primaryLink }}{{ .url }}{{ end }}','_blank')">Try It →</div>
-            </div>
-            {{ end }}
+</div>
 
-            <!-- Article Content -->
-            <div class="article-content">
-                {{ .Content }}
-            </div>
+<!-- Bottom Like Button -->
+<div class="bottom-like-section">
+  <div class="bottom-like-divider"></div>
+  <button class="bottom-like-btn" id="bottomLikeBtn" onclick="toggleLike(this)">
+    👍 <span id="bottomLikeCount">0</span> Likes
+  </button>
+  <p class="bottom-like-hint">Like this article? Show your support! ❤️</p>
+</div>
 
-            <!-- Bottom Like Section -->
-            <div class="bottom-like-section">
-                <div class="bottom-like-divider"></div>
-                <button class="bottom-like-btn" onclick="this.classList.toggle('liked'); var c=this.querySelector('.like-count'); c.textContent = this.classList.contains('liked')? parseInt(c.textContent)+1 + ' Thanks!' : c.textContent.replace(' Thanks!','');">
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                    <span class="like-count">{{ .Params.likes | default "42" }}</span>
-                </button>
-                <p class="bottom-like-hint">Found this helpful? Show some love! ❤️</p>
-            </div>
+<!-- Related Articles -->
+{{ with .Site.RegularPages.Related . | first 4 }}
+<section class="related-section">
+  <div class="related-header">
+    <h2 class="related-title">More Reviews You Might Like</h2>
+  </div>
+  <div class="related-grid">
+    {{ range . }}
+    <a href="{{ .Permalink }}" class="related-card">
+      {{ with .Params.heroImage }}
+      <img src="{{ $.Site.BaseURL }}assets/images/{{ . }}" alt="{{ $.Title }}" class="related-card-img">
+      {{ end }}
+      <div class="related-card-body">
+        <span class="related-card-cat">{{ .Section }}</span>
+        <h3 class="related-card-title">{{ .Title }}</h3>
+      </div>
+    </a>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
 
-            <!-- Related Articles — 4-column grid -->
-            {{ $relatedPages := where $related "Section" "articles" | intersect (where $related "Title" "!=" .Title) | first 4 }}
-            {{ if $relatedPages }}
-            <section class="related-section">
-                <h2 class="related-title">More Reviews You Might Like</h2>
-                <div class="related-grid">
-                    {{ range $relatedPages }}
-                    <a href="{{ .Permalink }}" class="related-card">
-                        {{ $relatedPage := . }}
-                        {{ with .Params.heroImage }}
-                        <div class="related-card-img">
-                            <img src="{{ $.Site.BaseURL }}assets/images/{{ . }}" alt="{{ $relatedPage.Title }}" loading="lazy">
-                        </div>
-                        {{ else }}
-                        <div class="related-card-img"><div class="img-placeholder"></div></div>
-                        {{ end }}
-                        <div class="related-card-body">
-                            {{ with index .Params.categories 0 }}
-                            <span class="related-card-tag">{{ . }}</span>
-                            {{ end }}
-                            <div class="related-card-title">{{ .Title }}</div>
-                            <div class="related-card-meta">
-                                <span class="related-card-date">{{ .Lastmod.Format "Jan 2" }}</span>
-                                <div class="related-card-stats">
-                                    <span class="related-card-stat">{{ .Params.readingTime | default "5" }} min</span>
-                                    {{ with .Params.likes }}
-                                    <span class="related-card-stat">· {{ . }} likes</span>
-                                    {{ end }}
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    {{ end }}
-                </div>
-            </section>
-            {{ end }}
-
-        </article>
-    </div>
-</main>
-
-<style>
-/* =============================================
-   Article Detail Page — v3.3 Layout
-   ============================================= */
-
-/* Breadcrumb */
-.breadcrumb {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: .82rem;
-    color: var(--text-3, #888);
-    padding: .75rem 0;
-    flex-wrap: wrap;
-}
-.breadcrumb a { color: var(--text-3, #888); text-decoration: none; }
-.breadcrumb a:hover { color: var(--accent-color, #7c3aed); }
-.breadcrumb-sep { color: var(--text-3, #aaa); }
-.breadcrumb-current { color: var(--text-2, #555); font-weight: 600; }
-
-/* Content wrapper: TOC left + article right */
-.content-wrapper {
-    display: flex;
-    align-items: flex-start;
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 0 3rem;
-}
-
-/* ---- TOC Panel (LEFT sticky) ---- */
-.toc-panel {
-    width: 240px;
-    flex-shrink: 0;
-    position: sticky;
-    top: 80px;
-    max-height: calc(100vh - 100px);
-    overflow-y: auto;
-    padding: 1rem 0;
-    scrollbar-width: none;
-}
-.toc-panel::-webkit-scrollbar { display: none; }
-.toc-title {
-    font-size: .7rem;
-    font-weight: 800;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: var(--text-3, #aaa);
-    margin-bottom: .75rem;
-    padding-left: .75rem;
-}
-.toc-item {
-    display: block;
-    padding: .4rem .75rem;
-    font-size: .82rem;
-    color: var(--text-2, #666);
-    text-decoration: none;
-    border-left: 2px solid transparent;
-    transition: all .2s;
-    line-height: 1.4;
-    border-radius: 0 4px 4px 0;
-}
-.toc-item:hover { color: var(--accent-color, #7c3aed); border-left-color: var(--accent-color, #7c3aed); }
-.toc-item.active { color: var(--accent-color, #7c3aed); border-left-color: var(--accent-color, #7c3aed); font-weight: 600; }
-.toc-item.h3 { padding-left: 1.5rem; font-size: .78rem; }
-
-/* ---- Article Hero (16:4.5) ---- */
-.article-hero {
-    width: 100%;
-    aspect-ratio: 16 / 4.5;
-    border-radius: var(--radius-lg, 12px);
-    overflow: hidden;
-    position: relative;
-    background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 50%, #c4b5fd 100%);
-    margin-bottom: 1.25rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.article-hero img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: relative;
-    z-index: 1;
-}
-.hero-pattern {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 30% 50%, rgba(255,255,255,.15) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 20%, rgba(255,255,255,.1) 0%, transparent 40%);
-    z-index: 0;
-}
-.hero-label {
-    position: absolute;
-    font-size: .75rem;
-    font-weight: 600;
-    color: rgba(255,255,255,.5);
-    z-index: 0;
-}
-
-/* ---- Tag Pills ---- */
-.article-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: .875rem;
-}
-.tag-pill {
-    display: inline-flex;
-    align-items: center;
-    padding: 3px 12px;
-    border-radius: 999px;
-    border: 1px solid var(--border, #e5e7eb);
-    background: var(--surface, #fff);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: .04em;
-    text-transform: uppercase;
-    color: var(--text-2, #6b7280);
-    transition: all .2s;
-}
-.tag-pill:hover { border-color: var(--accent-color, #7c3aed); color: var(--accent-color, #7c3aed); }
-.tag-pill.tag-free { background: #dcfce7; color: #166534; border-color: #86efac; }
-.tag-pill.tag-paid { background: #ffedd5; color: #9a3412; border-color: #fed7aa; }
-.tag-pill.tag-open { background: #ede9fe; color: #5b21b6; border-color: #c4b5fd; }
-.tag-pill.tag-ai { background: #f3e8ff; color: #7c3aed; border-color: #d8b4fe; }
-
-/* ---- Article Header ---- */
-.article-header { margin-bottom: 1rem; }
-.article-title {
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    font-weight: 800;
-    line-height: 1.25;
-    color: var(--text-1, #111);
-    margin-bottom: .75rem;
-    letter-spacing: -.01em;
-}
-.article-meta {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 4px;
-    font-size: .82rem;
-    color: var(--text-3, #888);
-}
-.meta-item { display: inline-flex; align-items: center; gap: 3px; }
-.meta-item-static { font-weight: 600; color: var(--text-2, #666); }
-.meta-sep { color: var(--border, #e5e7eb); }
-
-/* ---- Share Section ---- */
-.share-section {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 1.5rem;
-    padding: .875rem 1rem;
-    background: var(--surface-2, #f9f9f9);
-    border-radius: var(--radius, 8px);
-    border: 1px solid var(--border, #e5e7eb);
-}
-.share-label {
-    font-size: .78rem;
-    font-weight: 600;
-    color: var(--text-2, #666);
-    margin-right: .25rem;
-}
-.share-buttons { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
-.share-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 5px 12px;
-    border-radius: 6px;
-    border: 1px solid var(--border, #e5e7eb);
-    background: var(--surface, #fff);
-    font-size: .78rem;
-    font-weight: 600;
-    color: var(--text-2, #555);
-    text-decoration: none;
-    cursor: pointer;
-    transition: all .2s;
-}
-.share-btn:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,.08); }
-.share-btn.twitter:hover { background: #1DA1F2; color: #fff; border-color: #1DA1F2; }
-.share-btn.linkedin:hover { background: #0A66C2; color: #fff; border-color: #0A66C2; }
-.share-btn.facebook:hover { background: #1877F2; color: #fff; border-color: #1877F2; }
-.share-btn.copy:hover { background: var(--accent-color, #7c3aed); color: #fff; border-color: var(--accent-color, #7c3aed); }
-
-/* ---- Affiliate Card ---- */
-.affiliate-card {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1.25rem 1.5rem;
-    border: 1.5px solid var(--accent-color, #7c3aed);
-    border-radius: var(--radius-lg, 12px);
-    background: linear-gradient(135deg, rgba(124,58,237,.04), rgba(124,58,237,.08));
-    margin: 1.5rem 0;
-}
-.affiliate-label {
-    display: none;
-}
-.affiliate-info { flex: 1; }
-.affiliate-name {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--accent-color, #7c3aed);
-    margin-bottom: .2rem;
-}
-.affiliate-desc {
-    font-size: .82rem;
-    color: var(--text-2, #666);
-}
-.affiliate-cta {
-    padding: .6rem 1.25rem;
-    background: var(--accent-color, #7c3aed);
-    color: #fff;
-    border-radius: 8px;
-    font-size: .85rem;
-    font-weight: 700;
-    cursor: pointer;
-    text-decoration: none;
-    white-space: nowrap;
-    transition: opacity .2s;
-}
-.affiliate-cta:hover { opacity: .85; }
-
-/* ---- Article Content ---- */
-.article-content {
-    font-size: .9rem;
-    line-height: 1.8;
-    color: var(--text-1, #222);
-}
-.article-content h2 {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--text-1, #111);
-    margin: 2rem 0 .75rem;
-    padding-bottom: .4rem;
-    border-bottom: 2px solid var(--border, #e5e7eb);
-}
-.article-content h3 {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--text-1, #111);
-    margin: 1.5rem 0 .5rem;
-}
-.article-content p { margin-bottom: 1rem; }
-.article-content ul { padding-left: 1.5rem; margin-bottom: 1rem; }
-.article-content li { margin-bottom: .35rem; }
-.article-content img {
-    max-width: 100%;
-    border-radius: var(--radius, 8px);
-    margin: 1rem 0;
-}
-.article-content blockquote {
-    border-left: 4px solid var(--accent-color, #7c3aed);
-    padding: .75rem 1rem;
-    background: rgba(124,58,237,.04);
-    border-radius: 0 var(--radius, 8px) var(--radius, 8px) 0;
-    margin: 1.5rem 0;
-    font-style: italic;
-    color: var(--text-2, #555);
-}
-.article-content code {
-    background: var(--surface-2, #f3f4f6);
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-size: .85em;
-}
-.article-content pre {
-    background: #1e1e2e;
-    color: #cdd6f4;
-    padding: 1rem 1.25rem;
-    border-radius: var(--radius, 8px);
-    overflow-x: auto;
-    margin: 1.5rem 0;
-}
-.article-content pre code { background: none; padding: 0; color: inherit; }
-
-/* ---- Bottom Like Section ---- */
-.bottom-like-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 720px;
-    margin: 2.5rem auto;
-    gap: .875rem;
-}
-.bottom-like-divider {
-    width: 60px;
-    height: 3px;
-    background: var(--accent-color, #7c3aed);
-    border-radius: 999px;
-}
-.bottom-like-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 32px;
-    border: 2px solid var(--border, #e5e7eb);
-    border-radius: 999px;
-    background: var(--surface, #fff);
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--text-1, #111);
-    cursor: pointer;
-    transition: all .25s;
-    box-shadow: 0 2px 12px rgba(0,0,0,.06);
-}
-.bottom-like-btn:hover {
-    border-color: #e74c3c;
-    color: #e74c3c;
-    box-shadow: 0 4px 20px rgba(231,76,60,.15);
-    transform: translateY(-2px);
-}
-.bottom-like-btn.liked {
-    border-color: #e74c3c;
-    background: #fff5f5;
-    color: #e74c3c;
-}
-.bottom-like-hint {
-    font-size: .8rem;
-    color: var(--text-3, #aaa);
-    text-align: center;
-    margin: 0;
-}
-
-/* ---- Related Section ---- */
-.related-section {
-    margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--border, #e5e7eb);
-}
-.related-title {
-    font-size: 1.1rem;
-    font-weight: 800;
-    color: var(--text-1, #111);
-    margin-bottom: 1.25rem;
-    padding-left: .75rem;
-    border-left: 4px solid var(--accent-color, #7c3aed);
-}
-.related-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-}
-.related-card {
-    border: 1px solid var(--border, #e5e7eb);
-    border-radius: var(--radius-lg, 12px);
-    overflow: hidden;
-    text-decoration: none;
-    color: var(--text-1, #111);
-    background: var(--surface, #fff);
-    transition: all .2s;
-    display: flex;
-    flex-direction: column;
-}
-.related-card:hover {
-    border-color: var(--accent-color, #7c3aed);
-    box-shadow: 0 8px 24px rgba(124,58,237,.12);
-    transform: translateY(-3px);
-}
-.related-card-img {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
-    background: linear-gradient(135deg, #7c3aed22, #a78bfa22);
-}
-.related-card-img img { width: 100%; height: 100%; object-fit: cover; }
-.img-placeholder { width: 100%; height: 100%; background: linear-gradient(135deg, #ede9fe, #ddd6fe); }
-.related-card-body {
-    padding: .875rem;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-.related-card-tag {
-    display: inline-block;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: .06em;
-    text-transform: uppercase;
-    color: #fff;
-    background: var(--accent-color, #7c3aed);
-    padding: 2px 8px;
-    border-radius: 999px;
-    align-self: flex-start;
-}
-.related-card-title {
-    font-size: .875rem;
-    font-weight: 700;
-    color: var(--text-1, #111);
-    line-height: 1.4;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    flex: 1;
-}
-.related-card-meta {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: auto;
-}
-.related-card-date { font-size: .75rem; color: var(--text-3, #aaa); }
-.related-card-stats { display: flex; gap: 4px; }
-.related-card-stat { font-size: .75rem; color: var(--text-3, #aaa); }
-
-/* ---- Responsive ---- */
-@media (max-width: 1100px) {
-    .toc-panel { display: none; }
-    .related-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 700px) {
-    .related-grid { grid-template-columns: 1fr; }
-    .article-hero { aspect-ratio: 16 / 9; }
-    .affiliate-card { flex-direction: column; align-items: flex-start; }
-    .share-section { flex-direction: column; align-items: flex-start; }
-}
-</style>
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-links">
+    <a href="{{ .Site.BaseURL }}" class="footer-link">Home</a>
+    <a href="{{ .Site.BaseURL }}about/" class="footer-link">About</a>
+    <a href="{{ .Site.BaseURL }}privacy/" class="footer-link">Privacy</a>
+    <a href="{{ .Site.BaseURL }}terms/" class="footer-link">Terms</a>
+  </div>
+  <p class="footer-copy">© 2026 {{ .Site.Title }}. All rights reserved.</p>
+</footer>
 
 <script>
-// TOC active link tracking on scroll
-document.addEventListener('DOMContentLoaded', function() {
-    const tocItems = document.querySelectorAll('.toc-item');
-    if (!tocItems.length) return;
+// Random likes/views on load
+document.getElementById('likeCount').textContent = Math.floor(Math.random() * 5) + 1;
+document.getElementById('viewCount').textContent = Math.floor(Math.random() * 30) + 20;
+document.getElementById('bottomLikeCount').textContent = document.getElementById('likeCount').textContent;
 
-    const headings = [];
-    tocItems.forEach(function(item) {
-        const id = item.getAttribute('data-id') || item.getAttribute('href').replace('#', '');
-        const el = document.getElementById(id);
-        if (el) headings.push({ id: id, el: el });
-    });
+// Like toggle
+function toggleLike(btn) {
+  btn.classList.toggle('liked');
+  let count = parseInt(document.getElementById('bottomLikeCount').textContent);
+  if (btn.classList.contains('liked')) {
+    count++;
+  } else {
+    count--;
+  }
+  document.getElementById('bottomLikeCount').textContent = count;
+}
 
-    function updateActive() {
-        let current = '';
-        headings.forEach(function(h) {
-            if (h.el.getBoundingClientRect().top <= 120) current = h.id;
-        });
-        tocItems.forEach(function(item) {
-            const id = item.getAttribute('data-id') || item.getAttribute('href').replace('#', '');
-            item.classList.toggle('active', id === current);
-        });
-    }
-    window.addEventListener('scroll', updateActive, { passive: true });
-    updateActive();
+// Nav search
+document.getElementById('navSearchInput').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') {
+    window.location.href = '/search?q=' + encodeURIComponent(this.value);
+  }
 });
 </script>
 
+</body>
+</html>
 {{ end }}
