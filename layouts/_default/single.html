@@ -157,9 +157,10 @@
                 <div class="related-posts-grid">
                     {{ range $relatedPages }}
                     <a href="{{ .Permalink }}" class="related-card">
+                        {{ $relatedPage := . }}
                         {{ with .Params.heroImage }}
                         <div class="related-card-img">
-                            <img src="{{ $.Site.BaseURL }}assets/images/{{ . }}" alt="{{ .Title }}" loading="lazy">
+                            <img src="{{ $.Site.BaseURL }}assets/images/{{ . }}" alt="{{ $relatedPage.Title }}" loading="lazy">
                         </div>
                         {{ end }}
                         <div class="related-card-body">
