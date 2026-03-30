@@ -28,9 +28,9 @@
         <button class="category-filter-toggle" id="categoryToggle">View All Categories <span style="font-size:10px">&#8595;</span></button>
     </div>
 
-    <div class="article-grid" id="articleGrid">
+    <div class="article-grid-v2" id="articleGrid">
         {{ range $articles.ByLastmod.Reverse }}
-        <article class="article-card" data-category="{{ with index .Params.categories 0 }}{{ . }}{{ end }}}">
+        <article class="article-card-v2" data-category="{{ with index .Params.categories 0 }}{{ . }}{{ end }}}">
             <div class="card-image-wrap">
                 {{ with .Params.heroImage }}
                 <img class="card-image" src="{{ $.Site.BaseURL }}assets/images/{{ . }}" alt="{{ $.Title }}" loading="lazy">

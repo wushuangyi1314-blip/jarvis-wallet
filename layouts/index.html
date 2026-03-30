@@ -47,7 +47,7 @@
         <span class="section-title">Featured This Week</span>
     </div>
     {{ range first 1 . }}
-    <a href="{{ .Permalink }}" class="featured-card" style="display:flex;gap:24px;background:var(--c-surface,var(--surface));border:1px solid var(--c-border-sub,var(--border));border-radius:var(--r-lg);overflow:hidden;text-decoration:none;transition:all .2s;box-shadow:var(--sh-sm)">
+    <a href="{{ .Permalink }}" class="article-card-v2" style="display:flex;gap:24px;background:var(--c-surface,var(--surface));border:1px solid var(--c-border-sub,var(--border));border-radius:var(--r-lg);overflow:hidden;text-decoration:none;transition:all .2s;box-shadow:var(--sh-sm)">
         <div style="flex:1;padding:28px;">
             <div style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;background:var(--c-accent-s);color:var(--c-accent-d);border-radius:var(--r-full);font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-bottom:12px;">
                 <svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
