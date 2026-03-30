@@ -27,6 +27,7 @@ publishDir = "public"
 
 [build]
   writeStats = true
+  # trigger redeploy
 
 [taxonomies]
   category = "categories"
