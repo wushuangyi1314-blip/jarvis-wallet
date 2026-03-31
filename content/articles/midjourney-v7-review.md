@@ -35,7 +35,7 @@ toc:
   - id: "verdict"
     title: "Final Verdict"
 affiliateName: "Midjourney"
-affiliateDesc: "AI艺术生成工具，每月$10起"
+affiliateDesc: "AI art generation tool, starting at $10/month"
 affiliateUrl: "https://midjourney.com"
 ---
 

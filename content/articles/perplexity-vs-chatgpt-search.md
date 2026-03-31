@@ -35,7 +35,7 @@ toc:
   - id: "verdict"
     title: "The Verdict"
 affiliateName: "ChatGPT"
-affiliateDesc: "AI写作助手，支持多模态"
+affiliateDesc: "AI-powered answer engine with multimodal support"
 affiliateUrl: "https://chat.openai.com"
 ---
 

@@ -63,23 +63,38 @@
     <!-- ARTICLE CONTENT -->
     <div class="article-content">
 
-        <!-- Affiliate Card -->
-        {{ $name := .Params.affiliateName | default .Params.featuredTool | default "Leonardo.ai" }}
-        {{ $desc := .Params.affiliateDesc | default "" }}
-        {{ $url := .Params.affiliateUrl | default .Params.featuredLink | default "https://leonardo.ai" }}
-        <div class="affiliate-card">
-            <div class="affiliate-info">
-                <div class="affiliate-label">[AI Tool]</div>
-                <div class="affiliate-name">{{ $name }}</div>
-                <div class="affiliate-desc">{{ $desc }}</div>
-            </div>
-            <a href="{{ $url }}" class="affiliate-cta" target="_blank" rel="noopener">
-                🌐 Visit Official Website
-            </a>
-        </div>
-
         <!-- Page Content -->
         {{ .Content }}
+
+        <!-- Affiliate Cards (mid-article) -->
+        {{ if .Params.affiliateTools }}
+            {{ range .Params.affiliateTools }}
+            <div class="affiliate-card">
+                <div class="affiliate-info">
+                    <div class="affiliate-label">[AI Tool]</div>
+                    <div class="affiliate-name">{{ .name }}</div>
+                    <div class="affiliate-desc">{{ .desc }}</div>
+                </div>
+                <a href="{{ .url }}" class="affiliate-cta" target="_blank" rel="noopener">
+                    🌐 Visit Official Website
+                </a>
+            </div>
+            {{ end }}
+        {{ else }}
+            {{ $name := .Params.affiliateName | default .Params.featuredTool | default "Leonardo.ai" }}
+            {{ $desc := .Params.affiliateDesc | default "" }}
+            {{ $url := .Params.affiliateUrl | default .Params.featuredLink | default "https://leonardo.ai" }}
+            <div class="affiliate-card">
+                <div class="affiliate-info">
+                    <div class="affiliate-label">[AI Tool]</div>
+                    <div class="affiliate-name">{{ $name }}</div>
+                    <div class="affiliate-desc">{{ $desc }}</div>
+                </div>
+                <a href="{{ $url }}" class="affiliate-cta" target="_blank" rel="noopener">
+                    🌐 Visit Official Website
+                </a>
+            </div>
+        {{ end }}
 
         <!-- BOTTOM LIKE SECTION -->
         <div class="bottom-like-section">

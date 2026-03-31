@@ -35,7 +35,7 @@ toc:
   - id: "verdict"
     title: "The Verdict"
 affiliateName: "GitHub Copilot"
-affiliateDesc: "AI编程助手，提升开发效率"
+affiliateDesc: "AI-powered code completion tool that boosts developer productivity"
 affiliateUrl: "https://github.com/features/copilot"
 ---
 

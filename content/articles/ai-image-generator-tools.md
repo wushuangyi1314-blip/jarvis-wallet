@@ -35,7 +35,7 @@ toc:
   - id: "recommendation"
     title: "My Recommendation"
 affiliateName: "Leonardo.ai"
-affiliateDesc: "AI图像生成工具，免费使用"
+affiliateDesc: "Best free AI image generator for creators"
 affiliateUrl: "https://leonardo.ai"
 ---
 

@@ -35,7 +35,7 @@ toc:
   - id: "verdict"
     title: "Final Verdict"
 affiliateName: "OpenAI Sora"
-affiliateDesc: "OpenAI视频生成工具，ChatGPT Plus用户免费使用"
+affiliateDesc: "OpenAI's video generation tool, free for ChatGPT Plus users"
 affiliateUrl: "https://openai.com/sora"
 ---
 

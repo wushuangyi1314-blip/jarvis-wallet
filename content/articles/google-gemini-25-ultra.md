@@ -35,7 +35,7 @@ toc:
   - id: "verdict"
     title: "Final Verdict"
 affiliateName: "Google Gemini"
-affiliateDesc: "Google多模态AI模型，支持文本图像音视频"
+affiliateDesc: "Google's multimodal AI model supporting text, images, audio, and video"
 affiliateUrl: "https://deepmind.google/gemini"
 ---
 

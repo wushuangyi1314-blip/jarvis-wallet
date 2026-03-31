@@ -35,7 +35,7 @@ toc:
   - id: "verdict"
     title: "Final Verdict"
 affiliateName: "Runway"
-affiliateDesc: "AI视频生成工具，Gen-4版本"
+affiliateDesc: "AI video generation tool, Gen-4 model"
 affiliateUrl: "https://runwayml.com"
 ---
 

@@ -35,7 +35,7 @@ toc:
   - id: "verdict"
     title: "Final Verdict"
 affiliateName: "Meta Llama"
-affiliateDesc: "Meta开源大语言模型免费下载使用"
+affiliateDesc: "Meta's open-source large language model, free to download and use"
 affiliateUrl: "https://llama.meta.com"
 ---
 

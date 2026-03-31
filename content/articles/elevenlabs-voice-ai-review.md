@@ -35,7 +35,7 @@ toc:
   - id: "verdict"
     title: "Final Verdict"
 affiliateName: "ElevenLabs"
-affiliateDesc: "AI语音合成与克隆平台"
+affiliateDesc: "AI voice synthesis and cloning platform"
 affiliateUrl: "https://elevenlabs.io"
 ---
 

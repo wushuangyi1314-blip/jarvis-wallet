@@ -42,7 +42,7 @@ toc:
   - id: "conclusion"
     title: "Conclusion"
 affiliateName: "ChatGPT"
-affiliateDesc: "AI写作助手，支持多模态"
+affiliateDesc: "AI writing assistant with multimodal capabilities"
 affiliateUrl: "https://chat.openai.com"
 ---
 
