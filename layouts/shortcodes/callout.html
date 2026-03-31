@@ -1,0 +1,6 @@
+{{ $type := .Get "type" | default "info" }}
+{{ $title := .Get "title" }}
+<div class="callout-box callout-{{ $type }}">
+{{ with $title }}<h4>{{ $title }}</h4>{{ end }}
+{{ .Inner }}
+</div>

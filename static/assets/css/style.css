@@ -500,11 +500,11 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
     padding: 16px 20px;
     margin: 1.5rem 0;
     border-radius: 0 8px 8px 0;
-    font-style: italic;
 }
 .content-blockquote p {
+    font-style: italic;
+    color: var(--text-secondary);
     font-size: 15px;
-    color: var(--text-primary);
     line-height: 1.7;
 }
 
