@@ -34,6 +34,9 @@ toc:
     title: "FAQ"
   - id: "recommendation"
     title: "My Recommendation"
+affiliateName: "Leonardo.ai"
+affiliateDesc: "AI图像生成工具，免费使用"
+affiliateUrl: "https://leonardo.ai"
 ---
 
 **AI image generation** has transformed faster than any other AI category. What once took 4 hours in Photoshop now takes 30 seconds with the right tool. After testing every major **AI image generator** in 2026, here's the definitive guide to which tools actually deliver professional results.

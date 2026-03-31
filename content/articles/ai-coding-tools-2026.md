@@ -34,6 +34,9 @@ toc:
     title: "Head-to-Head Comparison"
   - id: "verdict"
     title: "The Verdict"
+affiliateName: "GitHub Copilot"
+affiliateDesc: "AI编程助手，提升开发效率"
+affiliateUrl: "https://github.com/features/copilot"
 ---
 
 The AI coding assistant landscape has fractured into genuinely different approaches. GitHub Copilot X, Cursor, and Replit Agent all promise to make developers more productive, but they achieve this in fundamentally different ways. After using all three extensively for the past month, here's where I think each one shines.

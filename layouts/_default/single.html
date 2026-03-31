@@ -64,20 +64,19 @@
     <div class="article-content">
 
         <!-- Affiliate Card -->
-        {{ with .Params.affiliateName }}
+        {{ $name := .Params.affiliateName | default "Leonardo.ai" }}
+        {{ $desc := .Params.affiliateDesc | default "AI图像生成工具，免费使用" }}
+        {{ $url := .Params.affiliateUrl | default "https://leonardo.ai" }}
         <div class="affiliate-card">
             <div class="affiliate-info">
                 <div class="affiliate-label">[AI Tool]</div>
-                <div class="affiliate-name">{{ . }}</div>
-                {{ with $.Params.affiliateDesc }}
-                <div class="affiliate-desc">{{ . }}</div>
-                {{ end }}
+                <div class="affiliate-name">{{ $name }}</div>
+                <div class="affiliate-desc">{{ $desc }}</div>
             </div>
-            <a href="{{ $.Params.affiliateUrl | default "#" }}" class="affiliate-cta" target="_blank" rel="noopener">
+            <a href="{{ $url }}" class="affiliate-cta" target="_blank" rel="noopener">
                 🌐 Visit Official Website
             </a>
         </div>
-        {{ end }}
 
         <!-- Page Content -->
         {{ .Content }}

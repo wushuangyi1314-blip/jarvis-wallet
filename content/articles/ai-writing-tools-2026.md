@@ -41,6 +41,9 @@ toc:
     title: "My Recommendation"
   - id: "conclusion"
     title: "Conclusion"
+affiliateName: "ChatGPT"
+affiliateDesc: "AI写作助手，支持多模态"
+affiliateUrl: "https://chat.openai.com"
 ---
 
 The **best AI writing tools** of 2026 have matured significantly — but not all are worth your time or money. After testing every major platform with 500+ hours of real writing work, this guide cuts through the marketing noise to deliver honest, actionable recommendations.

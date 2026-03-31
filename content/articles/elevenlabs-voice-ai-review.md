@@ -34,6 +34,9 @@ toc:
     title: "Pricing"
   - id: "verdict"
     title: "Final Verdict"
+affiliateName: "ElevenLabs"
+affiliateDesc: "AI语音合成与克隆平台"
+affiliateUrl: "https://elevenlabs.io"
 ---
 
 Voice synthesis has been "almost there" for years. The uncanny valley of speech—where AI voices sound almost human but something feels subtly wrong—has trapped countless tools in the "impressive but unusable" category. ElevenLabs has been systematically dismantling that barrier, and with their latest voice engine, the gap feels nearly closed.

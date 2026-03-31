@@ -34,6 +34,9 @@ toc:
     title: "Pricing"
   - id: "verdict"
     title: "Final Verdict"
+affiliateName: "Runway"
+affiliateDesc: "AI视频生成工具，Gen-4版本"
+affiliateUrl: "https://runwayml.com"
 ---
 
 When Runway dropped Gen-4, I expected incremental improvements. More seconds of generated video, slightly better consistency, a few new style options. What I got felt like watching a technology cross a threshold I hadn't realized existed.

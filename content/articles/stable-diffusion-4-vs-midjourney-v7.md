@@ -34,6 +34,9 @@ toc:
     title: "Pricing & Access"
   - id: "verdict"
     title: "The Verdict"
+affiliateName: "Leonardo.ai"
+affiliateDesc: "AI图像生成工具，免费使用"
+affiliateUrl: "https://leonardo.ai"
 ---
 
 For months, the AI image generation conversation felt settled. Midjourney dominated professional creative work, DALL-E handled the casual experiments, and Stable Diffusion quietly powered everything behind the scenes—custom models, local installations, niche applications. Then SD4 arrived and complicated everything.

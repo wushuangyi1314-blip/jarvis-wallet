@@ -34,6 +34,9 @@ toc:
     title: "Pricing"
   - id: "verdict"
     title: "Final Verdict"
+affiliateName: "Midjourney"
+affiliateDesc: "AI艺术生成工具，每月$10起"
+affiliateUrl: "https://midjourney.com"
 ---
 
 I remember when Midjourney first dropped and we all lost our minds over what AI could create. That was fun, but honestly? Most of those early images had a certain... AI look to them. Telltale signs—unusually smooth skin, objects that didn't quite obey physics, that slightly oversaturated dreaminess. V7 changes the conversation entirely.

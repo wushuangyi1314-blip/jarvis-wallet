@@ -34,6 +34,9 @@ toc:
     title: "Pricing"
   - id: "verdict"
     title: "Final Verdict"
+affiliateName: "GitHub Copilot"
+affiliateDesc: "AI编程助手，提升开发效率"
+affiliateUrl: "https://github.com/features/copilot"
 ---
 
 Let me start with a confession: I wasn't sold on Gemini when it launched. Too many promises, too much hype, and early results that didn't quite justify the excitement. Gemini 2.5 Ultra changed my mind, and it happened faster than I expected.

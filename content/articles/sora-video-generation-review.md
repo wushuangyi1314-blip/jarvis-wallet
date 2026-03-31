@@ -34,6 +34,9 @@ toc:
     title: "Pricing"
   - id: "verdict"
     title: "Final Verdict"
+affiliateName: "Runway"
+affiliateDesc: "AI视频生成工具，Gen-4版本"
+affiliateUrl: "https://runwayml.com"
 ---
 
 OpenAI's Sora launched with fanfare that made waves across the internet. Months later, with Runway's Gen-4 and other competitors closing in, how does Sora hold up? The answer is more nuanced than the initial hype suggested.

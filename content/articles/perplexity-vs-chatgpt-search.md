@@ -34,6 +34,9 @@ toc:
     title: "Pricing"
   - id: "verdict"
     title: "The Verdict"
+affiliateName: "ChatGPT"
+affiliateDesc: "AI写作助手，支持多模态"
+affiliateUrl: "https://chat.openai.com"
 ---
 
 The conversation about AI search has shifted from "can AI search replace traditional search" to "which AI search experience actually works better." Perplexity and ChatGPT Search represent two philosophies, and after months of using both as my primary information tools, I have opinions.

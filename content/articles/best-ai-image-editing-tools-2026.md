@@ -32,6 +32,9 @@ toc:
     title: "Pricing Comparison"
   - id: "verdict"
     title: "The Verdict"
+affiliateName: "Leonardo.ai"
+affiliateDesc: "AI图像生成工具，免费使用"
+affiliateUrl: "https://leonardo.ai"
 ---
 
 The conversation around AI image generation has shifted. Creating images from scratch is impressive, but the real production work happens in editing—taking existing images and transforming them, extending them, perfecting them. This is where 2026's AI tools have gotten seriously sophisticated.

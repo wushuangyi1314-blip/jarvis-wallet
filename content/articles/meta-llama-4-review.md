@@ -34,6 +34,9 @@ toc:
     title: "Deployment Options"
   - id: "verdict"
     title: "Final Verdict"
+affiliateName: "GitHub Copilot"
+affiliateDesc: "AI编程助手，提升开发效率"
+affiliateUrl: "https://github.com/features/copilot"
 ---
 
 When Meta released Llama 4 under a genuinely open license, the AI community responded with something between disbelief and excitement. Not the "open-ish" licensing some companies use, but real openness—download the weights, run them locally, modify them, build products without asking permission or paying fees. It's a different philosophy, and its implications are still unfolding.
