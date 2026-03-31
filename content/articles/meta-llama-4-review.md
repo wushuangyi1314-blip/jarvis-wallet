@@ -3,7 +3,7 @@ title: "Meta Llama 4: The Open Source Model That Changed Everything"
 description: "Meta's Llama 4 has shattered expectations for open-source AI. We tested it thoroughly — here's why it matters for developers and businesses everywhere."
 date: 2026-03-22
 lastmod: 2026-03-22
-heroImage: "llama4-review.jpg"
+heroImage: "heroes/meta-llama-4-hero.jpg"
 heroImagePrompt: "Meta's Llama 4 represented as an open book transforming into a glowing neural network, pages containing code and data visualizations, symbolic representation of open-source AI, purple and blue color s..."
 rating: 4.8
 ratingCount: "967"

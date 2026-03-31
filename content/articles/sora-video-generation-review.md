@@ -3,7 +3,7 @@ title: "Sora Video Generation: OpenAI's First-Mover Advantage Tested"
 description: "Sora was the first major AI video generator. We tested OpenAI's offering rigorously — is the first-mover advantage enough to compete with newer entrants?"
 date: 2026-03-23
 lastmod: 2026-03-23
-heroImage: "sora-review.jpg"
+heroImage: "heroes/sora-video-generation-hero.jpg"
 heroImagePrompt: "OpenAI's Sora interface represented as a window into infinite video possibilities, with clips of diverse content—swimming fish, flying cars, emotional portraits—emerging from a central glowing portal,..."
 rating: 4.4
 ratingCount: "445"

@@ -3,7 +3,7 @@ title: "GPT-5 vs Claude 4: The AI Flagship Showdown of 2026"
 description: "OpenAI's GPT-5 vs Anthropic's Claude 4 — we tested both extensively. Here's the definitive comparison for developers, creators, and everyday users."
 date: 2026-03-28
 lastmod: 2026-03-28
-heroImage: "gpt5-vs-claude4.jpg"
+heroImage: "heroes/gpt-5-vs-claude-4-hero.jpg"
 heroImagePrompt: "A split-screen digital illustration showing two futuristic AI brain interfaces on opposite sides—left side with OpenAI's red-orange glowing neural patterns, right side with Anthropic's blue-violet cry..."
 rating: 4.9
 ratingCount: "1247"

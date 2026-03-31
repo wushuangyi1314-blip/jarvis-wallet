@@ -3,7 +3,7 @@ title: "Midjourney V7 Review: When AI Art Finally Feels Like Art"
 description: "Midjourney V7 sets a new standard for AI image generation. We spent weeks testing every feature — here's our complete review of the most photorealistic AI art tool yet."
 date: 2026-03-27
 lastmod: 2026-03-27
-heroImage: "midjourney-v7.jpg"
+heroImage: "heroes/midjourney-v7-review-hero.jpg"
 heroImagePrompt: "A stunning AI-generated artwork showing a surreal landscape where digital paint strokes blend with photorealistic elements—a floating library above an ocean of stars, rendered in Midjourney V7's signa..."
 rating: 4.8
 ratingCount: "892"

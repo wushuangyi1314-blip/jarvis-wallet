@@ -3,7 +3,7 @@ title: "Google Gemini 2.5 Ultra: The Multimodal Powerhouse You Need to Know"
 description: "Google's most capable AI model yet handles text, images, audio, and video seamlessly. Our in-depth review of Gemini 2.5 Ultra and what it means for you."
 date: 2026-03-26
 lastmod: 2026-03-26
-heroImage: "gemini-25-ultra.jpg"
+heroImage: "heroes/google-gemini-25-ultra-hero.jpg"
 heroImagePrompt: "Google's Gemini 2.5 Ultra represented as a brilliant blue-white light entity emerging from digital circuitry, surrounded by floating UI elements representing its multimodal capabilities (images, video..."
 rating: 4.7
 ratingCount: "734"

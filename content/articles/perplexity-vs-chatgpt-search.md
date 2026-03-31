@@ -3,7 +3,7 @@ title: "Perplexity vs ChatGPT Search: The AI Search Wars Heat Up"
 description: "AI-powered search is reshaping how we find information. We put Perplexity and ChatGPT Search head-to-head to find which gives better, faster, more reliable answers."
 date: 2026-03-20
 lastmod: 2026-03-20
-heroImage: "ai-search-wars.jpg"
+heroImage: "heroes/perplexity-vs-chatgpt-search-hero.jpg"
 heroImagePrompt: "Two search interfaces facing each other like dueling sheriffs in a digital western—one styled in Perplexity's clean blue minimalism, the other in ChatGPT's warm orange interface—with search results ma..."
 rating: 4.6
 ratingCount: "789"

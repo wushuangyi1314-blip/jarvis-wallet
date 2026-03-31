@@ -3,7 +3,7 @@ title: "ElevenLabs Voice AI Review: Speaking With the Future"
 description: "ElevenLabs has redefined what's possible with AI voice synthesis. From voice cloning to real-time TTS, we tested the full platform — here's the definitive review."
 date: 2026-03-19
 lastmod: 2026-03-19
-heroImage: "elevenlabs-review.jpg"
+heroImage: "heroes/elevenlabs-voice-ai-hero.jpg"
 heroImagePrompt: "A futuristic sound studio visualization with ElevenLabs represented as a crystalline voice waveform emanating from a sleek microphone, surrounded by floating text samples and language symbols, audio s..."
 rating: 4.8
 ratingCount: "634"

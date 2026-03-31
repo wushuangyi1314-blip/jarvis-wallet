@@ -3,7 +3,7 @@ title: "Best AI Image Editing Tools of 2026: A Comprehensive Showdown"
 description: "From AI-powered Photoshop alternatives to browser-based editors, we tested the top AI image editing tools. Here's our comprehensive ranking and review."
 date: 2026-03-18
 lastmod: 2026-03-18
-heroImage: "ai-image-editing.jpg"
+heroImage: "heroes/best-ai-image-editing-tools-2026-hero.jpg"
 heroImagePrompt: "A creative designer's workspace showing multiple AI image editing interfaces simultaneously—Photoshop's Generative Fill, DALL-E's editing features, and Midjourney's canvas tools—floating panels with b..."
 rating: 4.5
 ratingCount: "523"

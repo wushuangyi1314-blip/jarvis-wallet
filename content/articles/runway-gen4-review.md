@@ -3,7 +3,7 @@ title: "Runway Gen-4: The Gold Standard for AI Video Generation"
 description: "Runway Gen-4 represents a genuine leap forward in AI video. We tested it extensively for professional content creation — here's what you need to know."
 date: 2026-03-25
 lastmod: 2026-03-25
-heroImage: "runway-gen4.jpg"
+heroImage: "heroes/runway-gen-4-hero.jpg"
 heroImagePrompt: "A cinematic still from an AI-generated film scene showing a woman walking through a rainy Tokyo alley at night, neon reflections on wet pavement, photorealistic quality with Runway Gen-4's characteris..."
 rating: 4.6
 ratingCount: "567"

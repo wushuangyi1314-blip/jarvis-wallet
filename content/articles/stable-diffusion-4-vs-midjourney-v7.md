@@ -3,7 +3,7 @@ title: "Stable Diffusion 4 vs Midjourney V7: The Open Source Challenger Arrives"
 description: "Stable Diffusion 4 has closed the gap with Midjourney. We put both head-to-head across dozens of prompts to find which AI image generator truly leads."
 date: 2026-03-24
 lastmod: 2026-03-24
-heroImage: "sd4-vs-mj7.jpg"
+heroImage: "heroes/stable-diffusion-4-vs-midjourney-v7-hero.jpg"
 heroImagePrompt: "A dramatic split-image showing Stable Diffusion 4's open-source neural network visualization on one side morphing into Midjourney V7's artistic output on the other, with digital bridges connecting cod..."
 rating: 4.7
 ratingCount: "823"
