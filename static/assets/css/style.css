@@ -446,40 +446,145 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 
 .content-section { margin-bottom: 32px; }
 
-.content-h2 {
-    font-size: 18px; font-weight: 700; color: var(--text-primary);
-    margin-bottom: 14px; letter-spacing: -0.3px; padding-top: 8px;
-}
+/* ====== ARTICLE CONTENT STYLES ====== */
 
-.content-h3 {
-    font-size: 15px; font-weight: 600; color: var(--text-primary);
-    margin-bottom: 10px; letter-spacing: -0.2px;
-}
-
+/* 正文段落 */
 .content-p {
-    font-size: 14px; color: var(--text-secondary);
-    line-height: 1.85; margin-bottom: 16px; letter-spacing: 0.01em;
+    font-size: 16px;
+    color: var(--text-primary);
+    line-height: 1.85;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.01em;
 }
 
+/* 首段下沉 */
+.content-p:first-of-type {
+    font-size: 17px;
+    color: var(--text-primary);
+    line-height: 1.9;
+    margin-bottom: 2rem;
+}
+
+/* H2 段落标题 */
+.content-h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 2.5rem 0 1rem;
+    padding-left: 16px;
+    border-left: 4px solid var(--primary);
+    letter-spacing: -0.3px;
+}
+
+/* H3 子标题 */
+.content-h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 2rem 0 0.75rem;
+    letter-spacing: -0.2px;
+}
+
+/* 重点内容 */
+.content-highlight {
+    background: linear-gradient(120deg, rgba(99,102,241,0.15) 0%, rgba(99,102,241,0.08) 100%);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+/* 引用块 */
+.content-blockquote {
+    background: var(--c-surface, var(--surface));
+    border-left: 4px solid var(--primary);
+    padding: 16px 20px;
+    margin: 1.5rem 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+}
+.content-blockquote p {
+    font-size: 15px;
+    color: var(--text-primary);
+    line-height: 1.7;
+}
+
+/* 有序列表数字样式 */
+.content-ol {
+    counter-reset: list-counter;
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 1.5rem;
+}
+.content-ol li {
+    counter-increment: list-counter;
+    position: relative;
+    padding-left: 36px;
+    margin-bottom: 0.75rem;
+    font-size: 16px;
+    color: var(--text-primary);
+    line-height: 1.85;
+}
+.content-ol li::before {
+    content: counter(list-counter);
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 24px;
+    height: 24px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 24px;
+}
+
+/* 无序列表样式 */
+.content-ul {
+    padding-left: 20px;
+    margin-bottom: 1.5rem;
+}
+.content-ul li {
+    font-size: 16px;
+    color: var(--text-primary);
+    line-height: 1.85;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.01em;
+}
+
+/* 表格样式 */
+.content-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 14px;
+}
+.content-table th,
+.content-table td {
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    text-align: left;
+}
+.content-table th {
+    background: var(--c-surface, var(--surface));
+    font-weight: 600;
+}
+
+/* 文章图片 */
 .content-img {
-    width: 100%; aspect-ratio: 16/9;
+    width: 100%;
+    aspect-ratio: 16/9;
     background: linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 100%);
     border-radius: var(--radius-card);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--text-secondary); font-size: 12px;
-    margin: 20px 0; border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    font-size: 12px;
+    margin: 20px 0;
+    border: 1px solid var(--border);
 }
-
-.content-highlight {
-    background: linear-gradient(135deg, rgba(99,102,241,0.06), rgba(16,185,129,0.06));
-    border-left: 3px solid var(--primary);
-    border-radius: 0 var(--radius-card) var(--radius-card) 0;
-    padding: 16px 20px; margin: 20px 0;
-}
-.content-highlight p { font-size: 14px; color: var(--text-primary); line-height: 1.7; }
-
-.content-ul { padding-left: 20px; margin-bottom: 14px; }
-.content-ul li { font-size: 14px; color: var(--text-secondary); line-height: 1.85; margin-bottom: 6px; letter-spacing: 0.01em; }
 
 /* ====== TABLE OF CONTENTS ====== */
 .toc-panel {
