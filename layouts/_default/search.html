@@ -17,22 +17,28 @@
   </div>
 </nav>
 
-<!-- SEARCH HERO -->
-<div class="search-hero">
-  <form class="search-bar-large" action="/search/" method="get" id="searchForm">
-    <input type="text" name="q" class="search-input-large" id="searchInputLarge" placeholder="Search AI tools..." value="{{ $query }}">
-    <button type="submit" class="search-btn-large">Search</button>
-  </form>
+<!-- SEARCH BAR: same style as homepage -->
+<div style="padding: 24px 40px; margin-top: var(--nav-height);">
+  <div class="home-search-container">
+    <form class="home-search-bar" action="/search/" method="get" id="searchForm">
+      <span class="home-search-icon">🔍</span>
+      <input type="text" name="q" class="home-search-input" id="searchInputLarge" placeholder="Search AI tools, categories, reviews..." value="{{ $query }}">
+      <button type="submit" class="home-search-btn">Search</button>
+    </form>
+  </div>
 </div>
 
 {{ $pages := .Site.RegularPages }}
 {{ $articles := where $pages "Section" "articles" }}
 
 {{ if $query }}
-  {{ $searched := where $articles "Title" "like" $query }}
   {{ $matched := slice }}
   {{ range $articles }}
-    {{ if or (in (lower .Title) (lower $query)) (in (lower .Description) (lower $query)) (in (lower .Content) (lower $query)) }}
+    {{ $titleLower := lower .Title }}
+    {{ $descLower := lower .Description }}
+    {{ $contentLower := lower .Content }}
+    {{ $queryLower := lower $query }}
+    {{ if or (findRE $queryLower $titleLower) (findRE $queryLower $descLower) (findRE $queryLower $contentLower) }}
       {{ $matched = $matched | append . }}
     {{ end }}
   {{ end }}
@@ -104,19 +110,6 @@
     </div>
   </div>
 {{ end }}
-
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="page-wrap">
-    <div class="footer-links">
-      <a href="{{ $.Site.BaseURL }}about/" class="footer-link">About Us</a>
-      <a href="{{ $.Site.BaseURL }}contact/" class="footer-link">Contact</a>
-      <a href="{{ $.Site.BaseURL }}privacy/" class="footer-link">Privacy Policy</a>
-      <a href="{{ $.Site.BaseURL }}terms/" class="footer-link">Terms of Service</a>
-    </div>
-    <div class="footer-copy">© {{ now.Year }} {{ $.Site.Title }}. All rights reserved.</div>
-  </div>
-</footer>
 
 {{ end }}
 
