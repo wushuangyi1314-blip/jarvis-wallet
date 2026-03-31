@@ -134,7 +134,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 /* ====== CATEGORY NAV ====== */
 .category-nav-wrap {
     background: var(--surface); border-bottom: 1px solid var(--border);
-    max-width: var(--max-width); margin: 0 auto; padding: 0 40px;
+    padding: 0 40px;
 }
 
 .category-nav {
