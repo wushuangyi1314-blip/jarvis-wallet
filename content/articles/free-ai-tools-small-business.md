@@ -45,15 +45,13 @@ The result: Some of the most powerful AI tools available are genuinely free. Not
 Here's my tested, ranked list of the **best free AI tools for small business** in 2026.
 
 <!-- Quick Nav -->
-<div class="quick-nav-box">
-**⚡ Quick-start stack (costs $0/month):**
-
+{{< callout type="info" title="**⚡ Quick-start stack (costs $0/month):**" >}}
 - **Writing/research:** [Claude Free](https://claude.ai)
 - **Design:** Canva Free
 - **SEO/research:** Bing Copilot Free
 - **Editing:** Hemingway App Free
 - **Product images:** Pixelcut Free
-</div>
+{{< /callout >}}
 
 ## Why Free AI Tools Matter for Small Business
 
@@ -71,34 +69,23 @@ This guide covers only tools with **genuinely permanent free tiers**. No 14-day 
 
 **Free tier:** 50 messages/day on Claude.ai (Sonnet 4 model included)
 
-<div class="pros-cons">
-<div class="pros-box">
-
-#### ✅ Why it tops this list
-
+{{< pros >}}
 - 200,000 token context window — feed it entire business plans, contracts, or style guides
 - Exceptional quality for content creation, analysis, and strategic thinking
 - Handles complex reasoning better than any free competitor
 - No ads, no data harvesting — genuinely free
-
-</div>
-<div class="cons-box">
-
-#### ⚠️ Limitations
-
+{{< /pros >}}
+{{< cons >}}
 - 50 messages/day can feel limiting for heavy users
 - No real-time web access (use Bing Copilot for this)
 - No built-in image generation
-
-</div>
-</div>
+{{< /cons >}}
 
 **My use case:** Business planning, content drafting, customer service templates, competitor analysis, contract review.
 
-<div class="affiliate-cta">
-Start using **Claude for free** — no credit card needed. It's the best free AI tool for small business.
-<a href="https://claude.ai" target="_blank" class="cta-button">Try Claude Free →</a>
-</div>
+{{< callout type="tip" title="Start using **Claude for free** — no credit card needed. It's the best free AI tool for small business." >}}
+[Try Claude Free →](https://claude.ai)
+{{< /callout >}}
 
 ### #2: ChatGPT — Best for Versatility
 
@@ -180,16 +167,14 @@ Copy.ai specializes in the exact **marketing content small businesses** need mos
 
 The real power comes from chaining these tools together:
 
-<div class="quick-nav-box">
-**⚡ Recommended workflow:**
-
+{{< callout type="info" title="**⚡ Recommended workflow:**" >}}
 - **Research:** Bing Copilot (free, real-time web)
 - **Strategy/outline:** Claude (free tier)
 - **First draft:** Claude or ChatGPT
 - **Refining:** QuillBot + Hemingway App
 - **Design:** Canva Free
 - **Product images:** Pixelcut
-</div>
+{{< /callout >}}
 
 ## When to Upgrade to Paid
 

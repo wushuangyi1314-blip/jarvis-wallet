@@ -49,17 +49,13 @@ toc:
 This guide shows you exactly how to **use AI for SEO** in 2026 — the workflows that work, the mistakes to avoid, and the specific prompts that deliver results.
 
 <!-- Quick Nav -->
-<div class="quick-nav-box">
-**⚡ The golden rule:** AI makes you faster. It doesn't make you smart about SEO. Strategy first, AI second.
-
-**My AI SEO workflow:**
-
+{{< callout type="info" title="**⚡ The golden rule:** AI makes you faster. It doesn't make you smart about SEO. Strategy first, AI second." >}}
 1. **Research:** Claude — find keyword gaps in minutes
 2. **Structure:** Claude — create better outlines than competitors
 3. **Draft:** Claude or ChatGPT — first draft (then heavily edit)
 4. **Optimize:** Any AI — meta, schema, internal links
 5. **Monitor:** Claude — diagnose ranking changes
-</div>
+{{< /callout >}}
 
 ## Why AI is a Game-Changer for SEO
 
@@ -147,13 +143,11 @@ AI-generated content without human oversight is often factually wrong, generic, 
 
 ### The Correct AI SEO Writing Workflow
 
-<div class="quick-nav-box">
-**✅ Correct workflow:**
+{{< callout type="info" title="✅ Correct workflow:" >}}
 Human Research → AI Draft → Human Edit → AI Optimize → Human Review
-
 **❌ Wrong workflow:**
 AI writes alone → publish → wonder why rankings drop
-</div>
+{{< /callout >}}
 
 ### Step 1: Human Research (30 min)
 

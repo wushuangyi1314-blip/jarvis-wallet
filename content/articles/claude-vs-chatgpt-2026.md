@@ -42,13 +42,11 @@ toc:
 The **Claude vs ChatGPT** debate is the question I get asked most — and the honest answer is: it depends. Both are excellent in 2026, but they have distinct strengths. After using both for professional work, here's my definitive head-to-head comparison.
 
 <!-- Quick Verdict Box -->
-<div class="quick-nav-box">
-**⚡ TL;DR — Quick Verdict:**
-
+{{< callout type="info" title="**⚡ TL;DR — Quick Verdict:**" >}}
 - **Claude** = Better long-form content, larger context window (200K tokens), nuanced reasoning
 - **ChatGPT** = Larger ecosystem, real-time web access, DALL-E 3 image generation
 - **Best strategy:** Use both — they're complementary tools
-</div>
+{{< /callout >}}
 
 ## Claude vs ChatGPT: Key Differences at a Glance
 
@@ -97,11 +95,9 @@ DALL-E 3 integration in ChatGPT provides excellent image generation capabilities
 **Best for ecosystem:** ChatGPT (plugins, GPT Store)
 
 <!-- Mid-article CTA -->
-<div class="affiliate-cta">
-🎯 **Bottom line:** Both Claude and ChatGPT offer free tiers. Test them both and decide based on your workflow.
-<a href="https://claude.ai" target="_blank" class="cta-button">Try Claude Free →</a>
-<a href="https://chat.openai.com" target="_blank" class="cta-button" style="background:#666">Try ChatGPT Free →</a>
-</div>
+{{< callout type="tip" title="🎯 **Bottom line:** Both Claude and ChatGPT offer free tiers. Test them both and decide based on your workflow." >}}
+[Try Claude Free →](https://claude.ai) · [Try ChatGPT Free →](https://chat.openai.com)
+{{< /callout >}}
 
 ---
 

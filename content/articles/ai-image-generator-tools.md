@@ -44,14 +44,12 @@ affiliateUrl: "https://leonardo.ai"
 Whether you need photorealistic product shots, artistic illustrations, game assets, or social media visuals — there's a **best AI image generator** for your specific use case. This guide tells you exactly which one.
 
 <!-- Quick Decision Box -->
-<div class="quick-nav-box">
-**⚡ Quick recommendation:**
-
+{{< callout type="info" title="**⚡ Quick recommendation:**" >}}
 - **Best quality:** Midjourney (from $10/mo)
 - **Best free:** Leonardo.ai (150-450 free images/day)
 - **Best reliability:** DALL-E 3 (via ChatGPT Plus)
 - **Best for Adobe users:** Adobe Firefly ($5/mo)
-</div>
+{{< /callout >}}
 
 ## The Best AI Image Generators Ranked
 
@@ -61,28 +59,18 @@ Whether you need photorealistic product shots, artistic illustrations, game asse
 
 **Pricing:** Free (25 images), Basic $10/mo, Standard $30/mo, Pro $60/mo
 
-<div class="pros-cons">
-<div class="pros-box">
-
-#### ✅ Strengths
-
+{{< pros >}}
 - Exceptional photorealism — best in class for artistic quality
 - Strong aesthetic sense — images have consistent, beautiful style
 - Active community sharing prompts and techniques
 - Continuous improvement with each version
-
-</div>
-<div class="cons-box">
-
-#### ⚠️ Limitations
-
+{{< /pros >}}
+{{< cons >}}
 - Discord-only interface (unusual workflow)
 - No native mobile app
 - Learning curve for prompt engineering
 - Expensive for heavy use ($30+/month for unlimited)
-
-</div>
-</div>
+{{< /cons >}}
 
 **My experience:** Midjourney is what I reach for when image quality is paramount. The latest version 6 produces results indistinguishable from professional photography or illustration work.
 
@@ -94,27 +82,17 @@ Whether you need photorealistic product shots, artistic illustrations, game asse
 
 DALL-E 3 excels at one thing: reliability. It does exactly what you ask, every time. The prompt following is so precise that you spend significantly less time regenerating and iterating.
 
-<div class="pros-cons">
-<div class="pros-box">
-
-#### ✅ Strengths
-
+{{< pros >}}
 - Near-perfect prompt following — what you type is what you get
 - Excellent text generation within images (unique capability)
 - Integrated with ChatGPT — strong context understanding
 - Commercial usage rights included
-
-</div>
-<div class="cons-box">
-
-#### ⚠️ Limitations
-
+{{< /pros >}}
+{{< cons >}}
 - Quality slightly below Midjourney for artistic work
 - Less variety in styles compared to Midjourney
 - Capped generations on Plus plan
-
-</div>
-</div>
+{{< /cons >}}
 
 **My experience:** DALL-E 3 is my daily driver for content creation. The prompt reliability means I can create consistent visual content for marketing campaigns without extensive iteration.
 
@@ -126,27 +104,17 @@ DALL-E 3 excels at one thing: reliability. It does exactly what you ask, every t
 
 Stable Diffusion is the open-source champion of AI image generation — completely free, runs locally on your own hardware, with unparalleled customization options.
 
-<div class="pros-cons">
-<div class="pros-box">
-
-#### ✅ Strengths
-
+{{< pros >}}
 - Completely free to use (self-hosted)
 - Massive customization — LoRAs, checkpoints, ControlNet
 - Huge community models and weights
 - Runs locally — maximum privacy
-
-</div>
-<div class="cons-box">
-
-#### ⚠️ Limitations
-
+{{< /pros >}}
+{{< cons >}}
 - Steep learning curve
 - Requires decent GPU (8GB+ VRAM recommended)
 - Quality varies wildly by model choice
-
-</div>
-</div>
+{{< /cons >}}
 
 **My experience:** Stable Diffusion is what I use for experiments and custom model training. The open-source ecosystem is infinitely extensible — if you have the technical skill to use it.
 
@@ -158,27 +126,17 @@ Stable Diffusion is the open-source champion of AI image generation — complete
 
 Leonardo.ai has emerged as the **best free AI image generator**. It combines quality, variety, and accessibility better than any competitor — with a genuinely usable free tier.
 
-<div class="pros-cons">
-<div class="pros-box">
-
-#### ✅ Strengths
-
+{{< pros >}}
 - Generous free tier — 150-450 images/day
 - Excellent community models
 - Intuitive web interface
 - Great for game assets and anime styles
-
-</div>
-<div class="cons-box">
-
-#### ⚠️ Limitations
-
+{{< /pros >}}
+{{< cons >}}
 - Can be slow during peak times
 - Image quality varies by model
 - Less control than Stable Diffusion
-
-</div>
-</div>
+{{< /cons >}}
 
 ### #5: Adobe Firefly — Best for Adobe Users
 

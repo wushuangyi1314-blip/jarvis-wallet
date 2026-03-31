@@ -51,13 +51,11 @@ The **best AI writing tools** of 2026 have matured significantly — but not all
 Whether you're a content marketer, blogger, business owner, or freelance writer, you'll find the right AI writing tool for your workflow below.
 
 <!-- Quick Nav -->
-<div class="quick-nav-box">
-**⚡ Looking for a quick answer?**
-
+{{< callout type="info" title="**⚡ Looking for a quick answer?**" >}}
 - **Best overall:** [Claude](https://claude.ai) (free tier, exceptional quality)
 - **Best for SEO:** [Writesonic](https://writesonic.com) ($16/mo with built-in SEO)
 - **Best for marketing teams:** [Jasper](https://jasper.ai) ($49+/mo)
-</div>
+{{< /callout >}}
 
 In this guide, you'll learn:
 
@@ -98,86 +96,55 @@ Some tools excel at marketing copy, others at technical writing. Pick a tool tha
 
 **Best for:** Versatile, high-quality content creation
 
-<div class="pros-cons">
-<div class="pros-box">
-
-#### ✅ Pros
-
+{{< pros >}}
 - Exceptional context understanding (200K tokens)
 - Nuanced, thoughtful responses
 - Strong reasoning capabilities
 - Free tier available
-
-</div>
-<div class="cons-box">
-
-#### ❌ Cons
-
+{{< /pros >}}
+{{< cons >}}
 - No built-in SEO features
 - Can be slower during peak hours
 - Limited formatting options
-
-</div>
-</div>
+{{< /cons >}}
 
 **Pricing:** Free (limited), Pro $20/month
 
-<div class="affiliate-cta">
-Ready to try **Claude**? Start for free — no credit card needed.
-<a href="https://claude.ai" target="_blank" class="cta-button">Get Started Free →</a>
-</div>
+{{< callout type="tip" title="Ready to try **Claude**? Start for free — no credit card needed." >}}
+[Get Started Free →](https://claude.ai)
+{{< /callout >}}
 
 ### #2: ChatGPT (OpenAI)
 
 **Best for:** General purpose writing, brainstorming, coding assistance
 
-<div class="pros-cons">
-<div class="pros-box">
-
-#### ✅ Pros
-
+{{< pros >}}
 - Massive ecosystem and community
 - GPT Store has specialized assistants
 - Fast generation speed
 - Reliable output quality
-
-</div>
-<div class="cons-box">
-
-#### ❌ Cons
-
+{{< /pros >}}
+{{< cons >}}
 - Context window limitations (128K)
 - Can produce generic-sounding content
 - Plus subscription is expensive at $20/month
-
-</div>
-</div>
+{{< /cons >}}
 
 ### #3: Jasper
 
 **Best for:** Marketing teams, brand voice consistency
 
-<div class="pros-cons">
-<div class="pros-box">
-
-#### ✅ Pros
-
+{{< pros >}}
 - Built specifically for marketing content
 - Brand voice training features
 - Team collaboration tools
 - SEO mode integration with Surfer SEO
-
-</div>
-<div class="cons-box">
-
-#### ❌ Cons
-
+{{< /pros >}}
+{{< cons >}}
 - Expensive for individuals ($49+/month)
 - Learning curve for templates
 - Can feel rigid for creative writing
-
-</div>
-</div>
+{{< /cons >}}
 
 ### #4: Copy.ai
 
@@ -198,10 +165,9 @@ Ready to try **Claude**? Start for free — no credit card needed.
 | **Writesonic** | SEO content | ✅ Yes | $16/mo | ⭐ 4.0/5 |
 
 <!-- Mid-Article CTA -->
-<div class="affiliate-cta">
-🎯 **Save this guide** and come back when you're ready to pick your AI writing tool. For immediate testing, **Claude's free tier** is the best place to start.
-<a href="https://claude.ai" target="_blank" class="cta-button">Try Claude Free — No Card Required →</a>
-</div>
+{{< callout type="tip" title="🎯 **Save this guide** and come back when you're ready to pick your AI writing tool. For immediate testing, **Claude's free tier** is the best place to start." >}}
+[Try Claude Free — No Card Required →](https://claude.ai)
+{{< /callout >}}
 
 ## How to Choose the Right AI Writing Tool
 
