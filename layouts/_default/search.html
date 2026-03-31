@@ -107,13 +107,15 @@
 
 <!-- FOOTER -->
 <footer class="footer">
-  <div class="footer-links">
-    <a href="{{ $.Site.BaseURL }}about/" class="footer-link">About Us</a>
-    <a href="{{ $.Site.BaseURL }}contact/" class="footer-link">Contact</a>
-    <a href="{{ $.Site.BaseURL }}privacy/" class="footer-link">Privacy Policy</a>
-    <a href="{{ $.Site.BaseURL }}terms/" class="footer-link">Terms of Service</a>
+  <div class="page-wrap">
+    <div class="footer-links">
+      <a href="{{ $.Site.BaseURL }}about/" class="footer-link">About Us</a>
+      <a href="{{ $.Site.BaseURL }}contact/" class="footer-link">Contact</a>
+      <a href="{{ $.Site.BaseURL }}privacy/" class="footer-link">Privacy Policy</a>
+      <a href="{{ $.Site.BaseURL }}terms/" class="footer-link">Terms of Service</a>
+    </div>
+    <div class="footer-copy">© {{ now.Year }} {{ $.Site.Title }}. All rights reserved.</div>
   </div>
-  <div class="footer-copy">© {{ now.Year }} {{ $.Site.Title }}. All rights reserved.</div>
 </footer>
 
 {{ end }}
