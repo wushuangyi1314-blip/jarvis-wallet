@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "skills": {
+    "git-workflows": {
+      "version": "1.0.0",
+      "installedAt": 1774873759198
+    },
+    "docker-essentials": {
+      "version": "1.0.0",
+      "installedAt": 1774873862064
+    },
+    "database-design": {
+      "version": "2.0.0",
+      "installedAt": 1774873983024
+    },
+    "humanizer-zh": {
+      "version": "1.0.0",
+      "installedAt": 1774883386874
+    },
+    "humanize": {
+      "version": "1.0.0",
+      "installedAt": 1774883762250
+    }
+  }
+}

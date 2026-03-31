@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Tool Reviewer - Homepage Wireframe</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #FAFAFA;
+    color: #1a1a1a;
+    line-height: 1.6;
+  }
+  :root {
+    --primary: #6366F1;
+    --success: #10B981;
+    --bg: #FAFAFA;
+    --surface: #FFFFFF;
+    --border: #E5E7EB;
+    --text-primary: #111827;
+    --text-secondary: #6B7280;
+    --text-muted: #9CA3AF;
+  }
+
+  /* 吸顶导航 */
+  .sticky-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(250,250,250,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 48px;
+  }
+  .sticky-nav-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+  .logo {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--primary);
+    letter-spacing: -0.5px;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .logo span { color: var(--text-primary); }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    list-style: none;
+    flex: 1;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: all 0.15s;
+  }
+  .nav-links a:hover { color: var(--text-primary); background: #F3F4F6; }
+  .nav-links a.active { color: var(--primary); font-weight: 600; background: #EEF2FF; }
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .nav-search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #F3F4F6;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 8px 14px;
+    width: 220px;
+    font-size: 13px;
+    color: var(--text-muted);
+    cursor: text;
+  }
+  .nav-search input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 13px;
+    color: var(--text-primary);
+    width: 100%;
+  }
+  .btn-subscribe {
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 48px; }
+
+  /* Hero */
+  .hero { text-align: center; padding: 80px 48px 56px; }
+  .hero h1 {
+    font-size: 52px;
+    font-weight: 800;
+    letter-spacing: -2px;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    line-height: 1.15;
+  }
+  .hero h1 em { font-style: normal; color: var(--primary); }
+  .hero p { font-size: 18px; color: var(--text-secondary); margin-bottom: 40px; }
+  .hero-search {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    padding: 6px 6px 6px 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  }
+  .hero-search:focus-within { border-color: var(--primary); }
+  .hero-search input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 16px;
+    color: var(--text-primary);
+  }
+  .hero-search input::placeholder { color: var(--text-muted); }
+  .hero-search button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  /* 分类标签 */
+  .category-bar { border-bottom: 1px solid var(--border); padding: 0 48px; margin-bottom: 48px; }
+  .category-bar-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    overflow-x: auto;
+    padding-bottom: 1px;
+  }
+  .cat-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.15s;
+    text-decoration: none;
+  }
+  .cat-tag:hover { color: var(--text-primary); background: #F9FAFB; }
+  .cat-tag.active { color: var(--primary); border-bottom-color: var(--primary); font-weight: 600; }
+
+  /* 文章网格 */
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+  }
+  .section-title { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; color: var(--text-primary); }
+  .section-meta { font-size: 13px; color: var(--text-muted); }
+  .article-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; margin-bottom: 48px; }
+  .article-card {
+    background: var(--surface);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+  }
+  .article-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); border-color: #C7D2FE; }
+  .card-img { width: 100%; aspect-ratio: 16/9; background: linear-gradient(135deg, #E0E7FF 0%, #C7D2FE 100%); position: relative; overflow: hidden; }
+  .card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .card-badge { position: absolute; top: 10px; left: 10px; background: var(--primary); color: white; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 6px; }
+  .card-badge.new { background: var(--success); }
+  .card-badge.hot { background: #F59E0B; }
+  .card-body { padding: 16px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+  .card-title { font-size: 15px; font-weight: 700; color: var(--text-primary); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .card-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; flex: 1; }
+  .card-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+  .card-tag { font-size: 11px; color: var(--primary); background: #EEF2FF; padding: 3px 8px; border-radius: 6px; font-weight: 500; }
+  .card-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 12px; border-top: 1px solid var(--border); margin-top: auto; font-size: 12px; color: var(--text-muted); }
+
+  /* 分页 */
+  .pagination { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 40px 0 64px; }
+  .page-btn {
+    width: 40px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 10px; border: 1px solid var(--border);
+    background: var(--surface); font-size: 14px; font-weight: 500;
+    color: var(--text-secondary); cursor: pointer; transition: all 0.15s;
+  }
+  .page-btn:hover { border-color: var(--primary); color: var(--primary); }
+  .page-btn.active { background: var(--primary); border-color: var(--primary); color: white; font-weight: 700; }
+  .page-btn.dot { border: none; background: transparent; cursor: default; color: var(--text-muted); }
+
+  /* Footer */
+  .footer { border-top: 1px solid var(--border); padding: 40px 48px; background: var(--surface); }
+  .footer-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+  .footer-left { font-size: 13px; color: var(--text-muted); line-height: 1.8; }
+  .footer-left strong { color: var(--text-secondary); }
+  .footer-links { display: flex; gap: 20px; list-style: none; }
+  .footer-links a { font-size: 13px; color: var(--text-muted); text-decoration: none; }
+  .footer-links a:hover { color: var(--primary); }
+
+  /* 说明面板 */
+  .spec-panel { background: #F9FAFB; border: 1px solid var(--border); border-radius: 16px; padding: 32px 36px; margin: 0 auto 48px; }
+  .spec-panel h2 { font-size: 18px; font-weight: 800; color: var(--text-primary); margin-bottom: 20px; letter-spacing: -0.3px; }
+  .spec-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .spec-table th { text-align: left; color: var(--text-muted); font-weight: 600; padding: 8px 12px; border-bottom: 2px solid var(--border); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .spec-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text-secondary); vertical-align: top; }
+  .spec-table tr:last-child td { border-bottom: none; }
+  .spec-table .num { background: var(--primary); color: white; border-radius: 50%; width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; margin-right: 6px; }
+  .spec-table .req { color: var(--text-primary); font-weight: 600; font-size: 13px; }
+  .spec-table code { background: #EEF2FF; color: var(--primary); padding: 1px 6px; border-radius: 4px; font-size: 12px; }
+  .tag-green { background: #D1FAE5; color: #065F46; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+  .tag-red { background: #FEE2E2; color: #991B1B; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+  .two-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+</style>
+</head>
+<body>
+
+<!-- ① 吸顶导航 -->
+<div class="sticky-nav">
+  <div class="sticky-nav-inner">
+    <a href="#" class="logo">aitool<span>reviewr</span></a>
+    <ul class="nav-links">
+      <li><a href="#" class="active">首页</a></li>
+      <li><a href="#">AI编程</a></li>
+      <li><a href="#">AI办公</a></li>
+      <li><a href="#">AI图像</a></li>
+      <li><a href="#">AI视频</a></li>
+      <li><a href="#">AI设计</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-search"><span>&#128269;</span><input type="text" placeholder="搜索 AI 工具…"></div>
+      <button class="btn-subscribe">订阅</button>
+    </div>
+  </div>
+</div>
+
+<!-- ② Hero 搜索区 -->
+<div class="hero">
+  <h1>发现最值得使用的<br><em>AI 工具</em></h1>
+  <p>覆盖 AI 编程、办公、图像、视频、设计等分类 · 持续更新</p>
+  <div class="hero-search">
+    <input type="text" placeholder="搜索任何 AI 工具…">
+    <button>搜索</button>
+  </div>
+</div>
+
+<!-- ③ 分类标签导航 -->
+<div class="category-bar">
+  <div class="category-bar-inner">
+    <a href="#" class="cat-tag active">&#128293; 最热</a>
+    <a href="#" class="cat-tag">&#10024; 最新</a>
+    <a href="#" class="cat-tag">&#128187; AI编程</a>
+    <a href="#" class="cat-tag">&#128202; AI办公</a>
+    <a href="#" class="cat-tag">&#127912; AI图像</a>
+    <a href="#" class="cat-tag">&#127916; AI视频</a>
+    <a href="#" class="cat-tag">&#9998; AI设计</a>
+    <a href="#" class="cat-tag">&#128736; AI开发</a>
+    <a href="#" class="cat-tag">&#127919; AI营销</a>
+    <a href="#" class="cat-tag">&#128221; AI写作</a>
+  </div>
+</div>
+
+<!-- ④ 文章网格 -->
+<div class="container">
+  <div class="section-header">
+    <div class="section-title">&#128293; 热门工具</div>
+    <div class="section-meta">共 50 篇 · 第 1 页</div>
+  </div>
+  <div class="article-grid">
+
+    <div class="article-card">
+      <div class="card-img"><img src="https://picsum.photos/seed/ai1/400/225" alt=""><span class="card-badge hot">最热</span></div>
+      <div class="card-body">
+        <div class="card-title">ChatGPT-4.5 深度测评：最强对话AI的进化之路</div>
+        <div class="card-desc">全面解析 OpenAI 最新模型的能力提升与应用场景。</div>
+        <div class="card-tags"><span class="card-tag">AI编程</span><span class="card-tag">GPT-4</span></div>
+        <div class="card-footer"><span>&#128065; 42</span><span>&#10084; 3</span><span>3天前</span></div>
+      </div>
+    </div>
+
+    <div class="article-card">
+      <div class="card-img"><img src="https://picsum.photos/seed/ai2/400/225" alt=""><span class="card-badge new">新</span></div>
+      <div class="card-body">
+        <div class="card-title">Midjourney V7 测评：AI图像生成进入新纪元</div>
+        <div class="card-desc">实测 V7 版本在写实、插画、UI设计上的表现差异。</div>
+        <div class="card-tags"><span class="card-tag">AI图像</span><span class="card-tag">Midjourney</span></div>
+        <div class="card-footer"><span>&#128065; 38</span><span>&#10084; 5</span><span>1天前</span></div>
+      </div>
+    </div>
+
+    <div class="article-card">
+      <div class="card-img"><img src="https://picsum.photos/seed/ai3/400/225" alt=""></div>
+      <div class="card-body">
+        <div class="card-title">Claude 3.7 Sonnet 编程能力实测：代码助手横评</div>
+        <div class="card-desc">对比 Anthropic 最新模型与 GitHub Copilot 的代码能力。</div>
+        <div class="card-tags"><span class="card-tag">AI编程</span><span class="card-tag">Claude</span></div>
+        <div class="card-footer"><span>&#128065; 35</span><span>&#10084; 2</span><span>5天前</span></div>
+      </div>
+    </div>
+
+    <div class="article-card">
+      <div class="card-img"><img src="https://picsum.photos/seed/ai4/400/225" alt=""></div>
+      <div class="card-body">
+        <div class="card-title">Sora vs Runway：AI视频生成哪家强？</div>
+        <div class="card-desc">从生成速度、画面质量、运镜稳定性横向对比两大平台。</div>
+        <div class="card-tags"><span class="card-tag">AI视频</span><span class="card-tag">Sora</span></div>
+        <div class="card-footer"><span>&#128065; 29</span><span>&#10084; 4</span><span>2天前</span></div>
+      </div>
+    </div>
+
+    <div class="article-card">
+      <div class="card-img"><img src="https://picsum.photos/seed/ai5/400/225" alt=""><span class="card-badge hot">最热</span></div>
+      <div class="card-body">
+        <div class="card-title">Notion AI vs Copilot：办公场景AI助手全面对比</div>
+        <div class="card-desc">从写作、总结、数据处理三个维度深度横向测评。</div>
+        <div class="card-tags"><span class="card-tag">AI办公</span><span class="card-tag">Notion</span></div>
+        <div class="card-footer"><span>&#128065; 27</span><span>&#10084; 1</span><span>4天前</span></div>
+      </div>
+    </div>
+
+    <div class="article-card">
+      <div class="card-img"><img src="https://picsum.photos/seed/ai6/400/225" alt=""></div>
+      <div class="card-body">
+        <div class="card-title">Figma AI 设计工具测评：设计师的效率革命</div>
+        <div class="card-desc">AI 生成布局、图标、配色方案实测体验报告。</div>
+        <div class="card-tags"><span class="card-tag">AI设计</span><span class="card-tag">Figma</span></div>
+        <div class="card-footer"><span>&#128065; 22</span><span>&#10084; 3</span><span>6天前</span></div>
+      </div>
+    </div>
+
+    <div class="article-card">
+      <div class="card-img"><img src="https://picsum.photos/seed/ai7/400/225" alt=""><span class="card-badge new">新</span></div>
+      <div class="card-body">
+        <div class="card-title">Gemini 2.0 Flash 测评：免费最强的多模态模型</div>
+        <div class="card-desc">Google 最新免费模型在文本、图像、代码任务上的表现。</div>
+        <div class="card-tags"><span class="card-tag">AI编程</span><span class="card-tag">Gemini</span></div>
+        <div class="card-footer"><span>&#128065; 31</span><span>&#10084; 4</span><span>1天前</span></div>
+      </div>
+    </div>
+
+    <div class="article-card">
+      <div class="card-img"><img src="https://picsum.photos/seed/ai8/400/225" alt=""></div>
+      <div class="card-body">
+        <div class="card-title">Canva AI 功能更新：零设计基础也能做海报</div>
+        <div class="card-desc">Magic Media、Magic Write 等功能的实测体验。</div>
+        <div class="card-tags"><span class="card-tag">AI设计</span><span class="card-tag">Canva</span></div>
+        <div class="card-footer"><span>&#128065; 19</span><span>&#10084; 2</span><span>7天前</span></div>
+      </div>
+    </div>
+
+    <div class="article-card">
+      <div class="card-img"><img src="https://picsum.photos/seed/ai9/400/225" alt=""></div>
+      <div class="card-body">
+        <div class="card-title">Kimi 深度测评：国产长文本AI的新天花板</div>
+        <div class="card-desc">200K 超长上下文分析实测，中文场景下的能力评估。</div>
+        <div class="card-tags"><span class="card-tag">AI编程</span><span class="card-tag">Kimi</span></div>
+        <div class="card-footer"><span>&#128065; 25</span><span>&#10084; 5</span><span>3天前</span></div>
+      </div>
+    </div>
+
+    <div class="article-card">
+      <div class="card-img"><img src="https://picsum.photos/seed/ai10/400/225" alt=""><span class="card-badge hot">最热</span></div>
+      <div class="card-body">
+        <div class="card-title">DALL-E 3 vs Stable Diffusion：谁更适合商业设计？</div>
+        <div class="card-desc">从版权合规、输出稳定性、风格可控性全面对比。</div>
+        <div class="card-tags"><span class="card-tag">AI图像</span><span class="card-tag">DALL-E</span></div>
+        <div class="card-footer"><span>&#128065; 33</span><span>&#10084; 1</span><span>2天前</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ⑤ 分页 -->
+  <div class="pagination">
+    <button class="page-btn">&#8249;</button>
+    <button class="page-btn active">1</button>
+    <button class="page-btn">2</button>
+    <button class="page-btn">3</button>
+    <span class="page-btn dot">&#8230;</span>
+    <button class="page-btn">12</button>
+    <button class="page-btn">&#8250;</button>
+  </div>
+</div>
+
+<!-- ⑥ Footer -->
+<div class="footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <strong>aitoolreviewr</strong> &middot; 发现值得使用的 AI 工具<br>
+      <span style="font-size:11px;">SEO 优化 &middot; Google 收录 &middot; 数据统计集成</span>
+    </div>
+    <ul class="footer-links">
+      <li><a href="#">关于我们</a></li>
+      <li><a href="#">隐私政策</a></li>
+      <li><a href="#">联系我们</a></li>
+      <li><a href="#">sitemap.xml</a></li>
+    </ul>
+  </div>
+</div>
+
+<br><br>
+
+<!-- 说明面板 -->
+<div class="container">
+<div class="spec-panel">
+  <h2>&#128216; 模块说明 &amp; 高总需求对照</h2>
+  <div class="two-cols">
+    <div>
+  <table class="spec-table">
+    <thead><tr><th style="width:30px">#</th><th style="width:140px">模块</th><th>功能说明</th><th>对应需求</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="num">1</span></td>
+        <td class="req">吸顶导航</td>
+        <td>滚动时固定在顶部，含 Logo、分类链接（最热/最新/AI编程/AI办公/AI图像/AI视频/AI设计）、简化搜索框、订阅按钮。毛玻璃背景。</td>
+        <td><span class="tag-green">&#10003;</span> <code>吸顶导航</code> + <code>简化搜索框</code> + <code>分类导航</code></td>
+      </tr>
+      <tr>
+        <td><span class="num">2</span></td>
+        <td class="req">Hero 搜索区</td>
+        <td>大标题 + 副标题 + 居中搜索框。强调品牌定位。</td>
+        <td><span class="tag-green">&#10003;</span> <code>简化搜索框</code>（首页核心入口）</td>
+      </tr>
+      <tr>
+        <td><span class="num">3</span></td>
+        <td class="req">分类标签导航</td>
+        <td>Tab 式标签栏：&#128293;最热 &#10024;最新 &#128187;AI编程 &#128202;AI办公 &#127912;AI图像 &#127916;AI视频 &#9998;AI设计 等，支持横向滚动。</td>
+        <td><span class="tag-green">&#10003;</span> <code>分类导航</code>（最热、最新、AI编程、AI办公、AI图像、AI视频、AI设计）</td>
+      </tr>
+      <tr>
+        <td><span class="num">4</span></td>
+        <td class="req">文章卡片网格</td>
+        <td>5列网格，每张卡片：16:9英雄图 + 角标 + 标题 + 描述 + 标签 + 阅读量(20-50随机) + 点赞(1-5随机) + 日期。每页50篇（当前显示10篇示意）。</td>
+        <td>
+          <span class="tag-green">&#10003;</span> <code>每页50篇</code><br>
+          <span class="tag-green">&#10003;</span> <code>英雄图16:9压缩</code><br>
+          <span class="tag-green">&#10003;</span> <code>阅读量(20-50随机)</code><br>
+          <span class="tag-green">&#10003;</span> <code>匿名点赞(1-5随机)</code><br>
+          <span class="tag-green">&#10003;</span> <code>内容标签</code>
+        </td>
+      </tr>
+      <tr>
+        <td><span class="num">5</span></td>
+        <td class="req">分页组件</td>
+        <td>居中分页，显示「共 50 篇 · 第 X 页」。</td>
+        <td><span class="tag-green">&#10003;</span> <code>每页50篇</code></td>
+      </tr>
+      <tr>
+        <td><span class="num">6</span></td>
+        <td class="req">Footer</td>
+        <td>品牌信息 + 链接 + <code>sitemap.xml</code>。</td>
+        <td><span class="tag-green">&#10003;</span> <code>SEO · Google收录</code> + <code>数据统计</code></td>
+      </tr>
+      <tr>
+        <td><span class="num">7</span></td>
+        <td class="req">设计语言</td>
+        <td>学术现代极简（Anthropic + Linear）：极致留白、粗体800 weight标题、克制配色、大圆角卡片。</td>
+        <td>
+          <span class="tag-green">&#10003;</span> <code>学术现代极简</code><br>
+          <span class="tag-green">&#10003;</span> <code>极致留白 · 粗体标题</code><br>
+          <span class="tag-green">&#10003;</span> <code>#6366F1 / #10B981 / #FAFAFA</code>
+        </td>
+      </tr>
+      <tr>
+        <td><span class="num">8</span></td>
+        <td class="req">Review 页面</td>
+        <td>本版本已删除所有 Review 页面入口。</td>
+        <td><span class="tag-red">&#10007;</span> <code>删除 Review 页面和入口</code></td>
+      </tr>
+    </tbody>
+  </table>
+    </div>
+    <div>
+  <h2 style="margin-top:0;">&#128640; 后续详细文档待确认方向后产出</h2>
+  <table class="spec-table">
+    <thead><tr><th>待确认项</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="req">文章详情页原型</td>
+        <td>英雄图 16:9 + 内容标签 + 点赞/阅读量显示逻辑</td>
+      </tr>
+      <tr>
+        <td class="req">SEO 元数据规范</td>
+        <td>每篇文章的 title / description / og: 标签模板</td>
+      </tr>
+      <tr>
+        <td class="req">数据统计方案</td>
+        <td>Google Analytics / 百度统计 / 自建埋点选型</td>
+      </tr>
+      <tr>
+        <td class="req">搜索交互细节</td>
+        <td>实时搜索 / 回车搜索 / 搜索结果页</td>
+      </tr>
+      <tr>
+        <td class="req">分类排序逻辑</td>
+        <td>「最热」按点赞+阅读量加权？「最新」按发布时间？</td>
+      </tr>
+    </tbody>
+  </table>
+    </div>
+  </div>
+</div>
+</div>
+
+</body>
+</html>

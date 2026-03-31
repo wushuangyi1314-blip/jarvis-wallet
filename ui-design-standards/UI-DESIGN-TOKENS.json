@@ -1,0 +1,150 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "color": {
+    "primary": {
+      "50": { "value": "#EFF6FF", "description": "Primary 50" },
+      "100": { "value": "#DBEAFE", "description": "Primary 100" },
+      "200": { "value": "#BFDBFE", "description": "Primary 200" },
+      "300": { "value": "#93C5FD", "description": "Primary 300" },
+      "400": { "value": "#60A5FA", "description": "Primary 400" },
+      "500": { "value": "#3B82F6", "description": "Primary 500" },
+      "600": { "value": "#2563EB", "description": "Primary 600" },
+      "700": { "value": "#1D4ED8", "description": "Primary 700" },
+      "800": { "value": "#1E40AF", "description": "Primary 800" },
+      "900": { "value": "#1E3A8A", "description": "Primary 900" }
+    },
+    "secondary": {
+      "500": { "value": "#7C3AED", "description": "Secondary 500" },
+      "600": { "value": "#6D28D9", "description": "Secondary 600" }
+    },
+    "success": {
+      "50": { "value": "#DCFCE7", "description": "Success light bg" },
+      "500": { "value": "#10B981", "description": "Success 500" },
+      "600": { "value": "#059669", "description": "Success 600" },
+      "dark": { "value": "#166534", "description": "Success dark text" }
+    },
+    "warning": {
+      "50": { "value": "#FEF3C7", "description": "Warning light bg" },
+      "500": { "value": "#F59E0B", "description": "Warning 500" },
+      "dark": { "value": "#92400E", "description": "Warning dark text" }
+    },
+    "error": {
+      "50": { "value": "#FEE2E2", "description": "Error light bg" },
+      "500": { "value": "#EF4444", "description": "Error 500" },
+      "600": { "value": "#DC2626", "description": "Error 600" },
+      "dark": { "value": "#991B1B", "description": "Error dark text" }
+    },
+    "info": {
+      "50": { "value": "#E0F2FE", "description": "Info light bg" },
+      "500": { "value": "#06B6D4", "description": "Info 500" },
+      "dark": { "value": "#075985", "description": "Info dark text" }
+    },
+    "neutral": {
+      "50": { "value": "#F8FAFC" },
+      "100": { "value": "#F1F5F9" },
+      "200": { "value": "#E2E8F0" },
+      "300": { "value": "#CBD5E1" },
+      "400": { "value": "#94A3B8" },
+      "500": { "value": "#64748B" },
+      "600": { "value": "#475569" },
+      "700": { "value": "#334155" },
+      "800": { "value": "#1E293B" },
+      "900": { "value": "#0F172A" }
+    },
+    "text": {
+      "primary": { "value": "#0F172A", "description": "Main text color" },
+      "secondary": { "value": "#475569", "description": "Secondary text" },
+      "disabled": { "value": "#94A3B8", "description": "Disabled text" },
+      "inverse": { "value": "#FFFFFF", "description": "On dark backgrounds" }
+    }
+  },
+  "typography": {
+    "fontFamily": {
+      "sans": { "value": "\"PingFang SC\", \"Microsoft YaHei\", \"Helvetica Neue\", -apple-system, sans-serif" },
+      "mono": { "value": "\"SF Mono\", \"Cascadia Code\", monospace" }
+    },
+    "fontSize": {
+      "xs": { "value": "12px", "lineHeight": "1.3" },
+      "sm": { "value": "14px", "lineHeight": "1.4" },
+      "base": { "value": "16px", "lineHeight": "1.5" },
+      "lg": { "value": "18px", "lineHeight": "1.4" },
+      "xl": { "value": "20px", "lineHeight": "1.4" },
+      "2xl": { "value": "24px", "lineHeight": "1.3" },
+      "3xl": { "value": "30px", "lineHeight": "1.2" },
+      "4xl": { "value": "36px", "lineHeight": "1.2" },
+      "5xl": { "value": "48px", "lineHeight": "1.1" }
+    },
+    "fontWeight": {
+      "regular": { "value": "400" },
+      "medium": { "value": "500" },
+      "semibold": { "value": "600" },
+      "bold": { "value": "700" }
+    }
+  },
+  "spacing": {
+    "0": { "value": "0px" },
+    "1": { "value": "4px" },
+    "2": { "value": "8px" },
+    "3": { "value": "12px" },
+    "4": { "value": "16px" },
+    "5": { "value": "20px" },
+    "6": { "value": "24px" },
+    "8": { "value": "32px" },
+    "10": { "value": "40px" },
+    "12": { "value": "48px" },
+    "16": { "value": "64px" },
+    "20": { "value": "80px" },
+    "24": { "value": "96px" },
+    "32": { "value": "128px" }
+  },
+  "borderRadius": {
+    "none": { "value": "0px" },
+    "sm": { "value": "4px" },
+    "DEFAULT": { "value": "6px" },
+    "md": { "value": "8px" },
+    "lg": { "value": "12px" },
+    "xl": { "value": "16px" },
+    "2xl": { "value": "24px" },
+    "full": { "value": "9999px" }
+  },
+  "shadow": {
+    "sm": { "value": "0 1px 2px rgba(0, 0, 0, 0.05)" },
+    "DEFAULT": { "value": "0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06)" },
+    "md": { "value": "0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06)" },
+    "lg": { "value": "0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05)" },
+    "xl": { "value": "0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04)" },
+    "inner": { "value": "inset 0 2px 4px rgba(0, 0, 0, 0.06)" }
+  },
+  "transition": {
+    "duration": {
+      "fast": { "value": "100ms" },
+      "DEFAULT": { "value": "150ms" },
+      "slow": { "value": "200ms" },
+      "slower": { "value": "300ms" },
+      "slowest": { "value": "400ms" }
+    },
+    "easing": {
+      "DEFAULT": { "value": "cubic-bezier(0.4, 0, 0.2, 1)" },
+      "in": { "value": "cubic-bezier(0.4, 0, 1, 1)" },
+      "out": { "value": "cubic-bezier(0, 0, 0.2, 1)" },
+      "inOut": { "value": "cubic-bezier(0.4, 0, 0.2, 1)" },
+      "spring": { "value": "cubic-bezier(0.175, 0.885, 0.32, 1.275)" }
+    }
+  },
+  "zIndex": {
+    "dropdown": { "value": "1000" },
+    "sticky": { "value": "1100" },
+    "fixed": { "value": "1200" },
+    "modalBackdrop": { "value": "1300" },
+    "modal": { "value": "1400" },
+    "popover": { "value": "1500" },
+    "tooltip": { "value": "1600" }
+  },
+  "breakpoints": {
+    "sm": { "value": "640px" },
+    "md": { "value": "768px" },
+    "lg": { "value": "1024px" },
+    "xl": { "value": "1280px" },
+    "2xl": { "value": "1536px" }
+  }
+}
