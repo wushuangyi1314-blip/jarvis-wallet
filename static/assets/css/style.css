@@ -139,6 +139,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 
 .category-nav {
     max-width: var(--max-width); margin: 0 auto;
+    padding: 0 40px;
     display: flex; align-items: center;
     overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none;
 }
