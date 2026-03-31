@@ -1,19 +1,6 @@
 {{ define "main" }}
 {{ $related := where .Site.RegularPages "Section" "articles" | complement (slice .) | first 4 }}
 
-<!-- BREADCRUMB -->
-<nav class="breadcrumb">
-    <a href="{{ $.Site.BaseURL }}">Home</a>
-    <span class="breadcrumb-sep">›</span>
-    <a href="{{ $.Site.BaseURL }}articles/">Articles</a>
-    {{ with index .Params.categories 0 }}
-    <span class="breadcrumb-sep">›</span>
-    <a href="{{ $.Site.BaseURL }}categories/{{ . | urlize }}/">{{ . }}</a>
-    {{ end }}
-    <span class="breadcrumb-sep">›</span>
-    <span class="breadcrumb-current">{{ .Title }}</span>
-</nav>
-
 <!-- HERO IMAGE -->
 {{ if .Params.heroImage }}
 <div class="article-hero" style="margin-top:0;">
