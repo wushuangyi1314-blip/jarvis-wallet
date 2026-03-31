@@ -134,6 +134,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 /* ====== CATEGORY NAV ====== */
 .category-nav-wrap {
     background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 0 40px;
 }
 
 .category-nav {
@@ -557,6 +558,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 @media (max-width: 768px) {
     .article-grid, .search-result-grid { grid-template-columns: repeat(2, 1fr); }
     .top-nav, .home-hero, .page-wrap, .footer,
+    .category-nav-wrap,
     .breadcrumb, .article-tags, .article-header,
     .article-body, .search-hero, .search-result-meta,
     .search-result-grid-wrap { padding-left: 20px; padding-right: 20px; }
