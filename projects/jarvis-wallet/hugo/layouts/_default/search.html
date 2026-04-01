@@ -1,0 +1,123 @@
+{{ define "main" }}
+{{ $query := .Data.Query }}
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <a href="{{ $.Site.BaseURL }}" class="logo">
+    <div class="logo-icon">AI</div>
+    {{ $.Site.Title }}
+  </a>
+  <div class="nav-links">
+    <a href="{{ $.Site.BaseURL }}" class="nav-link">Home</a>
+    <a href="{{ $.Site.BaseURL }}about/" class="nav-link">About</a>
+  </div>
+  <div class="nav-search">
+    <span class="nav-search-icon">🔍</span>
+    <input type="text" class="nav-search-box" id="navSearchBox" placeholder="Search AI tools..." onkeydown="if(event.key==='Enter'){var q=this.value.trim();if(q)window.location.href='/search/?q='+encodeURIComponent(q);}">
+  </div>
+</nav>
+
+<!-- SEARCH BAR: same style as homepage -->
+<div style="padding: 24px 40px; margin-top: var(--nav-height);">
+  <div class="home-search-container">
+    <form class="home-search-bar" action="/search/" method="get" id="searchForm">
+      <span class="home-search-icon">🔍</span>
+      <input type="text" name="q" class="home-search-input" id="searchInputLarge" placeholder="Search AI tools, categories, reviews..." value="{{ $query }}">
+      <button type="submit" class="home-search-btn">Search</button>
+    </form>
+  </div>
+</div>
+
+{{ $pages := .Site.RegularPages }}
+{{ $articles := where $pages "Section" "articles" }}
+
+{{ if $query }}
+  {{ $matched := slice }}
+  {{ range $articles }}
+    {{ $titleLower := lower .Title }}
+    {{ $descLower := lower .Description }}
+    {{ $contentLower := lower .Content }}
+    {{ $queryLower := lower $query }}
+    {{ if or (findRE $queryLower $titleLower) (findRE $queryLower $descLower) (findRE $queryLower $contentLower) }}
+      {{ $matched = $matched | append . }}
+    {{ end }}
+  {{ end }}
+
+  <!-- Result Count -->
+  <div class="search-result-meta">
+    Found <strong>{{ len $matched }}</strong> articles matching "<strong>{{ $query }}</strong>"
+  </div>
+
+  <!-- Search Result Grid -->
+  <div class="search-result-grid-wrap">
+    <div class="search-result-grid">
+      {{ range $matched }}
+      <a href="{{ .Permalink }}" class="article-card">
+        <div class="card-img">
+          {{ if .Params.heroImage }}
+          <img src="{{ $.Site.BaseURL }}assets/images/{{ .Params.heroImage }}" alt="{{ .Title }}" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
+          {{ else }}
+          <div class="card-img-inner">16:9 Cover Image</div>
+          {{ end }}
+        </div>
+        <div class="card-body">
+          <div class="card-title">{{ .Title }}</div>
+          <div class="card-desc">{{ .Description }}</div>
+          <div class="card-meta">
+            <span class="card-tag">{{ range first 1 .Params.categories }}{{ . }}{{ end }}</span>
+            <span class="card-date">{{ .Lastmod.Format "Jan 2, 2006" }}</span>
+          </div>
+        </div>
+      </a>
+      {{ end }}
+    </div>
+
+    {{ if eq (len $matched) 0 }}
+    <div style="text-align:center;padding:60px 0;color:var(--text-secondary);">
+      <p style="font-size:16px;font-weight:600;margin-bottom:8px;">No results found for "{{ $query }}"</p>
+      <p style="font-size:14px;">Try different keywords or browse categories on the homepage.</p>
+    </div>
+    {{ end }}
+  </div>
+
+{{ else }}
+
+  <!-- No query: show all articles -->
+  <div class="search-result-meta">
+    Showing all <strong>{{ len $articles }}</strong> articles
+  </div>
+  <div class="search-result-grid-wrap">
+    <div class="search-result-grid">
+      {{ range $articles.ByLastmod.Reverse }}
+      <a href="{{ .Permalink }}" class="article-card">
+        <div class="card-img">
+          {{ if .Params.heroImage }}
+          <img src="{{ $.Site.BaseURL }}assets/images/{{ .Params.heroImage }}" alt="{{ .Title }}" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
+          {{ else }}
+          <div class="card-img-inner">16:9 Cover Image</div>
+          {{ end }}
+        </div>
+        <div class="card-body">
+          <div class="card-title">{{ .Title }}</div>
+          <div class="card-desc">{{ .Description }}</div>
+          <div class="card-meta">
+            <span class="card-tag">{{ range first 1 .Params.categories }}{{ . }}{{ end }}</span>
+            <span class="card-date">{{ .Lastmod.Format "Jan 2, 2006" }}</span>
+          </div>
+        </div>
+      </a>
+      {{ end }}
+    </div>
+  </div>
+{{ end }}
+
+{{ end }}
+
+{{ define "scripts" }}
+<script>
+(function() {
+  var input = document.getElementById('searchInputLarge');
+  if (input) input.focus();
+})();
+</script>
+{{ end }}

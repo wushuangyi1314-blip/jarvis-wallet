@@ -1,0 +1,74 @@
+{{ define "main" }}
+<main class="container">
+    <div class="breadcrumb">
+        <a href="{{ .Site.BaseURL }}">Home</a> / About
+    </div>
+
+    <div class="content-wrapper">
+        <article class="main-content">
+            <header class="article-header">
+                <div class="rating-display">
+                    <span class="stars">★★★★★</span>
+                    <span class="rating-number">Trusted by 10,000+ readers</span>
+                </div>
+
+                <h1>{{ .Title }}</h1>
+
+                <div class="article-meta">
+                    <span class="article-meta-item">📅 Founded March 2026</span>
+                    <span class="article-meta-item">👤 Jarvis</span>
+                    <span class="article-meta-item">📂 About</span>
+                </div>
+            </header>
+
+            <div class="tool-card">
+                <div class="tool-card-info">
+                    <h3>🎯 Our Mission</h3>
+                    <p class="tool-card-price">Helping you make informed decisions about AI tools</p>
+                </div>
+            </div>
+
+            <div class="article-content">
+                {{ .Content }}
+            </div>
+
+            <div class="share-buttons">
+                <a href="https://twitter.com/intent/tweet?url={{ .Permalink }}" target="_blank" class="share-btn twitter">Share on Twitter</a>
+                <a href="https://www.linkedin.com/shareArticle?url={{ .Permalink }}" target="_blank" class="share-btn linkedin">Share on LinkedIn</a>
+            </div>
+
+            <div class="related-articles">
+                <h3>📚 Start Reading</h3>
+                <div class="related-grid">
+                    <a href="{{ $.Site.BaseURL }}articles/ai-writing-tools-2026/" class="related-card">
+                        <h4>Best AI Writing Tools</h4>
+                        <p>Comprehensive review of top AI writing tools.</p>
+                    </a>
+                    <a href="{{ $.Site.BaseURL }}articles/claude-vs-chatgpt-2026/" class="related-card">
+                        <h4>Claude vs ChatGPT</h4>
+                        <p>Head-to-head comparison.</p>
+                    </a>
+                    <a href="{{ $.Site.BaseURL }}articles/free-ai-tools-small-business/" class="related-card">
+                        <h4>Free AI Tools</h4>
+                        <p>Save thousands with free alternatives.</p>
+                    </a>
+                </div>
+            </div>
+        </article>
+
+        <aside class="sidebar">
+            <nav class="toc">
+                <h4>📋 On This Page</h4>
+                <ul class="toc-list">
+                    <li><a href="#mission">Our Mission</a></li>
+                    <li><a href="#how-we-test">How We Test</a></li>
+                    <li><a href="#why-trust">Why Trust Us</a></li>
+                    <li><a href="#our-team">About the Author</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#disclosure">Disclosure</a></li>
+                </ul>
+            </nav>
+        </aside>
+    </div>
+</main>
+{{ end }}

@@ -1,0 +1,124 @@
+{{ define "main" }}
+{{ $pages := .Site.RegularPages }}
+{{ $articles := where $pages "Section" "articles" }}
+{{ $paginator := .Paginate ($articles.ByLastmod.Reverse) 20 }}
+{{ $currentPage := .Paginator.PageNumber }}
+
+<!-- HERO -->
+<div class="home-hero">
+  <div class="home-search-container">
+    <div class="home-slogan">
+      <!-- AI pulsing dots row -->
+      <div class="ai-dot-row">
+        <div class="ai-dot"></div>
+        <div class="ai-dot"></div>
+        <div class="ai-dot"></div>
+        <div class="ai-dot"></div>
+        <div class="ai-dot"></div>
+      </div>
+      <!-- Slogan lines with gradient -->
+      <div class="slogan-lines">
+        <span class="slogan-line" data-text="Discover the Best AI Tools">Discover the Best AI Tools</span>
+        <span class="slogan-line" data-text="for Your Workflow">for Your Workflow</span>
+      </div>
+      <!-- Subtle underline accent -->
+      <div class="slogan-underline"></div>
+      <!-- Scan line effect -->
+      <div class="scan-line"></div>
+    </div>
+    <div class="home-search-bar">
+      <span class="home-search-icon">🔍</span>
+      <input type="text" class="home-search-input" id="heroSearchInput" placeholder="Search AI tools, categories, reviews...">
+      <button class="home-search-btn" onclick="var q=document.getElementById('heroSearchInput').value.trim();if(q)window.location.href='/search/?q='+encodeURIComponent(q);">Search</button>
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORY NAV -->
+<div class="category-nav-wrap">
+  <div class="category-nav">
+    <div class="cat-item active" onclick="filterArticles('All', this)">Trending</div>
+    <div class="cat-item" onclick="filterArticles('Latest', this)">Latest</div>
+    <div class="cat-item" onclick="filterArticles('AI Coding', this)">AI Coding</div>
+    <div class="cat-item" onclick="filterArticles('AI Productivity', this)">AI Productivity</div>
+    <div class="cat-item" onclick="filterArticles('AI Image', this)">AI Image</div>
+    <div class="cat-item" onclick="filterArticles('AI Video', this)">AI Video</div>
+    <div class="cat-item" onclick="filterArticles('AI Design', this)">AI Design</div>
+    <div class="cat-item" onclick="filterArticles('AI Writing', this)">AI Writing</div>
+    <div class="cat-item" onclick="filterArticles('AI Audio', this)">AI Audio</div>
+  </div>
+</div>
+
+<!-- ARTICLE GRID -->
+<div class="page-wrap">
+  <div class="article-grid" id="articleGrid">
+    {{ range $paginator.Pages }}
+    <a href="{{ .Permalink }}" class="article-card" data-category="{{ range first 1 .Params.categories }}{{ . }}{{ end }}">
+      <div class="card-img">
+        {{ if .Params.heroImage }}
+        <img src="{{ $.Site.BaseURL }}assets/images/{{ .Params.heroImage }}" alt="{{ .Title }}" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
+        {{ else }}
+        <div class="card-img-inner">16:9 Cover Image</div>
+        {{ end }}
+      </div>
+      <div class="card-body">
+        <div class="card-title">{{ .Title }}</div>
+        <div class="card-desc">{{ .Description }}</div>
+        <div class="card-meta">
+          <span class="card-tag">{{ range first 1 .Params.categories }}{{ . }}{{ end }}</span>
+          <span class="card-date">{{ .Lastmod.Format "Jan 2, 2006" }}</span>
+        </div>
+      </div>
+    </a>
+    {{ end }}
+  </div>
+
+  <!-- PAGINATION -->
+  {{ if gt $paginator.TotalPages 1 }}
+  <div class="pagination">
+    {{ if $paginator.HasPrev }}
+    <a href="{{ $paginator.Prev.URL }}" class="page-btn">‹</a>
+    {{ else }}
+    <span class="page-btn disabled">‹</span>
+    {{ end }}
+
+    {{ range $paginator.Pagers }}
+      {{ if eq .PageNumber $currentPage }}
+      <span class="page-btn active">{{ .PageNumber }}</span>
+      {{ else if or (le .PageNumber (add $currentPage 2)) (ge .PageNumber (sub $currentPage 2)) }}
+      <a href="{{ .URL }}" class="page-btn">{{ .PageNumber }}</a>
+      {{ else if or (eq .PageNumber 1) (eq .PageNumber $paginator.TotalPages) }}
+      <a href="{{ .URL }}" class="page-btn">{{ .PageNumber }}</a>
+      {{ end }}
+    {{ end }}
+
+    {{ if $paginator.HasNext }}
+    <a href="{{ $paginator.Next.URL }}" class="page-btn">›</a>
+    {{ else }}
+    <span class="page-btn disabled">›</span>
+    {{ end }}
+    <span class="page-info">{{ len $articles }} articles</span>
+  </div>
+  {{ end }}
+</div>
+
+{{ end }}
+
+{{ define "scripts" }}
+<script>
+function filterArticles(category, el) {
+  var cards = document.querySelectorAll('.article-card');
+  var tabs = document.querySelectorAll('.cat-item');
+  tabs.forEach(function(t) { t.classList.remove('active'); });
+  el.classList.add('active');
+  cards.forEach(function(card) {
+    var cat = card.getAttribute('data-category') || '';
+    if (category === 'All' || category === 'Trending' || category === 'Latest' || cat === category) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+</script>
+{{ end }}

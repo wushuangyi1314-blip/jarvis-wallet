@@ -1,0 +1,39 @@
+baseURL = "https://aitoolreviewr.com/"
+languageCode = "en"
+title = "AI Tool Review"
+publishDir = "public"
+
+[frontmatter]
+  date = ["date"]
+  lastmod = ["lastmod"]
+
+[permalinks]
+  articles = "/articles/:filename/"
+  page = "/:filename/"
+
+[outputs]
+  home = ["HTML", "JSON"]
+  page = ["HTML"]
+
+[mediaTypes]
+  [mediaTypes."application/json"]
+    suffixes = ["json"]
+
+[outputFormats]
+  [outputFormats.JSON]
+    mediaType = "application/json"
+    isPlainText = true
+    isHTML = false
+
+[build]
+  writeStats = true
+  # trigger redeploy
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+[params]
+  description = "Honest, expert AI tool reviews. In-depth analysis of the best AI tools in 2026 — Claude, ChatGPT, Midjourney, Jasper & more. Updated weekly."
+  siteName = "AI Tool Review"
+  twitterHandle = "@aitoolreviewr"

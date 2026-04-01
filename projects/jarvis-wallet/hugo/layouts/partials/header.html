@@ -1,0 +1,14 @@
+<header class="top-nav" id="siteHeader">
+    <a href="{{ .Site.BaseURL }}" class="logo">
+        <div class="logo-icon">AI</div>
+        {{ .Site.Title }}
+    </a>
+    <nav class="nav-links" id="navLinks">
+        <a href="{{ .Site.BaseURL }}" class="nav-link">Home</a>
+        <a href="{{ .Site.BaseURL }}about/" class="nav-link">About</a>
+    </nav>
+    <div class="nav-search">
+        <span class="nav-search-icon">🔍</span>
+        <input type="text" class="nav-search-box" id="navSearchBox" placeholder="Search AI tools..." onkeydown="if(event.key==='Enter'){var q=this.value.trim();if(q)window.location.href='/search/?q='+encodeURIComponent(q);}">
+    </div>
+</header>

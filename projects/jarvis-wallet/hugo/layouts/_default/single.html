@@ -1,0 +1,178 @@
+{{ define "main" }}
+{{ $related := where .Site.RegularPages "Section" "articles" | complement (slice .) | first 4 }}
+
+<!-- HERO IMAGE -->
+{{ if .Params.heroImage }}
+<div class="article-hero" style="margin-top:0;">
+    <div class="hero-pattern"></div>
+    <img src="{{ $.Site.BaseURL }}assets/images/{{ .Params.heroImage }}" alt="{{ .Title }}" style="width:100%;height:100%;object-fit:cover;">
+</div>
+{{ else }}
+<div class="article-hero">
+    <div class="hero-pattern"></div>
+    <div class="hero-label">Hero Image</div>
+</div>
+{{ end }}
+
+<!-- TAG PILLS -->
+{{ with .Params.tags }}
+<div class="article-tags">
+    {{ range first 4 . }}
+    <span class="tag-pill tag-ai">{{ . }}</span>
+    {{ end }}
+</div>
+{{ end }}
+
+<!-- ARTICLE HEADER -->
+<div class="article-header">
+    <h1 class="article-title">{{ .Title }}</h1>
+    <div class="article-meta">
+        <span class="meta-item">
+            📅 {{ .Lastmod.Format "Jan 2, 2006" }}
+        </span>
+        {{ with .Params.readingTime }}
+        <span class="meta-item">⏱ {{ . }} min read</span>
+        {{ end }}
+        {{ with .Params.likes }}
+        <span class="meta-item-static">👍 {{ . }} likes</span>
+        {{ end }}
+        {{ with index .Params.categories 0 }}
+        <span class="meta-item">📁 {{ . }}</span>
+        {{ end }}
+        <button class="like-btn" id="likeBtn" onclick="this.classList.toggle('liked')">
+            👍 Like
+        </button>
+    </div>
+</div>
+
+<!-- ARTICLE BODY -->
+<div class="article-body">
+
+    <!-- TABLE OF CONTENTS -->
+    {{ with .Params.toc }}
+    <aside class="toc-panel" id="toc-panel">
+        <div class="toc-title">📑 Contents</div>
+        <nav class="toc-nav" id="toc-nav">
+            {{ range . }}
+            <a href="#{{ .id }}" class="toc-item" data-id="{{ .id }}">{{ .title }}</a>
+            {{ end }}
+        </nav>
+    </aside>
+    {{ end }}
+
+    <!-- ARTICLE CONTENT -->
+    <div class="article-content">
+
+        <!-- Page Content -->
+        {{ .Content }}
+
+        <!-- Affiliate Cards (mid-article) -->
+        {{ if .Params.affiliateTools }}
+            {{ range .Params.affiliateTools }}
+            <div class="affiliate-card">
+                <div class="affiliate-info">
+                    <div class="affiliate-label">[AI Tool]</div>
+                    <div class="affiliate-name">{{ .name }}</div>
+                    <div class="affiliate-desc">{{ .desc }}</div>
+                </div>
+                <a href="{{ .url }}" class="affiliate-cta" target="_blank" rel="noopener">
+                    🌐 Visit Official Website
+                </a>
+            </div>
+            {{ end }}
+        {{ else }}
+            {{ $name := .Params.affiliateName | default .Params.featuredTool | default "Leonardo.ai" }}
+            {{ $desc := .Params.affiliateDesc | default "" }}
+            {{ $url := .Params.affiliateUrl | default .Params.featuredLink | default "https://leonardo.ai" }}
+            <div class="affiliate-card">
+                <div class="affiliate-info">
+                    <div class="affiliate-label">[AI Tool]</div>
+                    <div class="affiliate-name">{{ $name }}</div>
+                    <div class="affiliate-desc">{{ $desc }}</div>
+                </div>
+                <a href="{{ $url }}" class="affiliate-cta" target="_blank" rel="noopener">
+                    🌐 Visit Official Website
+                </a>
+            </div>
+        {{ end }}
+
+        <!-- BOTTOM LIKE SECTION -->
+        <div class="bottom-like-section">
+            <div class="bottom-like-divider"></div>
+            <button class="bottom-like-btn" id="bottomLikeBtn" onclick="this.classList.toggle('liked')">
+                👍 <span id="bottomLikeCount">{{ with .Params.likes }}{{ . }}{{ else }}0{{ end }}</span> Likes
+            </button>
+            <p class="bottom-like-hint">Like this article? Show your support! ❤️</p>
+        </div>
+
+    </div>
+</div>
+
+<!-- RELATED ARTICLES -->
+{{ if $related }}
+<div class="related-section">
+    <h2 class="related-title">More Reviews You Might Like</h2>
+    <div class="related-grid">
+        {{ range $related }}
+        <a href="{{ .Permalink }}" class="related-card">
+            <div class="related-card-img">
+                {{ if .Params.heroImage }}
+                <img src="{{ $.Site.BaseURL }}assets/images/{{ .Params.heroImage }}" alt="{{ .Title }}" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
+                {{ else }}
+                {{ .Title }}
+                {{ end }}
+            </div>
+            <div class="related-card-body">
+                <div class="related-card-tag">{{ range first 1 .Params.categories }}{{ . }}{{ end }}</div>
+                <div class="related-card-title">{{ .Title }}</div>
+                <div class="related-card-meta">
+                    <span class="related-card-date">{{ .Lastmod.Format "Jan 2, 2006" }}</span>
+                    <div class="related-card-stats">
+                        <span class="related-card-stat">👍 {{ with .Params.likes }}{{ . }}{{ else }}0{{ end }}</span>
+                        <span class="related-card-stat">👁 {{ with .Params.views }}{{ . }}{{ else }}0{{ end }}</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+        {{ end }}
+    </div>
+</div>
+{{ end }}
+
+{{ end }}
+
+{{ define "scripts" }}
+<script>
+// Sync like button across header and bottom
+(function() {
+    var likeBtn = document.getElementById('likeBtn');
+    var bottomLikeBtn = document.getElementById('bottomLikeBtn');
+    if (likeBtn && bottomLikeBtn) {
+        likeBtn.addEventListener('click', function() {
+            bottomLikeBtn.classList.toggle('liked', likeBtn.classList.contains('liked'));
+        });
+        bottomLikeBtn.addEventListener('click', function() {
+            likeBtn.classList.toggle('liked', bottomLikeBtn.classList.contains('liked'));
+        });
+    }
+
+    // TOC scroll highlighting
+    var tocLinks = document.querySelectorAll('.toc-item');
+    if (tocLinks.length) {
+        function highlightTOC() {
+            var scrollY = window.scrollY + 120;
+            var current = null;
+            tocLinks.forEach(function(link) {
+                var id = link.getAttribute('data-id') || link.getAttribute('href').replace('#', '');
+                var el = document.getElementById(id);
+                if (el && el.offsetTop <= scrollY) current = link;
+            });
+            tocLinks.forEach(function(l) { l.classList.remove('active'); });
+            if (current) current.classList.add('active');
+        }
+        window.addEventListener('scroll', highlightTOC);
+        highlightTOC();
+    }
+})();
+</script>
+{{ end }}

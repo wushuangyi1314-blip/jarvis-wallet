@@ -20,6 +20,10 @@
     "humanize": {
       "version": "1.0.0",
       "installedAt": 1774883762250
+    },
+    "web-tools-guide": {
+      "version": "1.0.0",
+      "installedAt": 1775003806209
     }
   }
 }
