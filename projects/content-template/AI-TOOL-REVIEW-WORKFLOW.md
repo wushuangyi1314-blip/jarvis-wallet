@@ -31,10 +31,17 @@ date: 2026-04-01
 heroImage: "图片路径"
 categories: ["AI Programming"]
 tags: ["tag1", "tag2"]
+toc:
+  - id: "section-1"
+    title: "第一章标题"
+  - id: "section-2"
+    title: "第二章标题"
 ---
 ```
 
-**注意：不要写 `toc: true`，这会导致构建失败。**
+**注意：**
+- 不要写 `toc: true`（布尔值会导致构建失败）
+- toc 必须是数组格式，每个条目包含 `id` 和 `title`
 
 ### 2.3 写作参考文档
 
