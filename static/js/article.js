@@ -28,4 +28,15 @@
         window.addEventListener('scroll', highlightTOC);
         highlightTOC();
     }
+
+    // Auto-style pros/cons headings
+    var headings = document.querySelectorAll('.article-content h2, .article-content h3, .article-content h4');
+    headings.forEach(function(h) {
+        var text = h.textContent || '';
+        if (text.match(/^✅|^\u2714/i) || text.match(/pros|strength|good|right|correct/i)) {
+            h.classList.add('pros-heading');
+        } else if (text.match(/^❌|^\u2718/i) || text.match(/cons|limitations?|wrong|fall.*short/i)) {
+            h.classList.add('cons-heading');
+        }
+    });
 })();

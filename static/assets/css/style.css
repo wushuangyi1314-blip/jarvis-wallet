@@ -1087,6 +1087,22 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   background: #F0F4FF;
 }
 
+/* Pros/Cons auto-styled headings */
+.article-content .pros-heading,
+.article-content h2:has(+ ul),
+.article-content h3:has(+ ul) {
+  color: #10B981;
+  border-left: 4px solid #10B981;
+  padding-left: 0.75rem;
+  margin-left: 0;
+}
+.article-content .cons-heading {
+  color: #EF4444;
+  border-left: 4px solid #EF4444;
+  padding-left: 0.75rem;
+  margin-left: 0;
+}
+
 /* Affiliate Card */
 .affiliate-card {
   display: flex;
