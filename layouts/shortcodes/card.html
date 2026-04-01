@@ -1,0 +1,58 @@
+{{/*
+Unified card shortcode - replaces callout, comparison, pros, cons
+Usage:
+  {{< card type="pros" title="Strengths" >}}
+  - Fast
+  - Reliable
+ {{< /card >}}
+
+  {{< card type="cons" title="Limitations" >}}
+  - Expensive
+  {{< /card >}}
+
+  {{< card type="callout" title="Note" >}}
+  Important info here
+  {{< /card >}}
+
+  {{< card type="comparison" title="Feature Comparison" >}}
+  | Feature | A | B |
+  |---------|---|---|
+  | Price | $10 | $20 |
+  {{< /card >}}
+
+Types: pros, cons, callout, info, warning, comparison
+*/}}
+{{ $type := .Get "type" | default "callout" }}
+{{ $title := .Get "title" }}
+
+{{ if eq $type "pros" }}
+<div class="pros-box">
+{{ with $title }}<h4>✅ {{ . }}</h4>{{ end }}
+<ul>{{ .Inner }}</ul>
+</div>
+
+{{ else if eq $type "cons" }}
+<div class="cons-box">
+{{ with $title }}<h4>⚠️ {{ . }}</h4>{{ end }}
+<ul>{{ .Inner }}</ul>
+</div>
+
+{{ else if eq $type "comparison" }}
+<div class="comparison-table-wrap">
+{{ with $title }}<h4>{{ . }}</h4>{{ end }}
+<table class="content-table">{{ .Inner | markdownify }}</table>
+</div>
+
+{{ else if eq $type "warning" }}
+<div class="callout-box callout-warning">
+{{ with $title }}<h4>{{ . }}</h4>{{ end }}
+{{ .Inner }}
+</div>
+
+{{ else }}
+{{/* default: callout / info */}}
+<div class="callout-box callout-{{ $type }}">
+{{ with $title }}<h4>{{ . }}</h4>{{ end }}
+{{ .Inner }}
+</div>
+{{ end }}

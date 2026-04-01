@@ -1,0 +1,26 @@
+{{ with .Params.tags }}
+<div class="article-tags">
+    {{ range first 4 . }}
+    <span class="tag-pill tag-ai">{{ . }}</span>
+    {{ end }}
+</div>
+{{ end }}
+
+<div class="article-header">
+    <h1 class="article-title">{{ .Title }}</h1>
+    <div class="article-meta">
+        <span class="meta-item">📅 {{ .Lastmod.Format "Jan 2, 2006" }}</span>
+        {{ with .Params.readingTime }}
+        <span class="meta-item">⏱ {{ . }} min read</span>
+        {{ end }}
+        {{ with .Params.likes }}
+        <span class="meta-item-static">👍 {{ . }} likes</span>
+        {{ end }}
+        {{ with index .Params.categories 0 }}
+        <span class="meta-item">📁 {{ . }}</span>
+        {{ end }}
+        <button class="like-btn" id="likeBtn" data-likes="{{ with .Params.likes }}{{ . }}{{ else }}0{{ end }}">
+            👍 Like
+        </button>
+    </div>
+</div>

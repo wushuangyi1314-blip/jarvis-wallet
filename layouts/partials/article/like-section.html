@@ -1,0 +1,7 @@
+<div class="bottom-like-section">
+    <div class="bottom-like-divider"></div>
+    <button class="bottom-like-btn" id="bottomLikeBtn" data-likes="{{ with .Params.likes }}{{ . }}{{ else }}0{{ end }}">
+        👍 <span id="bottomLikeCount">{{ with .Params.likes }}{{ . }}{{ else }}0{{ end }}</span> Likes
+    </button>
+    <p class="bottom-like-hint">Like this article? Show your support! ❤️</p>
+</div>

@@ -4,17 +4,16 @@ description: "{{SEO描述，50-160字符}}"
 date: {{ .Date }}
 lastmod: {{ .Lastmod }}
 heroImage: "{{英雄图文件名，如 ai-tool-hero.jpg}}"
-rating: 0
-ratingCount: "0"
-readingTime: 0
-categories: ["AI Image"]  # 可选: AI Image, AI Programming, AI Video, AI Writing, AI Audio, Comparison, Free Tools
+categories: ["AI Writing"]  # 可选: AI Image, AI Programming, AI Video, AI Writing, AI Audio, Comparison, Free Tools
 tags: ["tag1", "tag2"]
 
-# ====== Affiliate 赚佣金信息 ======
-affiliateName: "{{工具名称}}"
-affiliateDesc: "{{一句话描述}}"
-affiliateUrl: "{{Affiliate链接}}"
+# ====== 可选：Affiliate 赚佣金信息 ======
+# affiliate:
+#   name: "{{工具名称}}"
+#   desc: "{{一句话描述}}"
+#   url: "{{Affiliate链接}}"
 # ====================================
+
 toc: true
 draft: false
 ---

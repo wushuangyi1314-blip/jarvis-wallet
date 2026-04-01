@@ -64,7 +64,7 @@
           <div class="card-title">{{ .Title }}</div>
           <div class="card-desc">{{ .Description }}</div>
           <div class="card-meta">
-            <span class="card-tag">{{ range first 1 .Params.categories }}{{ . }}{{ end }}</span>
+            <span class="card-tag">{{ with index .Params.categories 0 }}{{ . }}{{ end }}</span>
             <span class="card-date">{{ .Lastmod.Format "Jan 2, 2006" }}</span>
           </div>
         </div>
@@ -101,7 +101,7 @@
           <div class="card-title">{{ .Title }}</div>
           <div class="card-desc">{{ .Description }}</div>
           <div class="card-meta">
-            <span class="card-tag">{{ range first 1 .Params.categories }}{{ . }}{{ end }}</span>
+            <span class="card-tag">{{ with index .Params.categories 0 }}{{ . }}{{ end }}</span>
             <span class="card-date">{{ .Lastmod.Format "Jan 2, 2006" }}</span>
           </div>
         </div>
