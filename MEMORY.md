@@ -68,12 +68,61 @@
 - 规范：Apple HIG + Material Design
 - 参考网站库：/workspace/ui-aesthetic-standards/
 
-## 项目信息
+## AI工具评测网站 (aitoolreviewr.com) - 内容运营工作流
 
-### AI工具评测 (aitoolreviewr.com)
-- Hugo静态站点
-- 域名：aitoolreviewr.com
-- 运营方向：AI Tools & Software Reviews
+### 技术架构
+- Hugo静态网站框架
+- 纯CSS样式方案（无需Shortcodes）
+- GitHub → Cloudflare Pages CI/CD
+- 内容目录：`content/articles/`
+
+### 内容生产流程（折中方案 v2.0）
+
+**核心原则：运营只写文章，CSS自动处理样式**
+
+#### 运营职责
+1. **写文章前**：先完成工具研究（特点、竞品对比、优缺点判断）
+2. **写文章**：纯Markdown写作，不需要学任何模板语法
+3. **写完后**：填写简化的frontmatter（必填：title/description/date/heroImage）
+
+#### CSS自动渲染的内容元素
+所有以下元素只需写标准Markdown，CSS自动样式化：
+| 元素 | Markdown写法 | 渲染样式 |
+|------|-------------|---------|
+| 表格 | `\| 表头 \|` + `\|---\|' 分隔符 | 渐变表头 + 斑马纹 |
+| 引用块 | `> 内容` | 紫色左边框 + 背景 |
+| 快捷导航 | `> **粗体标题**` + 列表 | 黄色背景盒子 |
+| 警告框 | `> **注意**` 开头 | 红色背景盒子 |
+
+#### RD Agent职责
+1. 维护 `/projects/scripts/pre-commit-check.sh` 检查脚本
+2. 持续优化CSS样式（`static/assets/css/style.css`）
+3. 不需要逐篇介入运营的文章写作
+
+### 运营参考文档
+| 文档 | 路径 | 用途 |
+|------|------|------|
+| 标杆文章示例 | `/projects/content-template/sample-benchmark-article.md` | 定义写作质量标杆（不是模板） |
+| 写作指南 | `/projects/content-template/WRITING-GUIDE.md` | 告诉运营如何写出好文章 |
+| frontmatter模板 | `/projects/content-template/article-frontmatter-template.md` | 简化的元数据格式 |
+| 写后检查清单 | `/projects/content-template/POST-WRITE-CHECKLIST.md` | 运营自检用 |
+
+### Pre-commit检查脚本
+```bash
+./projects/scripts/pre-commit-check.sh <文章路径>
+```
+检查内容：frontmatter完整性、禁止HTML标签、表格格式、标题层级、Hugo构建
+
+### 注意事项
+- ❌ 不要用HTML标签（`<table>`、`<div>`等），全部用Markdown
+- ❌ 不要用Shortcodes（已废弃）
+- ✅ 表格用 `| 格式 |`，引用用 `>`
+- ✅ 文章命名：`小写字母-连字符命名.md`
+
+### 项目信息
+- **域名**：aitoolreviewr.com
+- **运营方向**：AI Tools & Software Reviews
+- **内容目录**：`content/articles/`（本地5篇，线上17篇不同步）
 
 ### 团队配置
 - PM: 产品经理

@@ -745,28 +745,46 @@ nav .container {
     color: var(--text-light);
 }
 
+/* ============================================
+   Article Content - Auto-rendering all elements
+   运营只需要写标准 Markdown，CSS 自动处理样式
+   ============================================ */
+
 .article-content {
     max-width: 800px;
     padding: 2rem 0;
+    line-height: 1.75;
 }
 
+/* Headings */
 .article-content h2 {
     font-size: 1.65rem;
     margin: 2.5rem 0 1rem;
     color: var(--text);
     padding-top: 1rem;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 0.5rem;
 }
 
 .article-content h3 {
     font-size: 1.3rem;
     margin: 2rem 0 0.75rem;
+    color: var(--text);
 }
 
+.article-content h4 {
+    font-size: 1.1rem;
+    margin: 1.5rem 0 0.5rem;
+    color: var(--text);
+}
+
+/* Paragraphs */
 .article-content p {
     margin-bottom: 1.25rem;
     font-size: 1.05rem;
 }
 
+/* Lists */
 .article-content ul,
 .article-content ol {
     margin: 1.25rem 0;
@@ -775,93 +793,223 @@ nav .container {
 
 .article-content li {
     margin-bottom: 0.5rem;
+    line-height: 1.6;
 }
 
+.article-content ul li::marker {
+    color: var(--primary);
+}
+
+.article-content ol li::marker {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* Tables - 渐变表头 + 斑马纹 */
 .article-content table {
     width: 100%;
     border-collapse: collapse;
     margin: 1.5rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .article-content th,
 .article-content td {
-    padding: 0.75rem;
+    padding: 0.85rem 1rem;
     border: 1px solid var(--border);
     text-align: left;
 }
 
 .article-content th {
-    background: var(--bg-alt);
+    background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+    color: white;
     font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
 }
 
+.article-content td {
+    background: white;
+}
+
+/* 斑马纹 */
+.article-content tr:nth-child(even) td {
+    background: #F9FAFB;
+}
+
+.article-content tr:hover td {
+    background: #F0F4FF;
+}
+
+/* Code */
 .article-content code {
-    background: var(--bg-alt);
-    padding: 0.2rem 0.4rem;
+    background: #F3F4F6;
+    padding: 0.2rem 0.5rem;
     border-radius: 4px;
     font-size: 0.9em;
+    color: #7C3AED;
 }
 
 .article-content pre {
-    background: var(--bg-alt);
-    padding: 1rem;
+    background: #1F2937;
+    color: #E5E7EB;
+    padding: 1.25rem;
     border-radius: 8px;
     overflow-x: auto;
     margin: 1.5rem 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
 }
 
+.article-content pre code {
+    background: none;
+    padding: 0;
+    color: inherit;
+    font-size: inherit;
+}
+
+/* Blockquote - Callout 风格 */
 .article-content blockquote {
-    border-left: 4px solid var(--primary);
-    padding-left: 1.5rem;
+    border-left: none;
+    padding: 1.25rem 1.5rem;
     margin: 1.5rem 0;
-    font-style: italic;
-    color: var(--text-light);
+    background: linear-gradient(135deg, #EEF2FF 0%, #F5F3FF 100%);
+    border-radius: 0 12px 12px 0;
+    border-left: 4px solid #6366F1;
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.1);
 }
 
-/* Pros/Cons Box - NEW */
-.pros-cons {
+.article-content blockquote p {
+    margin-bottom: 0;
+    color: var(--text);
+    font-style: normal;
+}
+
+.article-content blockquote strong {
+    color: #6366F1;
+}
+
+/* 引用块内的列表 */
+.article-content blockquote ul,
+.article-content blockquote ol {
+    margin: 0.75rem 0;
+}
+
+/* 优缺点双栏布局 */
+.article-content .pros-cons {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
     margin: 1.5rem 0;
 }
 
-.pros-box,
-.cons-box {
+.article-content .pros-box,
+.article-content .cons-box {
     padding: 1.25rem;
-    border-radius: 8px;
+    border-radius: 12px;
 }
 
-.pros-box {
-    background: rgba(16, 185, 129, 0.1);
-    border: 1px solid rgba(16, 185, 129, 0.3);
+.article-content .pros-box {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(16, 185, 129, 0.04) 100%);
+    border: 1px solid rgba(16, 185, 129, 0.25);
 }
 
-.cons-box {
-    background: rgba(239, 68, 68, 0.1);
-    border: 1px solid rgba(239, 68, 68, 0.3);
+.article-content .cons-box {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(239, 68, 68, 0.04) 100%);
+    border: 1px solid rgba(239, 68, 68, 0.25);
 }
 
-.pros-box h4 {
-    color: var(--success);
+.article-content .pros-box h4,
+.article-content .cons-box h4 {
+    font-size: 1rem;
     margin-bottom: 0.75rem;
+    margin-top: 0;
 }
 
-.cons-box h4 {
-    color: #ef4444;
-    margin-bottom: 0.75rem;
+.article-content .pros-box h4 {
+    color: #10B981;
 }
 
-.pros-box ul,
-.cons-box ul {
+.article-content .cons-box h4 {
+    color: #EF4444;
+}
+
+.article-content .pros-box ul,
+.article-content .cons-box ul {
     margin: 0;
     padding-left: 1.25rem;
 }
 
-.pros-box li,
-.cons-box li {
+.article-content .pros-box li,
+.article-content .cons-box li {
     margin-bottom: 0.35rem;
     font-size: 0.95rem;
+}
+
+/* 工具对比表格特殊样式 */
+.article-content table:has(th:contains("价格")) th,
+.article-content table:has(th:contains("Price")) th,
+.article-content table:has(th:contains("价格")) td,
+.article-content table:has(th:contains("Price")) td {
+    font-size: 0.95rem;
+}
+
+/* CTA 样式（文章内的行动号召） */
+.article-content .cta-box {
+    background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.article-content .cta-box p {
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.article-content .cta-box a {
+    display: inline-block;
+    background: white;
+    color: #6366F1;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.2s;
+}
+
+.article-content .cta-box a:hover {
+    transform: translateY(-2px);
+}
+
+/* 快捷导航盒 */
+.article-content .quick-nav-box {
+    background: #FFFBEB;
+    border: 1px solid #FCD34D;
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.article-content .quick-nav-box strong {
+    color: #D97706;
+}
+
+/* 警告/注意盒 */
+.article-content .warning-box {
+    background: #FEF2F2;
+    border: 1px solid #FECACA;
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.article-content .warning-box strong {
+    color: #DC2626;
 }
 
 /* Article Footer */
