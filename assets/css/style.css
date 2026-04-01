@@ -277,9 +277,9 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 
 /* ====== ARTICLE HEADER WRAP (constrain to content width) ====== */
 .article-header-wrap {
-    max-width: 720px;
+    max-width: 1200px;
     margin-left: auto;
-    margin-right: 0;
+    margin-right: auto;
 }
 
 /* ====== ARTICLE HEADER ====== */
@@ -309,7 +309,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 
 .content-h2 {
     font-size: 18px; font-weight: 700; color: var(--text-primary);
-    margin: 40px 0 14px; letter-spacing: -0.3px; padding-top: 8px;
+    margin: 5rem 0 14px; letter-spacing: -0.3px; padding-top: 8px;
     border-top: 1px solid #F3F4F6;
 }
 
@@ -868,6 +868,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 /* ===== Article Content Styles ===== */
 .article-content{max-width:720px}
 .article-content h2{font-size:1.65rem;margin:5rem 0 1rem;color:var(--text-1);padding-top:1rem;border-top:1px solid #F3F4F6;letter-spacing:-.02em}
+.article-content hr{margin-top:20px;margin-bottom:20px;border:0;border-top:1px solid #F3F4F6}
 .article-content h3{font-size:1.3rem;margin:2rem 0 .75rem;color:var(--text-1)}
 .article-content p{margin-bottom:1.25rem;font-size:1.05rem;color:var(--text)}
 .article-content ul,.article-content ol{margin:1.25rem 0;padding-left:1.5rem}
