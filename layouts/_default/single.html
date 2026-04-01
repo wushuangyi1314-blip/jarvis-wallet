@@ -3,7 +3,9 @@
 
 <article class="article" data-pagefind-body>
     {{ partial "article/hero.html" . }}
-    {{ partial "article/header.html" . }}
+    <div class="article-header-wrap">
+        {{ partial "article/header.html" . }}
+    </div>
 
     <div class="article-body">
         {{ partial "article/toc.html" . }}

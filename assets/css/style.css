@@ -263,7 +263,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 }
 
 /* ====== ARTICLE TAGS ====== */
-.article-tags { display: flex; gap: 8px; padding: 20px 40px 0; flex-wrap: wrap; }
+.article-tags { display: flex; gap: 8px; padding: 20px 0 0; flex-wrap: wrap; }
 
 .tag-pill {
     display: inline-flex; align-items: center;
@@ -275,8 +275,16 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 .tag-open { border-color: var(--primary); color: var(--primary); background: rgba(99,102,241,0.06); }
 .tag-ai { border-color: #8B5CF6; color: #8B5CF6; background: rgba(139,92,246,0.06); }
 
+/* ====== ARTICLE HEADER WRAP (constrain to content width) ====== */
+.article-header-wrap {
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: 0;
+}
+
 /* ====== ARTICLE HEADER ====== */
-.article-header { padding: 20px 40px 24px; }
+.article-tags { padding: 20px 0 0; }
+.article-header { padding: 20px 0 24px; }
 
 .article-title {
     font-size: 26px; font-weight: 700; line-height: 1.35;
@@ -301,7 +309,8 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 
 .content-h2 {
     font-size: 18px; font-weight: 700; color: var(--text-primary);
-    margin-bottom: 14px; letter-spacing: -0.3px; padding-top: 8px;
+    margin: 40px 0 14px; letter-spacing: -0.3px; padding-top: 8px;
+    border-top: 1px solid #F3F4F6;
 }
 
 .content-h3 {
@@ -713,9 +722,9 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   font-size: 22px;
   font-weight: 700;
   color: var(--c-text);
-  margin: 2rem 0 1rem;
+  margin: 5rem 0 1rem;
   padding-top: 1rem;
-  border-top: 1px solid var(--c-border);
+  border-top: 1px solid #F3F4F6;
 }
 .content-h3 { font-size: 18px; font-weight: 600; color: var(--c-text); margin: 1.5rem 0 0.75rem; }
 .content-p { font-size: 15px; line-height: 1.75; color: var(--c-text-2); margin-bottom: 1rem; }
@@ -858,7 +867,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 
 /* ===== Article Content Styles ===== */
 .article-content{max-width:720px}
-.article-content h2{font-size:1.65rem;margin:2.5rem 0 1rem;color:var(--text-1);padding-top:1rem;letter-spacing:-.02em}
+.article-content h2{font-size:1.65rem;margin:5rem 0 1rem;color:var(--text-1);padding-top:1rem;border-top:1px solid #F3F4F6;letter-spacing:-.02em}
 .article-content h3{font-size:1.3rem;margin:2rem 0 .75rem;color:var(--text-1)}
 .article-content p{margin-bottom:1.25rem;font-size:1.05rem;color:var(--text)}
 .article-content ul,.article-content ol{margin:1.25rem 0;padding-left:1.5rem}
