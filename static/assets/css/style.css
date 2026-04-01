@@ -1060,6 +1060,33 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 .content-ul { padding-left: 1.5rem; margin-bottom: 1rem; }
 .content-ul li { font-size: 15px; line-height: 1.85; color: var(--c-text-2); margin-bottom: 0.6rem; letter-spacing: 0.01em; }
 
+/* Article Content Tables (plain markdown tables) */
+.article-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.article-content th {
+  background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+  color: white;
+  font-weight: 600;
+  padding: 0.85rem 1rem;
+  text-align: left;
+}
+.article-content td {
+  padding: 0.75rem 1rem;
+  border: 1px solid #E5E7EB;
+}
+.article-content tr:nth-child(even) td {
+  background: #F9FAFB;
+}
+.article-content tr:hover td {
+  background: #F0F4FF;
+}
+
 /* Affiliate Card */
 .affiliate-card {
   display: flex;
