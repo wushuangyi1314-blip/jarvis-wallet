@@ -1,9 +1,10 @@
-{{ $toc := .TableOfContents }}
-{{ if and $toc (not (eq $toc "<nav id=\"TableOfContents\"></nav>")) }}
+{{ with .Params.toc }}
 <aside class="toc-panel" id="toc-panel">
     <div class="toc-title">📑 Contents</div>
     <nav class="toc-nav" id="toc-nav">
-        {{ $toc }}
+        {{ range . }}
+        <a href="#{{ .id }}" class="toc-item" data-id="{{ .id }}">{{ .title }}</a>
+        {{ end }}
     </nav>
 </aside>
 {{ end }}
