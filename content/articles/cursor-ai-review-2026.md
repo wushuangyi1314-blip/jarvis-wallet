@@ -13,7 +13,6 @@ tags: ["cursor", "ai coding", "code editor", "AI programming", "VS Code alternat
 affiliateName: "Cursor"
 affiliateDesc: "The AI-first code editor built for professional developers."
 affiliateUrl: "https://cursor.com"
-toc: true
 draft: false
 likes: 42
 views: 1284
