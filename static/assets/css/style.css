@@ -422,6 +422,14 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 .tag-open { border-color: var(--primary); color: var(--primary); background: rgba(99,102,241,0.06); }
 .tag-ai { border-color: #8B5CF6; color: #8B5CF6; background: rgba(139,92,246,0.06); }
 
+/* ====== ARTICLE HEADER WRAP ====== */
+.article-header-wrap {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 40px;
+}
+
 /* ====== ARTICLE HEADER ====== */
 .article-header { padding: 20px 40px 24px; }
 
