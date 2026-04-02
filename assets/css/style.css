@@ -263,7 +263,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 }
 
 /* ====== ARTICLE TAGS ====== */
-.article-tags { display: flex; gap: 8px; padding: 20px 0 0; flex-wrap: wrap; }
+.article-tags { display: flex; gap: 8px; padding: 20px 40px 0; flex-wrap: wrap; }
 
 .tag-pill {
     display: inline-flex; align-items: center;
@@ -283,8 +283,8 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 }
 
 /* ====== ARTICLE HEADER ====== */
-.article-tags { padding: 20px 0 0; }
-.article-header { padding: 20px 0 24px; }
+.article-tags { padding: 20px 40px 0; }
+.article-header { padding: 20px 40px 24px; }
 
 .article-title {
     font-size: 26px; font-weight: 700; line-height: 1.35;
