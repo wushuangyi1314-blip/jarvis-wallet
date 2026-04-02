@@ -930,6 +930,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   margin-bottom: 1rem;
   padding-left: 40px;
   padding-right: 40px;
+  margin-left: 40px;
 }
 .tag-pill {
   display: inline-flex;
