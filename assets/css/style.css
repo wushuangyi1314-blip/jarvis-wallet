@@ -610,6 +610,8 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   flex-wrap: wrap;
   gap: 6px;
   margin-bottom: 1rem;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 .tag-pill {
   display: inline-flex;
@@ -627,6 +629,8 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 /* Article Header */
 .article-header {
   margin-bottom: 1.5rem;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 .article-title {
   font-size: 28px;
@@ -676,6 +680,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 40px 60px;
 }
 
 /* TOC Panel — LEFT Sidebar */
