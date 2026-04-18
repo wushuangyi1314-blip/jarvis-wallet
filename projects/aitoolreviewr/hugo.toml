@@ -1,7 +1,7 @@
 baseURL = "https://aitoolreviewr.com/"
 languageCode = "en"
 title = "AI Tool Review"
-publishDir = "public"
+publishDir = "../../public"
 
 [frontmatter]
   date = ["date"]
@@ -22,18 +22,5 @@ publishDir = "public"
 [outputFormats]
   [outputFormats.JSON]
     mediaType = "application/json"
+    baseName = "index"
     isPlainText = true
-    isHTML = false
-
-[build]
-  writeStats = true
-  # trigger redeploy
-
-[taxonomies]
-  category = "categories"
-  tag = "tags"
-
-[params]
-  description = "Honest, expert AI tool reviews. In-depth analysis of the best AI tools in 2026 — Claude, ChatGPT, Midjourney, Jasper & more. Updated weekly."
-  siteName = "AI Tool Review"
-  twitterHandle = "@aitoolreviewr"
