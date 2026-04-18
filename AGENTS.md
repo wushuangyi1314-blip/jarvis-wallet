@@ -210,3 +210,54 @@ The goal: Be helpful without being annoying. Check in a few times a day, do usef
 ## Make It Yours
 
 This is a starting point. Add your own conventions, style, and rules as you figure out what works.
+
+---
+
+## Skill Auto-Trigger System
+
+> 语义触发方案：当收到任务时，贝吉塔主动判断需要哪个技能并加载。
+> 配置文件：`SKILL-AUTO-TRIGGER.md`
+
+### Context Engineering Auto-Triggers
+
+当以下条件被检测到时，自动读取对应子技能：
+
+| 条件 | 子技能 | 何时触发 |
+|------|--------|---------|
+| Context 接近压缩 / ~80K tokens | `context-compression` | 压缩前 |
+| Spawn 2+ SubAgent | `multi-agent-patterns` | 多Agent协作前 |
+| 3+ 次任务失败/循环 | `context-degradation` | 重试前 |
+| 构建工具/MCP | `tool-design` | 工具构建开始时 |
+| 设置 Memory/Persistence | `memory-systems` | 记忆架构工作开始时 |
+| 读取 5+ 文件 | `filesystem-context` | 批量文件加载前 |
+
+### Skill 语义触发对照表
+
+| 任务类型 | 应触发技能 |
+|---------|-----------|
+| Git操作（rebase/merge/冲突） | `git-workflows` |
+| Docker部署 | `docker-essentials` |
+| 数据库设计 | `database-design` |
+| 前端开发 | `frontend-design-3` |
+| UI/UX设计 | `ui-ux-pro-max` |
+| 浏览器自动化 | `playwright` |
+| 文案写作 | `copywriting` |
+| 去AI味（中文） | `humanize-chinese-2-0-0` |
+| 记忆整理 | `memory-tiering` |
+| 知识图谱 | `jpeng-knowledge-graph-memory` |
+| 任务追踪 | `agent-task-tracker` |
+| 技能查询/安装 | `find-skills-skill` |
+| 技能创建 | `skill-creator` |
+| 主机安全 | `healthcheck` |
+| 节点连接诊断 | `node-connect` |
+| 终端管理 | `tmux` |
+| 视频帧提取 | `video-frames` |
+| 多模态生成（音视频图片） | `minimax-multimodal` |
+| Wiki维护 | `wiki-maintainer` |
+| 天气查询 | `weather` |
+
+### 禁止误触发规则
+
+- 只有真正需要技能时才触发
+- 用户只是提到某个词不等于需要该技能
+- 贝吉塔根据任务本质判断，不是关键词匹配

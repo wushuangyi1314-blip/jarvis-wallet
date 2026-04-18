@@ -1,0 +1,184 @@
+# 待办任务文档
+
+> 最后更新：2026-04-18 02:26
+> 维护者：阿呆（项目经理）
+
+---
+
+## 📋 待办任务总览（2026-04-17至今）
+
+| 状态 | 数量 | 说明 |
+|------|------|------|
+| 🔴 未完成 | 6项 | 高优先级待处理 |
+| 🟡 待用户确认 | 2项 | 需用户提供信息 |
+| ✅ 已完成 | 7项 | 本次修复期间完成 |
+
+---
+
+## 🔴 高优先级 - 未完成
+
+### 1. Hugo网站恢复方案（用户提问）
+
+| 项目 | 内容 |
+|------|------|
+| 提出时间 | 2026-04-17 10:29 |
+| 用户要求 | 一步一步恢复，先给整体方案 |
+| 当前状态 | ❌ 未执行 |
+| 说明 | 用户明确要求先给方案确认后再执行 |
+
+**来源：** 2026-04-17 10:29 用户说"阿呆，我们接下来一步一步的想办法恢复，首先你给我一个整体恢复方案"
+
+---
+
+### 2. Wiki Git 未提交
+
+| 项目 | 内容 |
+|------|------|
+| 状态 | ⚠️ 有未跟踪文件 |
+| 路径 | `/root/.openclaw/wiki/` |
+| 未提交文件 | `main/rules/FILE-INDEX.md`, `main/rules/SKILL-AUTO-TRIGGER.md`, `main/rules/README.md` |
+
+**说明：** 今天新建的规则文档还未提交到 Wiki Git。
+
+---
+
+### 3. hugo-refactor-plan.md 为空
+
+| 项目 | 内容 |
+|------|------|
+| 状态 | ❌ 0字节文件 |
+| 路径 | `/workspace/projects/hugo-refactor-plan.md` |
+| 原计划 | 模板重构方案文档 |
+
+**说明：** 2026-04-01 制定的 Hugo 重构计划，文件丢失或被清空。需要根据之前聊天的方案重建。
+
+---
+
+### 4. AI-TOOL-REVIEW-WORKFLOW.md 为空
+
+| 项目 | 内容 |
+|------|------|
+| 状态 | ❌ 0字节文件 |
+| 路径 | `/workspace/projects/content-template/AI-TOOL-REVIEW-WORKFLOW.md` |
+| 原内容 | AI 工具评测文章工作流 |
+
+**说明：** 根据 2026-04-15 的 Wiki 同步记录，此文件之前存在于 Wiki。
+
+---
+
+### 5. GitHub Push 待执行
+
+| 项目 | 内容 |
+|------|------|
+| 状态 | ⏸️ 等待用户授权 |
+| 说明 | Token 已验证有效，等用户确认后再 Push |
+
+**说明：** 根据 2026-04-17 08:18 的记录，GitHub Token 验证有效，待用户授权后执行 Push。
+
+---
+
+### 6. Wiki 知识库同步（根据2026-04-15评估）
+
+| 优先级 | 文档 | 目标位置 | 状态 |
+|--------|------|----------|:----:|
+| P0 | MEMORY.md | wiki/rules/ | ❌ |
+| P0 | HEARTBEAT.md | wiki/rules/ | ❌ |
+| P0 | TOOLS.md | wiki/entities/ | ❌ |
+| P1 | memory-tiering skill | wiki/concepts/ | ❌ |
+| P1 | frontend-design-3 skill | wiki/concepts/ | ❌ |
+| P1 | agent-task-tracker skill | wiki/processes/ | ❌ |
+| P1 | agent-skills-context-engineering skill | wiki/processes/ | ❌ |
+| P1 | jpeng-knowledge-graph-memory skill | wiki/concepts/ | ❌ |
+| P2 | archetypes/article.md | wiki/processes/ | ❌ |
+| P2 | persona.md | wiki/entities/ | ❌ |
+| P2 | 服务器资源与Agent并行能力评估.md | wiki/projects/ | ❌ |
+| P2 | 用户身份与凭证.md | wiki/entities/ | ❌ |
+| P2 | AI自我技术能力建设.md | wiki/concepts/ | ❌ |
+| P2 | jarvis-wallet项目.md | wiki/projects/ | ❌ |
+
+**说明：** 2026-04-15 贝吉塔已完成 Wiki 同步评估，列出了14个待同步文档，至今未执行。
+
+---
+
+## 🟡 待用户确认/提供信息
+
+### 7. memory-wiki 启用
+
+| 项目 | 内容 |
+|------|------|
+| 原计划时间 | 2026-04-14 |
+| 当前状态 | ⚠️ 配置已写入，但未确认是否生效 |
+| 说明 | 需用户确认 memory-wiki 是否正常工作 |
+
+**来源：** 2026-04-14 贝吉塔说"memory-wiki 已启用配置"，但之后无验证结果。
+
+---
+
+### 8. systemPromptOverride 配置
+
+| 项目 | 内容 |
+|------|------|
+| 原计划时间 | 2026-04-14 |
+| 状态 | ❌ 空值，未配置 |
+| 说明 | 需要用户提供要覆盖的具体内容 |
+
+**来源：** 2026-04-14 贝吉塔说"systemPromptOverride 需配置，需用户提供内容"
+
+---
+
+## ✅ 已完成（本次修复期间）
+
+| 任务 | 完成时间 | 说明 |
+|------|----------|------|
+| 前端工具链 | 2026-04-18 01:39 | ESLint/Prettier/Jest/pre-commit |
+| Agents 规范体系 | 2026-04-18 01:48 | 9个规范文件重建 |
+| Skills 恢复 | 2026-04-17 | 23个skills已安装 |
+| 记忆分层 | 2026-04-17 | hot/warm/cold |
+| Novels 目录 | 2026-04-18 02:16 | 小说工厂 v3.0 + 6品类规划书 |
+| Content-template | 2026-04-18 02:20 | 4个模板文件 |
+| 技能自动触发配置 | 2026-04-18 01:48 | SKILL-AUTO-TRIGGER.md |
+| TOOLS.md + TOKENS.md | 2026-04-18 01:37 | 凭证管理规范 |
+| FILE-INDEX.md | 2026-04-18 01:37 | 文件索引规范 |
+| 缓存清理 | 2026-04-18 02:06 | Playwright进程/session文件 |
+
+---
+
+## 📌 今日完成项（2026-04-18）
+
+| 时间 | 任务 |
+|------|------|
+| 01:37 | TOOLS.md + TOKENS.md + FILE-INDEX.md |
+| 01:38 | 前端工具链（ESLint/Prettier/Jest/pre-commit） |
+| 01:48 | Agents规范体系 + AGENTS.md更新 |
+| 01:48 | SKILL-AUTO-TRIGGER.md + 同步Wiki |
+| 02:06 | 缓存清理（Playwright进程/session文件） |
+| 02:16 | Novels目录重建（小说工厂v3.0 + 6品类规划书） |
+| 02:20 | Content-template重建（4个模板文件） |
+| 02:20 | 同步到unified记忆 |
+
+---
+
+## 下一步行动
+
+| 优先级 | 任务 | 执行者 | 阻塞 |
+|:-------:|------|--------|------|
+| 🔴 1 | 提交 Wiki Git 未跟踪文件 | 阿呆 | 无 |
+| 🔴 2 | 重建 hugo-refactor-plan.md 内容 | 运营/产品 | 无 |
+| 🔴 3 | 重建 AI-TOOL-REVIEW-WORKFLOW.md | 运营 | 无 |
+| 🔴 4 | Wiki 知识库同步（14个文档） | 阿呆 | 无 |
+| 🟡 5 | 确认 memory-wiki 是否正常工作 | 用户 | 需要用户验证 |
+| 🟡 6 | systemPromptOverride 配置 | 阿呆 | 需要用户提供内容 |
+
+---
+
+## 📅 历史待办（长期未完成）
+
+| 任务 | 提出时间 | 状态 | 说明 |
+|------|----------|------|------|
+| memory-wiki启用 | 2026-04-14 | 🟡 待确认 | 配置已写入 |
+| systemPromptOverride | 2026-04-14 | 🟡 待用户提供 | 未配置 |
+| Wiki知识库同步 | 2026-04-15 | ❌ 未执行 | 14个文档待同步 |
+
+---
+
+*最后更新：2026-04-18 02:26*

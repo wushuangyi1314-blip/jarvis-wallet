@@ -1,33 +1,105 @@
-# AI ToolSpot
+# humanize-chinese
 
-AI Tools & Software Reviews - Honest reviews for content creators, marketers, and small business owners.
+Detect and humanize AI-generated Chinese text. Makes robotic AI writing natural and undetectable.
 
-## 🔗 Live Site
+[![ClawHub](https://img.shields.io/badge/clawhub-humanize--chinese-blue)](https://clawhub.com/skills/humanize-chinese)
 
-Visit the live site at: **https://aitoolreviewr.com**
+## Features
 
-## 📝 About
+- **20+ detection categories** with weighted 0-100 scoring
+- **Sentence-level analysis** — find the most AI-like sentences
+- **Context-aware replacement** — regex patterns + plain text, longest-first
+- **Sentence restructuring** — merge short, split long, vary rhythm
+- **Vocabulary diversification** — reduce word repetition
+- **7 writing styles** — casual, zhihu, xiaohongshu, wechat, academic, literary, weibo
+- **External config** — all patterns in `patterns_cn.json`
+- **Pure Python** — no dependencies
 
-AI ToolSpot provides in-depth, honest reviews of AI tools and software. Our goal is to help you make informed decisions without the marketing hype.
+## Install
 
-## 🚀 Tech Stack
+```bash
+clawhub install humanize-chinese
+```
 
-- Static HTML/CSS (no framework required)
-- Cloudflare Pages (free hosting + CDN)
-- GitHub for version control and CI/CD
+Or clone:
 
-## 📂 Content
+```bash
+git clone https://github.com/voidborne-d/humanize-chinese.git
+```
 
-- AI Writing Tools Reviews
-- AI Image Generator Comparisons
-- Free AI Tools for Business
-- SEO Guides for AI Tools
-- Tool Comparisons (Claude vs ChatGPT, etc.)
+## Quick Start
 
-## ⚙️ Deployment
+```bash
+# Detect AI patterns
+python scripts/detect_cn.py text.txt
+python scripts/detect_cn.py text.txt -v    # verbose with worst sentences
+python scripts/detect_cn.py text.txt -s    # score only: "72/100 (high)"
 
-This site auto-deploys via Cloudflare Pages on every push to `main`.
+# Humanize
+python scripts/humanize_cn.py text.txt -o clean.txt
+python scripts/humanize_cn.py text.txt --scene tech -a   # aggressive mode
 
-## 📄 License
+# Style transform
+python scripts/style_cn.py text.txt --style xiaohongshu
 
-MIT License
+# Compare before/after
+python scripts/compare_cn.py text.txt --scene tech -a
+```
+
+## Scoring
+
+| Score  | Level     | Meaning               |
+| ------ | --------- | --------------------- |
+| 0-24   | LOW       | Likely human-written  |
+| 25-49  | MEDIUM    | Some AI signals       |
+| 50-74  | HIGH      | Probably AI-generated |
+| 75-100 | VERY HIGH | Almost certainly AI   |
+
+## Detection Example
+
+```
+AI 评分: 100/100 [████████████████████] VERY HIGH
+字符: 381 | 句子: 14 | 段落: 5
+信息熵: 8.29 | 情感密度: 0.00%
+问题总数: 25
+
+🔴 三段式套路 (2)
+   首先，值得注意的是...其次...最后
+🔴 机械连接词 (9)
+   值得注意的是, 综上所述, 总而言之...
+🔴 空洞宏大词 (8)
+   赋能, 闭环, 数字化转型...
+🟠 AI 高频词 (3)
+   助力, 彰显, 颠覆
+🟠 模板句式 (2)
+   随着...的不断发展, 在当今...时代
+```
+
+## Humanization Result
+
+```
+═══ 对比结果 ═══
+原文:   100/100 [████████████████████] VERY_HIGH
+改写后:  25/100 [█████░░░░░░░░░░░░░░░] MEDIUM
+✅ 降低了 75 分
+```
+
+## Writing Styles
+
+| Style         | Name   | Best For                |
+| ------------- | ------ | ----------------------- |
+| `casual`      | 口语化 | Social media, messaging |
+| `zhihu`       | 知乎   | Q&A, analysis           |
+| `xiaohongshu` | 小红书 | Reviews, lifestyle      |
+| `wechat`      | 公众号 | Newsletters, articles   |
+| `academic`    | 学术   | Papers, reports         |
+| `literary`    | 文艺   | Creative writing        |
+| `weibo`       | 微博   | Short posts             |
+
+## Customization
+
+Edit `scripts/patterns_cn.json` to add/modify detection patterns, replacement alternatives, and scoring weights.
+
+## License
+
+MIT

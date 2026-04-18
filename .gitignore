@@ -4,6 +4,16 @@ resources/
 .hugo_build.lock
 hugo_stats.json
 
+# NPM dependencies
+node_modules/
+
+# Trash / recovery zone
+.trash/
+
+# Memory files (sensitive, never push)
+memory/
+TOKENS.md
+
 # OS files
 .DS_Store
 Thumbs.db
@@ -11,3 +21,7 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
+
+# Test artifacts
+__tests__/
+*.log
