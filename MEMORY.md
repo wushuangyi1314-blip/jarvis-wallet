@@ -98,3 +98,32 @@
 ---
 
 _最后更新：2026-04-18_
+
+---
+
+## 文件版本判断规则（2026-04-18 新增）
+
+### 根因
+对话上下文可能过时/被压缩，导致误判"本地是新版"。实际上本地分支落后 remote，remote 才是完整权威版本。
+
+### 判断依据原则
+**"对话上下文 ≠ 仓库真实状态"**
+- Git 的 `origin/main` 是唯一可靠的真实数据源
+- 对话记忆可能被压缩或扭曲
+
+### 判断文件版本时（必做）
+
+```bash
+git fetch origin
+git log --oneline HEAD..origin/main          # 查看 remote 多出的 commits
+git show origin/main:<file> | head -20       # 获取远程实际内容
+```
+
+### 规则
+
+| 规则 | 说明 |
+|------|------|
+| **规则1** | 讨论文件版本前，先 `git fetch origin` + 比较 HEAD vs origin/main |
+| **规则2** | 用 `git show origin/main:<file>` 获取权威版本，不依赖对话记忆 |
+| **规则3** | 说"文件是新版/旧版"前，必须有实际数据支撑（git log / git diff） |
+| **规则4** | 不确定时，先诊断再下结论，不凭记忆推断 |
