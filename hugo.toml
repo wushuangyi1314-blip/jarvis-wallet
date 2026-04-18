@@ -1,9 +1,6 @@
 baseURL = "https://aitoolreviewr.com/"
 languageCode = "en"
 title = "AI Tool Review"
-publishDir = "projects/aitoolreviewr/public"
-contentDir = "projects/aitoolreviewr/content"
-layoutDir = "projects/aitoolreviewr/layouts"
 
 [frontmatter]
   date = ["date"]
@@ -11,18 +8,7 @@ layoutDir = "projects/aitoolreviewr/layouts"
 
 [permalinks]
   articles = "/articles/:filename/"
-  page = "/:filename/"
 
 [outputs]
   home = ["HTML", "JSON"]
   page = ["HTML"]
-
-[mediaTypes]
-  [mediaTypes."application/json"]
-    suffixes = ["json"]
-
-[outputFormats]
-  [outputFormats.JSON]
-    mediaType = "application/json"
-    baseName = "index"
-    isPlainText = true
