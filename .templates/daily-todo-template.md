@@ -1,4 +1,7 @@
-# 每日待办汇总模板
+# DAILY-TODO-SUMMARY（每日待办汇总模板）
+
+> 模板名称：`DAILY-TODO-SUMMARY`
+> 用途：每日早上9点自动汇总待办并发送微信
 
 > 由 cron 每日早上9点自动生成并发送
 > 生成后同步到 TODO.md

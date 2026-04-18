@@ -261,6 +261,9 @@
 
 ## 每日待办汇总模板（2026-04-18）
 
+### 模板标识
+`DAILY-TODO-SUMMARY`
+
 ### 模板文件
 `.templates/daily-todo-template.md`
 
