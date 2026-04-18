@@ -165,3 +165,20 @@ git show origin/main:<file> | head -20       # 获取远程实际内容
 
 ❌ "memory-wiki 未启用"（4月份的记录）
 ✅ 验证：`openclaw config get plugins.entries.memory-wiki.enabled` → true（实际已启用）
+
+---
+
+## 当前进行中（Session重启恢复用）
+
+> 此区块供 Session 重启后快速恢复上下文用。每次 heartbeat 自动更新。
+
+| 时间 | 话题 | 状态 | 备注 |
+|------|------|------|------|
+| 2026-04-18 22:29 | 渠道合并方案A2讨论 | ❌ 未完成 | 方案A2验证失败（per-peer无法实现跨渠道上下文共享），建议改用MEMORY/Wiki人工同步 |
+| 2026-04-18 22:29 | Session备份机制建立 | ✅ 完成 | 建立了 session-backup.sh + heartbeat定期同步 |
+
+### 最后一次 Session 重启
+- 时间：2026-04-18 13:25:01
+- 原因：dmScope 配置变更触发 gateway restart
+- 影响：LightClaw Session 上下文丢失（13:10-13:25的对话不可恢复）
+- 教训：涉及 Session 的配置变更前需告知用户丢失风险
