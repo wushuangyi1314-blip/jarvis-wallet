@@ -194,7 +194,7 @@ git show origin/main:<file> | head -20       # 获取远程实际内容
 ### 故障概述
 - **故障时间**：2026-04-19 上午
 - **现象**：OpenClaw 崩溃两次，Session 全部丢失
-- **错误信息**：`Error: EEXIST: file already exists, mkdir '/root/.openclaw/workspace/agents/01-RD.md'`
+- **错误信息**：`Error: EEXIST: file already exists, mkdir '/root/.openclaw/workspace/agents/RD-SUB.md'`
 
 ### 时间线
 
@@ -216,11 +216,11 @@ git show origin/main:<file> | head -20       # 获取远程实际内容
 | 路径 | 用途 | 内容 |
 |------|------|------|
 | `/root/.openclaw/agents/` | SubAgent 运行时目录 | main/, rd-agent/ |
-| `/root/.openclaw/workspace/agents/` | 角色文档目录 | 00-ADAI.md ~ 07-NOVELIST.md |
+| `/root/.openclaw/workspace/agents/` | 角色文档目录 | 00-ADAI.md ~ NOVELIST-SUB.md |
 
 **崩溃链路：**
 1. OpenClaw 尝试在 `workspace/agents/` 下创建 SubAgent 工作目录（作为子目录）
-2. 但 `workspace/agents/01-RD.md` 已经是一个文件（角色规范文档）
+2. 但 `workspace/agents/RD-SUB.md` 已经是一个文件（角色规范文档）
 3. mkdir 操作失败（EEXIST）→ 导致进程崩溃
 4. 所有使用 isolated session 的 cron 任务全部报相同错误
 
@@ -262,15 +262,15 @@ git show origin/main:<file> | head -20       # 获取远程实际内容
 | 路径 | 职责 | 内容 |
 |------|------|------|
 | `/root/.openclaw/agents/` | SubAgent 运行时目录 | main/, rd-agent/ 等 |
-| `/root/.openclaw/workspace/agents/` | 角色文档目录（给人看） | 01-RD.md, 04-UI.md 等 |
+| `/root/.openclaw/workspace/agents/` | 角色文档目录（给人看） | RD-SUB.md, UI-SUB.md 等 |
 
 **崩溃链路（源码级确认）：**
 
 1. OpenClaw 在创建 rd-agent session 时，调用 `resolveAgentWorkspaceDir(cfg, agentId)`
 2. 该函数对非 default agent，返回 `path.join(fallback, id)`，即 `/root/.openclaw/workspace/rd-agent`
-3. 理论上应该是 `workspace/rd-agent`，但错误显示的是 `workspace/agents/01-RD.md`
-4. 说明 OpenClaw 内部某个注册表错误地把 `rd-agent` 映射到了 `01-RD`（对应 `01-RD.md` 文件）
-5. 尝试创建 `workspace/agents/01-RD.md` 作为**目录**，但该路径已是**文件** → EEXIST 崩溃
+3. 理论上应该是 `workspace/rd-agent`，但错误显示的是 `workspace/agents/RD-SUB.md`
+4. 说明 OpenClaw 内部某个注册表错误地把 `rd-agent` 映射到了 `01-RD`（对应 `RD-SUB.md` 文件）
+5. 尝试创建 `workspace/agents/RD-SUB.md` 作为**目录**，但该路径已是**文件** → EEXIST 崩溃
 
 **关键源码位置：**
 - `agent-scope-KFH9bkHi.js` → `resolveAgentWorkspaceDir()`
@@ -283,13 +283,13 @@ git show origin/main:<file> | head -20       # 获取远程实际内容
 
 | 文件 | 对应agent | 冲突风险 |
 |------|-----------|:--------:|
-| 01-RD.md | rd-agent | ✅ 已验证 |
-| 02-OPERATIONS.md | operations-agent | ⚠️ 可能 |
-| 03-PM.md | pm-agent | ⚠️ 可能 |
-| 04-UI.md | ui-agent | ⚠️ 可能 |
-| 05-DATA.md | data-agent | ⚠️ 可能 |
-| 06-QA.md | qa-agent | ⚠️ 可能 |
-| 07-NOVELIST.md | novelist-agent | ⚠️ 可能 |
+| RD-SUB.md | rd-agent | ✅ 已验证 |
+| OPERATIONS-SUB.md | operations-agent | ⚠️ 可能 |
+| PM-SUB.md | pm-agent | ⚠️ 可能 |
+| UI-SUB.md | ui-agent | ⚠️ 可能 |
+| DATA-SUB.md | data-agent | ⚠️ 可能 |
+| QA-SUB.md | qa-agent | ⚠️ 可能 |
+| NOVELIST-SUB.md | novelist-agent | ⚠️ 可能 |
 
 ### 用户假设评估
 
@@ -305,7 +305,7 @@ git show origin/main:<file> | head -20       # 获取远程实际内容
 
 **最低风险方案：方案A — 重命名角色文档（去掉2位数前缀）**
 
-- 操作：`01-RD.md` → `RD.md`，`04-UI.md` → `UI.md` 等
+- 操作：`RD-SUB.md` → `RD.md`，`UI-SUB.md` → `UI.md` 等
 - 风险：低（可逆，不影响系统路径）
 - 原因：从根本上消除文件名冲突
 
