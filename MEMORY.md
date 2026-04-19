@@ -250,3 +250,76 @@ git show origin/main:<file> | head -20       # 获取远程实际内容
 1. SubAgent 重建方案需要在不触发路径冲突的前提下进行
 2. 需要明确 OpenClaw 内部如何决定 SubAgent session 的工作目录路径
 3. 防护方案待定（需要用户确认指令内容后才能设计）
+
+---
+
+## 2026-04-19 下午诊断结论（22:46）
+
+### 源码排查发现
+
+**根因：两个 agents 目录职责混淆**
+
+| 路径 | 职责 | 内容 |
+|------|------|------|
+| `/root/.openclaw/agents/` | SubAgent 运行时目录 | main/, rd-agent/ 等 |
+| `/root/.openclaw/workspace/agents/` | 角色文档目录（给人看） | 01-RD.md, 04-UI.md 等 |
+
+**崩溃链路（源码级确认）：**
+
+1. OpenClaw 在创建 rd-agent session 时，调用 `resolveAgentWorkspaceDir(cfg, agentId)`
+2. 该函数对非 default agent，返回 `path.join(fallback, id)`，即 `/root/.openclaw/workspace/rd-agent`
+3. 理论上应该是 `workspace/rd-agent`，但错误显示的是 `workspace/agents/01-RD.md`
+4. 说明 OpenClaw 内部某个注册表错误地把 `rd-agent` 映射到了 `01-RD`（对应 `01-RD.md` 文件）
+5. 尝试创建 `workspace/agents/01-RD.md` 作为**目录**，但该路径已是**文件** → EEXIST 崩溃
+
+**关键源码位置：**
+- `agent-scope-KFH9bkHi.js` → `resolveAgentWorkspaceDir()`
+- `workspace-hhTlRYqM.js` → `ensureAgentWorkspace()`
+- 错误发生在 workspace 目录初始化阶段（session 文件只有695字节）
+
+### 风险范围
+
+所有 `workspace/agents/` 下的文件都可能触发相同冲突：
+
+| 文件 | 对应agent | 冲突风险 |
+|------|-----------|:--------:|
+| 01-RD.md | rd-agent | ✅ 已验证 |
+| 02-OPERATIONS.md | operations-agent | ⚠️ 可能 |
+| 03-PM.md | pm-agent | ⚠️ 可能 |
+| 04-UI.md | ui-agent | ⚠️ 可能 |
+| 05-DATA.md | data-agent | ⚠️ 可能 |
+| 06-QA.md | qa-agent | ⚠️ 可能 |
+| 07-NOVELIST.md | novelist-agent | ⚠️ 可能 |
+
+### 用户假设评估
+
+**用户假设：** "应该先有 subagent，再有角色文档，但因为已有角色文档所以冲突"
+
+**评估：** 部分正确但不完全准确。
+
+- `workspace/agents/` 下的文件是**给人看的角色文档**，不是 Bootstrap 文件
+- OpenClaw 创建 SubAgent 时会生成 Bootstrap 文件（AGENTS.md、IDENTITY.md 等），与角色文档是**两套不同的文件**
+- 真正的问题：**OpenClaw 内部路径计算把两个目录混淆了**，不是创建顺序问题
+
+### 方案结论
+
+**最低风险方案：方案A — 重命名角色文档（去掉2位数前缀）**
+
+- 操作：`01-RD.md` → `RD.md`，`04-UI.md` → `UI.md` 等
+- 风险：低（可逆，不影响系统路径）
+- 原因：从根本上消除文件名冲突
+
+**用户备选方案 — 移动文档后重建**
+
+- 先把 `workspace/agents/` 移到 `/tmp/roles-backup/`
+- 重建 SubAgent
+- 观察是否成功
+- 如果成功，从备份恢复文档
+- 注意：系统不会自动补充角色文档
+
+### 当前状态
+
+- agents.list：**空**（没有注册任何 SubAgent）
+- rd-agent/ 目录存在但未完成初始化
+- 所有 cron 任务（memory-cleanup、daily-todo-summary 等）因 rd-agent 崩溃而失败
+- 待解决问题：安全地重建 SubAgent 系统
