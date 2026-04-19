@@ -97,7 +97,7 @@
 
 ---
 
-_最后更新：2026-04-18_
+_最后更新：2026-04-19_
 
 ---
 
@@ -176,9 +176,77 @@ git show origin/main:<file> | head -20       # 获取远程实际内容
 |------|------|------|------|
 | 2026-04-18 22:29 | 渠道合并方案A2讨论 | ❌ 未完成 | 方案A2验证失败（per-peer无法实现跨渠道上下文共享），建议改用MEMORY/Wiki人工同步 |
 | 2026-04-18 22:29 | Session备份机制建立 | ✅ 完成 | 建立了 session-backup.sh + heartbeat定期同步 |
+| 2026-04-19 01:29 | 技能安装位置问题 | ✅ 完成（验证修正） | 2026-04-18晚重新安装成功，workspace/skills/有17个技能目录，均有文件。MEMORY.md旧记录"23个技能全被SIGKILL杀死"为4月18日凌晨旧数据，已更正。|
+| 2026-04-19 07:13 | SubAgent配置核查 | 🔍 待确认 | agents_list仅显示main一个Agent；workspace/agents/有8个角色定义文件但非可执行SubAgent；用户想测试多Agent技能触发，需配置独立SubAgent |
+| 2026-04-19 07:18 | 技能语义触发测试 | ✅ 完成 | 测试了database-design/frontend-design/copywriting/git-workflows，技能均正常；完整多Agent链路因无独立SubAgent无法测试 |
+| 2026-04-19 上午 | SubAgent重建故障 | ❌ 未解决 | 重建SubAgent时触发EEXIST错误，OpenClaw崩溃两次；根因：workspace/agents/和agents/路径混淆 |
 
-### 最后一次 Session 重启
-- 时间：2026-04-18 13:25:01
-- 原因：dmScope 配置变更触发 gateway restart
-- 影响：LightClaw Session 上下文丢失（13:10-13:25的对话不可恢复）
-- 教训：涉及 Session 的配置变更前需告知用户丢失风险
+### 今日 Session 重启（2026-04-19）
+- 时间：2026-04-19（具体时间不明）
+- 原因：SubAgent重建触发EEXIST错误导致崩溃
+- 影响：7:19之后的对话全部丢失，无法精确还原触发指令
+- 教训：Session备份机制已建立，但今天仍丢失（可能是备份频率不够或崩溃太快）
+
+---
+
+## 2026-04-19 重大故障复盘（完整记录）
+
+### 故障概述
+- **故障时间**：2026-04-19 上午
+- **现象**：OpenClaw 崩溃两次，Session 全部丢失
+- **错误信息**：`Error: EEXIST: file already exists, mkdir '/root/.openclaw/workspace/agents/01-RD.md'`
+
+### 时间线
+
+| 时间 | 事件 |
+|------|------|
+| 00:49 | rd-agent SubAgent 首次创建（lightclawbot通道） |
+| 01:37 | rd-agent 第二次创建 |
+| 02:10 | rd-agent 第三次创建 |
+| 07:19 | 最后一次 Session 备份（之后全部丢失） |
+| 上午 | 用户要求重建 SubAgent → 触发 EEXIST 错误 → 第一次崩溃 |
+| 上午 | 第一次回退（腾讯云+龙虾医院配置）→ 短暂复活 |
+| 上午 | 让阿呆复盘解决方案 → 开始执行 → 再次崩溃 |
+| 上午 | 第二次回退 → 到现在 |
+
+### 根因分析
+
+**核心问题：两个 `agents` 目录职责混淆**
+
+| 路径 | 用途 | 内容 |
+|------|------|------|
+| `/root/.openclaw/agents/` | SubAgent 运行时目录 | main/, rd-agent/ |
+| `/root/.openclaw/workspace/agents/` | 角色文档目录 | 00-ADAI.md ~ 07-NOVELIST.md |
+
+**崩溃链路：**
+1. OpenClaw 尝试在 `workspace/agents/` 下创建 SubAgent 工作目录（作为子目录）
+2. 但 `workspace/agents/01-RD.md` 已经是一个文件（角色规范文档）
+3. mkdir 操作失败（EEXIST）→ 导致进程崩溃
+4. 所有使用 isolated session 的 cron 任务全部报相同错误
+
+**为什么rd-agent session文件只有695字节**
+- rd-agent 刚创建就崩溃了，说明崩溃发生在 session 初始化阶段
+
+### 影响范围
+
+- memory-cleanup cron：EEXIST 错误
+- daily-todo-summary cron：EEXIST 错误
+- daily-memory-maintenance cron：timeout 错误
+- file-integrity-check cron：timeout 错误
+- rd-agent session：创建即崩溃
+
+### 触发条件
+
+用户要求"重建 SubAgent"时触发了 OpenClaw 内部逻辑，具体指令不明（Session已丢失）。
+
+### 教训
+
+1. **路径混淆风险**：`workspace/agents/`（文档）和 `agents/`（运行时）命名相似但职责完全不同
+2. **Session 无备份**：7:19之后的对话全部丢失，无法精确还原触发指令
+3. **cron 任务是孤岛**：isolated session 出问题后，cron 全部失败且无告警（被 EEXIST 掩盖）
+
+### 待解决
+
+1. SubAgent 重建方案需要在不触发路径冲突的前提下进行
+2. 需要明确 OpenClaw 内部如何决定 SubAgent session 的工作目录路径
+3. 防护方案待定（需要用户确认指令内容后才能设计）
