@@ -32,10 +32,24 @@
 - **辅助模式**：直接找 SubAgent（明确、单一、不需要协调的任务）
 - **事后同步**：直接找 SubAgent 处理后，告知阿呆保持全局可见性
 
-**核心流程：**
+**核心流程（2026-04-20 整合版）：**
 
 ```
-接收需求 → 分析拆解 → 分配给合适Agent → 同步分配结果 → SubAgent执行 → 每10分钟检查状态 → 异常则重新分配 → 完成后汇总结果同步
+① 用户发需求
+      ↓
+② 阿呆接收需求
+      ↓
+③ 阿呆分析拆解 → 判断分配给哪个Agent
+      ↓
+④ 阿呆更新状态文件（task、phase:planning、progress.next）
+      ↓
+⑤ 阿呆 spawn SubAgent（run模式）
+      ↓
+⑥ SubAgent 读取状态文件 → 执行任务 → 更新状态文件
+      ↓
+⑦ 阿呆读取结果 → 更新 MEMORY.md（归档）
+      ↓
+⑧ 汇总结果同步给用户 → 状态文件 phase → done 或 归档
 ```
 
 **Spawn失败处理：** 遇到spawn无法分配任务时，立即同步用户并确认下一步，不得自行执行。
@@ -50,6 +64,21 @@
 | 数据分析 | 数据分析师 |
 | 测试验证、样式检查 | QA |
 | 流程协调、跨Agent沟通 | 阿呆 |
+
+**状态文件中转机制（SubAgent run模式专用）：**
+
+```
+/root/.openclaw/workspace/agent-state/
+  rd-agent-state.json      ← 研发
+  operations-state.json    ← 运营
+  pm-agent-state.json      ← 产品
+  ui-agent-state.json      ← UI设计
+  data-agent-state.json    ← 数据分析
+  qa-agent-state.json      ← QA
+  novelist-agent-state.json ← 小说家
+```
+
+完整规范见：`/workspace/agent-state/SUBAGENT-RUN-MODE-WORKFLOW.md`
 
 ---
 
@@ -97,7 +126,7 @@
 
 ---
 
-_最后更新：2026-04-19_
+_最后更新：2026-04-20 09:10_
 
 ---
 
@@ -174,12 +203,9 @@ git show origin/main:<file> | head -20       # 获取远程实际内容
 
 | 时间 | 话题 | 状态 | 备注 |
 |------|------|------|------|
-| 2026-04-18 22:29 | 渠道合并方案A2讨论 | ❌ 未完成 | 方案A2验证失败（per-peer无法实现跨渠道上下文共享），建议改用MEMORY/Wiki人工同步 |
-| 2026-04-18 22:29 | Session备份机制建立 | ✅ 完成 | 建立了 session-backup.sh + heartbeat定期同步 |
-| 2026-04-19 01:29 | 技能安装位置问题 | ✅ 完成（验证修正） | 2026-04-18晚重新安装成功，workspace/skills/有17个技能目录，均有文件。MEMORY.md旧记录"23个技能全被SIGKILL杀死"为4月18日凌晨旧数据，已更正。|
-| 2026-04-19 07:13 | SubAgent配置核查 | 🔍 待确认 | agents_list仅显示main一个Agent；workspace/agents/有8个角色定义文件但非可执行SubAgent；用户想测试多Agent技能触发，需配置独立SubAgent |
-| 2026-04-19 07:18 | 技能语义触发测试 | ✅ 完成 | 测试了database-design/frontend-design/copywriting/git-workflows，技能均正常；完整多Agent链路因无独立SubAgent无法测试 |
-| 2026-04-19 上午 | SubAgent重建故障 | ❌ 未解决 | 重建SubAgent时触发EEXIST错误，OpenClaw崩溃两次；根因：workspace/agents/和agents/路径混淆 |
+| 2026-04-19 上午 | SubAgent重建故障 | ✅ 已解决 | 确认lightclawbot仅支持run模式；建立状态文件中转方案 |
+| 2026-04-20 08:37 | 整合工作流固化 | ✅ 完成 | 完整10步流程 + 异常处理 + MEMORY.md同步更新 |
+| 2026-04-20 09:10 | 技能使用记录系统 | ✅ 完成 | skill-usage-log.md + HEARTBEAT自动报告 + MEMORY.md + Wiki同步 |
 
 ### 今日 Session 重启（2026-04-19）
 - 时间：2026-04-19（具体时间不明）
@@ -323,3 +349,126 @@ git show origin/main:<file> | head -20       # 获取远程实际内容
 - rd-agent/ 目录存在但未完成初始化
 - 所有 cron 任务（memory-cleanup、daily-todo-summary 等）因 rd-agent 崩溃而失败
 - 待解决问题：安全地重建 SubAgent 系统
+
+---
+
+## 2026-04-20 SubAgent 模式确认与固化
+
+### 关键发现
+
+| 发现 | 详情 |
+|------|------|
+| lightclawbot 不支持 session 模式 | API 层直接拒绝："mode=session requires thread=true" |
+| lightclawbot 不支持 thread 模式 | channel 不支持 thread 绑定："Unable to create or bind a thread" |
+| run 模式可用 | ✅ 成功，无独立工作目录，session 存储在 main/ 下 |
+| 微信通道的 rd-agent session | 存在独立实体（sessionFile 在 rd-agent/ 目录），但 lightclawbot 无法调用 |
+
+### 结论
+
+**所有 SubAgent 必须使用 run 模式**（lightclawbot 硬限制）。
+
+### 上下文传递方案：状态文件中转（方案一）
+
+**核心思路：** 把「上下文」从「Agent 内存」变成「磁盘文件」，每次 run 从文件继承历史。
+
+**目录结构：**
+```
+/root/.openclaw/workspace/agent-state/
+  ├── rd-agent-state.json
+  ├── operations-state.json
+  ├── pm-agent-state.json
+  ├── ui-agent-state.json
+  ├── data-agent-state.json
+  ├── qa-agent-state.json
+  └── novelist-agent-state.json
+```
+
+**状态文件格式：**
+```json
+{
+  "agent": "rd-agent",
+  "task": "当前任务描述",
+  "phase": "planning|coding|review|done",
+  "files": ["相关文件路径"],
+  "progress": {
+    "done": ["已完成"],
+    "next": ["下一步"],
+    "blocked": ["阻塞点"]
+  },
+  "context": { "branch": "...", "git_status": "..." },
+  "updated_at": "2026-04-20T07:00:00+08:00"
+}
+```
+
+**工作流：**
+```
+阿呆接收需求 → 更新状态文件 → spawn SubAgent(run) → SubAgent读文件执行 → 更新状态文件 → 阿呆汇总
+```
+
+**规范文档：** `/workspace/agent-state/SUBAGENT-RUN-MODE-WORKFLOW.md`
+
+---
+
+## 技能使用记录系统（skill-usage-log）
+
+**背景：** 2026-04-02 曾规划此功能但未实现，2026-04-20 正式落地。
+
+### 核心机制
+
+| 组件 | 说明 |
+|------|------|
+| `/workspace/skill-usage-log.md` | 技能使用原始记录文件 |
+| HEARTBEAT | 每天 08:50 统计并微信推送报告 |
+| 阿呆加载技能时 | 顺手追加一行记录 |
+
+### 记录格式
+
+```
+| 时间 | 技能 | 来源 | 说明 |
+| 2026-04-20 08:50 | copywriting | 阿呆 | 写推广文案 |
+```
+
+### 记录时机
+
+1. **阿呆直接使用技能** → 阿呆顺手写一行
+2. **阿呆 spawn SubAgent 执行任务** → 阿呆记录（因为是阿呆发起的）
+3. **SubAgent 内部技能使用** → ❌ 不记录（run 模式无状态）
+
+### 报告推送
+
+- 时间：每天 08:50（与每日待办汇总同步）
+- 渠道：微信推送（lightclawbot）
+- 格式：
+```
+📊 技能使用报告（4月20日）
+─────────────────────
+copywriting      3次  ████████████
+git-workflows    2次  ████████
+humanize-chinese 1次  ████
+─────────────────────
+合计触发 6 次
+```
+
+### 相关文件
+
+| 文件 | 用途 |
+|------|------|
+| `/workspace/skill-usage-log.md` | 原始记录 |
+| `/workspace/HEARTBEAT.md` | 定期任务定义 |
+
+### 与 session/thread 的本质区别
+
+| | run + 文件中转 | session/thread |
+|---|---|---|
+| 上下文存储 | 外部文件（磁盘） | Agent 内存 |
+| 生命周期 | 手动管理 | 自动保持 |
+| 跨 run 记忆 | ✅ 通过文件继承 | ❌ 每次 run 丢失 |
+| 状态可见性 | ✅ 阿呆可查看 | ❌ 内存不可见 |
+
+### 微信多设备问题
+
+**现象：** openclaw-weixin 绑定微信后，手机微信能与 OpenClaw 对话，电脑微信没有窗口
+
+**根因：** 微信个人版不支持多设备同时在线，手机微信占用会话通道后电脑微信无法再建立独立会话
+
+**解决方案：** 只用手机微信聊 OpenClaw（正常做法），或迁移到企业微信（支持多设备）
