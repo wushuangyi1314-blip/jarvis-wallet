@@ -68,8 +68,8 @@
 
 | commit | 内容 | 状态 |
 |---------|------|:----:|
-| `0db23b6` | hugo-refactor-plan.md 标记完成 | ⏸️ 待 push |
-| `7493505` | MEMORY.md 新增 Workspace 路径规则 | ⏸️ 待 push |
+| `0db23b6` | hugo-refactor-plan.md 标记完成 | ✅ 已推送 |
+| `7493505` | MEMORY.md 新增 Workspace 路径规则 | ✅ 已推送 |
 
 ---
 
