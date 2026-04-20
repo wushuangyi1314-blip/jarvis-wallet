@@ -19,10 +19,8 @@
 **2. hugo-refactor-plan.md ✅ 已存在（637行）**
 - 来源：2026-04-17
 
-**3. AI-TOOL-REVIEW-WORKFLOW.md 为空**
+**3. AI-TOOL-REVIEW-WORKFLOW.md ✅ 已存在（168行）**
 - 来源：2026-04-17
-- 验证情况：✅ 已验证，文件不存在，需运营 Agent 重建
-- 下一步：分配给运营经理重建
 
 **4. 小说创作套路公式（8项）**
 - 来源：2026-04-18
@@ -92,7 +90,6 @@
 
 | 项目 | 内容 |
 |------|------|
-| 状态 | ❌ 文件不存在 |
 | 路径 | `/workspace/projects/hugo-refactor-plan.md` |
 | 原计划 | 模板重构方案文档 |
 | 说明 | 2026-04-01 制定的 Hugo 重构计划，文件丢失，需要运营/产品 Agent 重建 |
@@ -100,11 +97,10 @@
 
 ---
 
-### 3. AI-TOOL-REVIEW-WORKFLOW.md 为空
+### 3. AI-TOOL-REVIEW-WORKFLOW.md ✅ 已存在（168行）
 
 | 项目 | 内容 |
 |------|------|
-| 状态 | ❌ 文件不存在 |
 | 路径 | `/workspace/projects/content-template/AI-TOOL-REVIEW-WORKFLOW.md` |
 | 原内容 | AI 工具评测文章工作流 |
 | 说明 | 根据 2026-04-15 Wiki 同步记录，此文件之前存在，需要运营 Agent 重建 |
