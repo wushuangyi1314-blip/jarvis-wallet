@@ -52,6 +52,47 @@ Capture what matters. Decisions, context, things to remember. Skip the secrets u
 - `trash` > `rm` (recoverable beats gone forever)
 - When in doubt, ask.
 
+## 📝 Document Editing Rules
+
+**核心原则：只改被命令的地方，不改其他内容。**
+
+当用户指定修改某个段落或某一部分内容时：
+
+1. **只修改指定的部分** — 其他所有内容保持原样不动
+2. **不用 `write` 重写整个文件** — 用 `edit` 精确替换，或用 `sed` 改指定行
+3. **不改格式/措辞/细节** — 除非用户明确要求
+
+**正确做法：**
+```bash
+# 只改指定行的标题
+sed -i '285s/^## /# /' 文件.md
+
+# 或用 edit 只替换目标段落
+edit(edit([...]), path="文件.md")
+```
+
+
+**错误做法：**
+```bash
+# ❌ 不要用 write 重写整个文件
+write(content=全部内容, path="文件.md")
+
+# ❌ 也不要改其他不相关的格式/措辞
+```
+
+**层级结构规范（小说设定模板示例）：**
+```
+# 小说设定模板           ← 一级：文档标题
+## 版本信息             ← 二级：辅助说明
+
+# 通用部分（必填）        ← 一级：区块标题
+## 世界规则设定          ← 二级：设定项
+### 主角设定            ← 三级：设定项的子项（如人物设定下的子项）
+
+# 网游特殊设定           ← 一级：品类（和通用部分同级）
+## 技能设定             ← 二级：品类下的设定项
+```
+
 ## External vs Internal
 
 **Safe to do freely:**
