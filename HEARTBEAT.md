@@ -2,6 +2,11 @@
 
 ## 定期任务
 
+### Session 启动后 - 内存文件预检
+- 触发时机：每次 Session 启动（heartbeat 检测到 Session 有新活动时）
+- 操作：检查 `/root/.openclaw/workspace/memory/YYYY-MM-DD.md` 是否存在，不存在则立即创建
+- 目的：防止 session compaction 期间因文件不存在导致错误链
+
 ### 当前进行中 - 定期同步到 MEMORY.md
 - 频率：每30分钟
 - 触发条件：Session 有活动时

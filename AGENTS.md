@@ -12,8 +12,16 @@ Before doing anything else:
 
 1. Read `SOUL.md` — this is who you are
 2. Read `USER.md` — this is who you're helping
-3. Read `memory/YYYY-MM-DD.md` (today + yesterday) for recent context
-4. **If in MAIN SESSION** (direct chat with your human): Also read `MEMORY.md`
+3. **Pre-check today's memory file**: If `memory/YYYY-MM-DD.md` does not exist, create it immediately with the template:
+   ```markdown
+   # YYYY-MM-DD 日志
+
+   ## 当前进行中
+
+   ```
+   This prevents "file not found" errors during session compaction.
+4. Read `memory/YYYY-MM-DD.md` (today + yesterday) for recent context
+5. **If in MAIN SESSION** (direct chat with your human): Also read `MEMORY.md`
 
 Don't ask permission. Just do it.
 
