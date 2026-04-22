@@ -227,6 +227,19 @@
 
 ---
 
+## 待办事项 - 2026-04-22
+
+### Git Push 待推送
+
+**1. GitHub push 失败（网络问题）**
+- 内容：commit `181737c 更新MEMORY.md飞书操作规范，文档体系20260421-v1`
+- 状态：🔴 待处理
+- 来源：2026-04-22 13:31
+- 说明：GitHub 网络连接不稳定，连续push失败。需网络恢复后手动执行 `git push`
+- 下一步：网络恢复后执行 `cd /root/.openclaw/workspace && git push`
+
+---
+
 ## 每日待办汇总模板
 
 > **模板文件：** `.templates/daily-todo-template.md`
