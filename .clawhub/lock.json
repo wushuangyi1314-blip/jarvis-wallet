@@ -68,6 +68,18 @@
     "jpeng-knowledge-graph-memory": {
       "version": "1.0.0",
       "installedAt": 1776538024196
+    },
+    "fanqie": {
+      "version": "0.1.0",
+      "installedAt": 1777050962380
+    },
+    "openclaw-feishu-docs-perm-auto": {
+      "version": "1.0.1",
+      "installedAt": 1777138262074
+    },
+    "web-tools-guide": {
+      "version": "1.0.2",
+      "installedAt": 1777224541739
     }
   }
 }

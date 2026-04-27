@@ -1,14 +1,20 @@
 {
   "agent": "novelist-agent",
-  "task": "",
-  "phase": "idle",
-  "files": [],
+  "task": "创作《深渊》婚内谋杀悬疑小说",
+  "phase": "writing",
+  "target_file": "/root/.openclaw/workspace/shortstory-factory/小说项目落地文件/深渊-正文.md",
+  "outline_file": "/root/.openclaw/workspace/shortstory-factory/小说项目落地文件/婚内谋杀-大纲.md",
   "progress": {
     "done": [],
-    "next": [],
+    "next": ["第1章"],
     "blocked": []
   },
-  "context": {},
-  "updated_at": "2026-04-20T07:10:00+08:00",
-  "updated_by": "main"
+  "instructions": {
+    "字数要求": "30章×1000字=30000字",
+    "人称": "第一人称（女主视角）",
+    "格式": "每章独立标题，1000字左右",
+    "悬念原则": "核心悬念直到第24章才完全揭露",
+    "结局": "开放式——女主走出深渊，但没有明确爱情归宿"
+  },
+  "updated_at": "2026-04-25T22:43:00+08:00"
 }

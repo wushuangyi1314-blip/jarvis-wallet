@@ -11,5 +11,8 @@
     "long-term-memory"
   ],
   "author": "evolver",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "nostr-tools": "^2.23.3"
+  }
 }
