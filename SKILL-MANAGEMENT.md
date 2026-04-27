@@ -1,6 +1,6 @@
 # SKILL-MANAGEMENT.md - 技能管理规范
 
-> 版本：1.1 | 更新：2026-04-20
+> 版本：1.2 | 更新：2026-04-27 | 同步：17→20个技能
 > 重建自：2026-04-15 原始文档
 
 ---
@@ -41,7 +41,7 @@ ls /root/.openclaw/workspace/skills/ | wc -l
 
 ---
 
-## 二、技能清单（17个）
+## 二、技能清单（20个）
 
 | 技能 | 安装时间 | Git Commit | 用途 | 触发场景 |
 |------|----------|------------|------|----------|
@@ -62,6 +62,9 @@ ls /root/.openclaw/workspace/skills/ | wc -l
 | humanize-chinese-2-0-0 | 2026-04-16 | - | 中文去AI味 | 中文文本需要更像人写的 |
 | minimax-multimodal | 2026-04-18 | - | 多模态内容生成 | 生成图片/视频/音乐/语音 |
 | wiki-maintainer | 2026-04-18 | - | Wiki知识库维护 | 维护整理知识库/Wiki页面 |
+| fanqie | 2026-04-20 | - | 番茄小说调研 | 番茄小说/网文市场调研 |
+| openclaw-feishu-docs-perm-auto | 2026-04-22 | - | 飞书文档权限自动添加 | 创建飞书文档后自动添加权限 |
+| find-skills-skill | 2026-04-20 | - | 技能查询辅助 | 辅助find-skills进行技能搜索 |
 
 ---
 
@@ -85,6 +88,9 @@ ls /root/.openclaw/workspace/skills/ | wc -l
 | 中文文本优化 | 中文文本需要去除AI味/更像人写 | humanize-chinese-2-0-0 |
 | 多模态生成 | 需要生成图片/视频/音乐/语音 | minimax-multimodal |
 | Wiki维护 | 需要维护整理Wiki/知识库页面 | wiki-maintainer |
+| 番茄小说调研 | 番茄小说/网文市场调研 | fanqie |
+| 飞书文档权限 | 飞书文档创建后自动添加权限 | openclaw-feishu-docs-perm-auto |
+| 技能查询辅助 | 辅助find-skills进行技能搜索 | find-skills-skill |
 
 ---
 
