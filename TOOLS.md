@@ -1,87 +1,162 @@
-# TOOLS.md - Local Notes
+# 浏览器使用规则
 
-Skills define _how_ tools work. This file is for _your_ specifics — the stuff that's unique to your setup.
+> 最后更新：2026-05-12 23:06 by 阿呆
 
-## What Goes Here
+---
 
-Things like:
+## 核心原则
 
-- Camera names and locations
-- SSH hosts and aliases
-- Preferred voices for TTS
-- Speaker/room names
-- Device nicknames
-- Anything environment-specific
+**OpenClaw browser 已降级为备用方案。**
 
-## Examples
+主要使用：
+- **agent-browser-clawdbot** — 日常浏览、截图、简单交互
+- **playwright** — 复杂交互、PDF/视频、多步骤自动化
 
-```markdown
-### Cameras
+---
 
-- living-room → Main area, 180° wide angle
-- front-door → Entrance, motion-triggered
+## 场景选择规则
 
-### SSH
+### 快速判断流程
 
-- home-server → 192.168.1.100, user: admin
-
-### TTS
-
-- Preferred voice: "Nova" (warm, slightly British)
-- Default speaker: Kitchen HomePod
+```
+1. 是否需要复杂多步交互（多表单、复杂点击链）？
+   → YES: playwright
+   
+2. 是否需要Session隔离、网络拦截Mock、批量任务？
+   → YES: agent-browser
+   
+3. 默认: agent-browser
 ```
 
-## Why Separate?
+---
 
-Skills are shared. Your setup is yours. Keeping them apart means you can update skills without losing your notes, and share skills without leaking your infrastructure.
+## 场景对照表
+
+| 场景 | 推荐工具 | 原因 |
+|------|---------|------|
+| 快速查看网页 | agent-browser | 最稳定可靠 |
+| 截图 | agent-browser | 更稳定 |
+| 填表/点击（简单） | agent-browser | CLI直观 |
+| 填表/点击（复杂多步） | playwright | API完整成熟 |
+| Session隔离 | agent-browser | 原生支持隔离 |
+| 网络拦截/Mock | agent-browser | 原生支持 |
+| PDF生成 | playwright | 原生支持 |
+| 视频录制 | playwright | 原生支持 |
+| 移动端模拟 | playwright | 支持设备模拟 |
+| 定时批量任务 | agent-browser | 支持批量 |
+| Accessibility Tree | agent-browser | 原生优化 |
 
 ---
 
-## 飞书文档权限系统
+## 工具对比
 
-### 飞书应用凭证（channels.feishu）
+| 功能 | agent-browser-clawdbot | playwright |
+|------|----------------------|-----------|
+| 打开网页 | ✅ | ✅ |
+| 截图 | ✅ | ✅ |
+| PDF生成 | ❌ | ✅ |
+| 视频录制 | ❌ | ✅ |
+| 填表/点击 | ✅ | ✅ |
+| Session隔离 | ✅ | ⚠️ 需配置 |
+| 网络拦截 | ✅ | ❌ |
+| Tab管理 | ✅ | ❌ |
+| 移动端模拟 | ❌ | ✅ |
+| 批量任务 | ✅ | ⚠️ 需脚本 |
+| Accessibility Tree | ✅ | ⚠️ |
+| 安装状态 | ✅ 已安装 | ✅ 已安装 |
 
-| 字段 | 值 | 说明 |
+---
+
+## OpenClaw browser（备用）
+
+**状态：仅作为最后备选**
+
+| 功能 | 状态 | 说明 |
 |------|------|------|
-| appId | `cli_a937590de3215cb6` | 飞书自建应用ID |
-| appSecret | `QzLSvdQievxboXegMQirXf5D3rdSNwSu` | 飞书应用密钥（已脱敏） |
-| ownerOpenId | `ou_797d4de5202a58785a1861d79a135d0a` | 高云飞的飞书open_id，用于文档权限添加 |
-| domain | `feishu` | 飞书频道标识 |
+| 打开网页 | ⚠️ 有时可用 | 不稳定 |
+| 截图 | ⚠️ 超时 | 已降级 |
+| act操作 | ❌ 不可用 | 持续超时 |
 
-**配置位置：** `~/.openclaw/openclaw.json` → `channels.feishu`
-
-**用途：** 飞书应用创建的文档默认无权限，需要通过API为用户添加权限
+**何时使用：** agent-browser 和 playwright 都无法工作时。
 
 ---
 
-### 权限添加 Skill
+## 反Bot能力
 
-**Skill名称：** `openclaw-feishu-docs-perm-auto`
-**安装来源：** SkillHub（基于ClawHub开源）
-**功能：** 自动为飞书文档添加用户权限（full_access/edit/view）
+| 工具 | 基础伪装 | 说明 |
+|------|---------|------|
+| agent-browser | ✅ 有 | Session隔离 + 基础伪装 |
+| playwright | ⚠️ 有限 | 需额外stealth配置 |
 
-**工作流程：**
-1. 读取配置文件获取 appId + appSecret + ownerOpenId
-2. 获取 tenant_access_token（有效期约2小时）
-3. 解析文档URL获取 token 和 doc_type
-4. 调用飞书权限API添加成员权限
-
-**使用场景：**
-- 阿呆创建飞书文档后，自动为你添加编辑权限
-- 你反馈文档无权限时，阿呆可手动触发添加
-
-**相关权限：** `docs:permission.member:create`（已开通）
+**注意：服务器网络可能无法访问某些网站（Google等），这是服务器环境限制，不是工具问题。**
 
 ---
 
-### 关键文档链接
+## 故障排查
 
-| 文档 | 链接 | 权限 |
-|------|------|------|
-| 《替身》增强反转版 | https://e993mcvstg.feishu.cn/docx/NZMkd2NSSoYVekxiAQMc6Zoenoe | full_access |
-| 《我发现老公杀了人》| https://feishu.cn/docx/SaM6dNuhjoCrzixhDcccSKCOn6c | full_access |
-| 爆款题材模型库 | https://feishu.cn/docx/SJX2dTNhHoIg0sxem3Cc26jrnpg | full_access |
+| 问题 | 解决 |
+|------|------|
+| agent-browser报错 | 检查命令是否正确，重启browser服务 |
+| playwright脚本慢 | 复用browser实例，避免频繁launch/close |
+| 网络超时 | 服务器无法访问外网，尝试其他目标 |
 
 ---
 
-Add whatever helps you do your job. This is your cheat sheet.
+## 调用示例
+
+### agent-browser-clawdbot
+
+```bash
+# 打开网页并获取快照
+agent-browser open https://example.com
+agent-browser snapshot -i --json
+
+# 点击和输入
+agent-browser click @e2
+agent-browser fill @e3 "text"
+
+# 截图
+agent-browser screenshot output.png
+
+# Session隔离
+agent-browser --session mysession open https://example.com
+```
+
+### playwright
+
+```javascript
+const { chromium } = require('playwright');
+
+// 基本浏览
+(async () => {
+  const browser = await chromium.launch({ headless: true });
+  const page = await browser.newPage();
+  await page.goto('https://example.com');
+  await page.screenshot({ path: 'page.png' });
+  await browser.close();
+})();
+
+// 复杂交互
+(async () => {
+  const browser = await chromium.launch({ headless: true });
+  const page = await browser.newPage();
+  
+  await page.goto('https://example.com');
+  await page.fill('#username', 'user');
+  await page.fill('#password', 'pass');
+  await page.click('#submit');
+  
+  await page.waitForNavigation();
+  console.log(await page.title());
+  await browser.close();
+})();
+```
+
+---
+
+## 安装记录
+
+| 工具 | 安装时间 | 状态 |
+|------|---------|------|
+| agent-browser-clawdbot | 2026-05-12 | ✅ 已安装 |
+| playwright | 2026-05-12 | ✅ 已安装 |

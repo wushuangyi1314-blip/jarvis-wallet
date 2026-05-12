@@ -92,6 +92,34 @@
     "novel-writing": {
       "version": "1.2.0",
       "installedAt": 1778551607089
+    },
+    "agent-browser-clawdbot": {
+      "version": "0.1.0",
+      "installedAt": 1778595961795
+    },
+    "ecommerce-product-selector": {
+      "version": "1.0.2",
+      "installedAt": 1778602085236
+    },
+    "competitor-analysis": {
+      "version": "9.9.5",
+      "installedAt": 1778602088553
+    },
+    "keyword-research": {
+      "version": "9.9.5",
+      "installedAt": 1778602100935
+    },
+    "dropshipping": {
+      "version": "1.0.0",
+      "installedAt": 1778602104164
+    },
+    "cross-border-ecommerce-skill": {
+      "version": "2.0.2",
+      "installedAt": 1778602114337
+    },
+    "amazon-niche-finder-skill": {
+      "version": "1.0.0",
+      "installedAt": 1778602117233
     }
   }
 }
