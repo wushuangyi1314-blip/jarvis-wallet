@@ -80,6 +80,18 @@
     "web-tools-guide": {
       "version": "1.0.2",
       "installedAt": 1777224541739
+    },
+    "novel-writer-structure": {
+      "version": "1.1.0",
+      "installedAt": 1778551584480
+    },
+    "novel-generator": {
+      "version": "1.0.0",
+      "installedAt": 1778551584917
+    },
+    "novel-writing": {
+      "version": "1.2.0",
+      "installedAt": 1778551607089
     }
   }
 }
