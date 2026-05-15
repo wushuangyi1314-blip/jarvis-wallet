@@ -714,8 +714,8 @@ novel-factory/
 - 操作授权规则
 
 **后续行动：**
-- ops-worker、pm-worker 等其他 Worker 待创建
-- 其他 Worker definition.md/log.md 需按 SPEC.md 模板创建
+- ops-worker、pm-worker 等其他 Worker 待创建（等 rd 测试稳定后）
+- rd-worker 第4轮测试（2026-05-15）：实际任务执行 ✅，规范流程验证通过
 
 ---
 
