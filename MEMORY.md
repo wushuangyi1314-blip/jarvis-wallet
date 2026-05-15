@@ -140,7 +140,18 @@
 
 ## 凭证存储
 
-**TOOLS.md** 中存储了 GitHub 和 Cloudflare 的凭证信息。
+**WordPress后台凭证（PhoneCaseWorld电商站）**
+
+| 项目 | 内容 |
+|------|------|
+| 网站地址 | http://82.156.99.87 |
+| 管理后台 | http://82.156.99.87/wp-admin |
+| 管理员账号 | admin |
+| 管理员密码 | G1EJviATjfar |
+| 凭证文件 | `/root/.openclaw/workspace/.credentials/wordpress-82.156.99.87.txt` |
+
+**语言设置位置：** wp-admin → Settings → General → WPLANG 下拉框选 `zh_CN`
+
 
 ---
 
@@ -259,11 +270,35 @@ git show origin/main:<file> | head -20       # 获取远程实际内容
 | 2026-04-27 08:35 | 昨晚崩溃复盘 | ✅ 已记录 | 根因：2026.4.21缺nostr-tools依赖，AI小说对话时触发 |
 | 2026-04-26 晚 | 新AI小说项目 | 🔴 待确认 | 用户想写AI小说，对话中崩溃，需重新接续需求 |
 
-### 今日 Session 重启（2026-04-19）
-- 时间：2026-04-19（具体时间不明）
-- 原因：SubAgent重建触发EEXIST错误导致崩溃
-- 影响：7:19之后的对话全部丢失，无法精确还原触发指令
-- 教训：Session备份机制已建立，但今天仍丢失（可能是备份频率不够或崩溃太快）
+## SubAgent 现状（2026-05-14 更新）
+
+**澄清：我们没有真正的 SubAgent。**
+
+| 项目 | 实际情况 |
+|------|----------|
+| workspace/agents/*.md | 只是角色文档（给人看的规范），不是可执行 Agent |
+| agents.list | 空，从未注册过任何 SubAgent |
+| Bootstrap 文件 | 无（AGENTS.md、IDENTITY.md 等不存在）|
+| 运行时目录 | 无独立目录 |
+
+**lightclawbot 通道的限制：**
+- run 模式：✅ 可用（但每次全新上下文，无记忆）
+- session 模式：❌ 不支持（核心层拒绝）
+- thread 模式：❌ 不支持（lightclawbot 无法绑定 thread）
+
+**真正的 SubAgent 需要：**
+1. 注册到 agents.list
+2. Bootstrap 文件初始化
+3. 支持 thread 的 channel（Discord/Telegram 等）才能持久记忆
+
+**后续处理方向（待解决）：**
+- 方向A：换用支持 thread 的 channel（测试飞书/微信是否支持）
+- 方向B：继续用 run 模式 + 状态文件传递上下文（当前可行方案）
+- 方向C：研究是否有其他方式在 lightclawbot 上实现有记忆的 SubAgent
+
+---
+
+_最后更新：2026-05-14 20:17_
 
 ---
 
@@ -651,3 +686,37 @@ novel-factory/
 **待处理：**
 1. 删除Git中的`novels/`（8个文件）
 2. 确认novel-factory/的Git同步策略（避免旧文件被重新带入）
+
+## SubAgent Worker 傀儡体系规范落地（2026-05-15）
+
+**落地状态：✅ 完整**
+
+| 检查项 | 状态 | 说明 |
+|--------|------|------|
+| SPEC.md 本地文件 | ✅ 已落地 | `/root/.openclaw/workspace/SPEC.md` |
+| workers/rd/ 目录 | ✅ 已落地 | definition.md + log.md |
+| rd-worker 测试 | ✅ 完成 | 3轮测试全部成功 |
+| 飞书文档 | ✅ 已落地 | ID: GW7gdV3kdoQQZXxU0Ghc0Dknnhb |
+| Git commit | ✅ | `e29a4c3` |
+| Git push | ✅ | `c6ab791..e29a4c3` |
+
+**规范核心内容：**
+- 4项核心原则（精简/隔离/有限记忆/阿呆主导）
+- 目录结构（workers/）
+- 文件格式规范（definition.md / log.md）
+- 记忆长度限制（20条/200字）
+- 阿呆调用流程（5步骤）
+- Prompt 模板
+- 写入规范
+- 错误处理流程
+- 禁止事项
+- 验证清单
+- 操作授权规则
+
+**后续行动：**
+- ops-worker、pm-worker 等其他 Worker 待创建
+- 其他 Worker definition.md/log.md 需按 SPEC.md 模板创建
+
+---
+
+[测试标记] SUBAGENT_A_写入时间戳: 2026-05-14T21:23:00+08:00_唯一值:ABC123XYZ
