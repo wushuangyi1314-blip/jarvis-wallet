@@ -228,6 +228,26 @@ git show origin/main:<file> | head -20       # 获取远程实际内容
 
 ---
 
+## 调研信息来源标注规则（2026-05-22 新增）
+
+**背景：** 用户要求阿呆每次调研后必须标注信息来源来源，供用户追溯核实。
+
+**规则：**
+| 场景 | 要求 |
+|------|------|
+| 调研类任务（web_search/web_fetch等） | 必须在调研结论末尾列出所有信息来源（来源URL或来源名称） |
+| 信息来源标注 | 提供查询关键词、来源平台、具体URL（可简写但需可追溯） |
+| 写入位置 | 信息来源随调研报告一起输出，并同步写入 MEMORY.md 的相关记忆区块 |
+
+**示例格式：**
+```
+信息来源：
+- geo targeting原理：MaxMind官方文档 + CSDN技术博客
+- hreflang配置：Google Search Central官方指南
+```
+
+---
+
 ## 信息验证规则（2026-04-18 新增）
 
 ### 根因
@@ -736,3 +756,68 @@ novel-factory/
 ---
 
 [测试标记] SUBAGENT_A_写入时间戳: 2026-05-14T21:23:00+08:00_唯一值:ABC123XYZ
+
+---
+
+## GEO 调研记录（2026-05-22）
+
+**信息来源：**
+- GeoIP 原理：MaxMind 官方文档 + CSDN《IP地理位置定位技术原理概述》+ 博客园《GeoIP简介》
+- HTML5 Geolocation API：博客园《HTML5 Geolocation API工作原理》
+- Geographic SEO 优化：CSDN《GEO优化技术原理与合规实践指南》+ 泛普软件《地理定位的影响因素》
+- Generative GEO（AI引擎优化）：CSDN《GEO优化的技术路径与市场实践剖析》+ 腾讯课堂搜索结果（豆包/文心一言GEO策略）
+- Schema/hreflang 技术：Google Search Central 官方指南
+
+**结论：** GEO 分为两个方向——Geographic SEO（地理定位）和 Generative GEO（生成式引擎优化）；对电商站优先级为 Schema + hreflang + ccTLD/子目录 + 本地商户
+
+## 代理搭建记录（2026-05-28）
+
+### 目标
+在服务器上搭建翻墙代理，使 wechat-article-spider 等工具能访问被墙的外网资源（主要是微信公众号图片）。
+
+### 最终状态：部分成功
+
+| 组件 | 状态 | 说明 |
+|------|------|------|
+| sing-box（代理核心） | ✅ 运行中 | 香港节点 VLESS + trojan 节点 |
+| proxychains4（工具链） | ✅ 可用 | `proxychains4 <cmd>` 让命令行工具走代理 |
+| Google/外网图片 | ✅ 通过 | curl/wget 均正常 |
+| 微信公众号文章内容 | ⚠️ 仍受限 | JS Challenge 验证拦截 |
+| 微信公众号图片直接访问 | ✅ 通过 | 但 spider 抓取正文时无法获取图片 |
+
+### 节点信息
+- 订阅地址：https://sub1.smallstrawberry.com/api/v1/client/subscribe?token=***（完整token需用户提供）
+- 节点：香港(8个) + 日本(8个) + 美国(4个)，共16个可用节点
+- 协议：VLESS + Trojan，sing-box/xray 支持
+
+### 关键文件位置
+- sing-box: `/tmp/v2rayN_setup/v2rayN/v2rayN-linux-64/sing_box/sing-box`
+- xray: `/tmp/v2rayN_setup/v2rayN/v2rayN-linux-64/xray/xray`
+- mihomo: `/tmp/v2rayN_setup/v2rayN/v2rayN-linux-64/mihomo/mihomo`
+- 配置文件: `/tmp/v2rayN_setup/sing-box.json`（香港节点配置）
+- proxychains: `/etc/proxychains4.conf`，已配置 `socks5 127.0.0.1 1080`
+
+### 启动命令
+```bash
+cd /tmp/v2rayN_setup
+nohup /tmp/v2rayN_setup/v2rayN/v2rayN-linux-64/sing_box/sing-box run -c /tmp/v2rayN_setup/sing-box.json > /tmp/singbox.log 2>&1 &
+
+# 使用方式
+proxychains4 python3 scripts/main.py <url> <output>
+```
+
+### 已知问题
+1. **微信 JS Challenge**：微信公众号文章有 JavaScript 验证，curl/python 无法通过；需要 Playwright 等浏览器模拟工具才能完整抓取
+2. **TLS 指纹**：sing-box 的 TLS 实现与真实浏览器有差异，部分服务会检测并拦截
+3. **节点域名封锁**：服务器 IP 直接访问节点域名（*.the-best-airport.com）被封锁，必须走代理
+
+### 备用工具
+- v2rayN-linux-x64 压缩包：用户上传（bin.7z + v2rayN-linux-64.7z），解压在 `/tmp/v2rayN_setup/`
+- 包含工具：xray、sing-box、mihomo、AmazTool（.NET GUI 需图形界面）
+
+### 经验总结
+- **shadowsocks-libev**（ss-local）已安装但无法使用——订阅里无纯 SS 协议节点
+- **shadowsocks-rust** 需要 Rust 编译器，服务器无 cargo，无法编译
+- v2rayN 的 Linux 版压缩包里最有用的是 **sing-box**（通用代理工具，支持 VLESS/trojan）
+- 服务器下载 GitHub releases 严重受限（返回错误页），但用户上传文件可行
+
