@@ -821,3 +821,39 @@ proxychains4 python3 scripts/main.py <url> <output>
 - v2rayN 的 Linux 版压缩包里最有用的是 **sing-box**（通用代理工具，支持 VLESS/trojan）
 - 服务器下载 GitHub releases 严重受限（返回错误页），但用户上传文件可行
 
+
+## 飞书操作规范（2026-05-28 更新）
+
+### 核心原则
+**飞书写操作使用 lark-cli，OpenClaw 飞书工具层仅用于读操作。**
+
+### 原因
+lark-cli 稳定性优于 OpenClaw 飞书工具层，且能绕过部分权限限制（`application:self_manage` 错误仍可能发生但较少见）。
+
+### lark-cli 常用命令
+
+| 操作 | 命令 |
+|------|------|
+| 创建文档 | `lark-cli docs +create` |
+| 文档插入文字 | `lark-cli docs +append` |
+| 上传图片到文档 | `lark-cli docs +media-insert` |
+| 上传文件到云空间 | `lark-cli drive +upload --file <path>` |
+| 检查文档 | `lark-cli docs +inspect <url>` |
+| 导出文档 | `lark-cli drive +export <token>` |
+
+### 图片上传到飞书云空间
+```bash
+cd /root/.openclaw/workspace/图片素材
+lark-cli drive +upload --file ai_conversation.jpg
+# 输出 url: https://e993mcvstg.feishu.cn/file/xxx
+```
+
+### 权限问题说明
+- `application:self_manage` 权限缺失时，飞书应用层 API 会报 404/权限错误
+- 但 lark-cli 的 drive +upload 和 docs +create 仍可用（机器人身份上传）
+- 用户手动访问上传的文件链接时可能需授权，lark-cli 会提示 "resource was created with bot identity"
+
+### 飞书文档图片限制（已知）
+- 飞书文档 **不支持** 通过 API 控制图片文字环绕（图文混排）
+- 图片只能控制水平对齐（left/center/right）
+- 如需图文混排效果，必须手动在飞书编辑器中调整

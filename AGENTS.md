@@ -25,6 +25,24 @@ Before doing anything else:
 
 Don't ask permission. Just do it.
 
+<!-- RESEARCH-SOURCES-START -->
+### 调研信息来源标注（CRITICAL）
+
+**每次调研后必须标注信息来源，格式：**
+
+```
+信息来源：
+- <信息点1>：<来源平台> / <URL或来源名称>
+- <信息点2>：<来源平台> / <URL或来源名称>
+```
+
+**要求：**
+- 每个主要结论点对应一条信息来源
+- 来源需可追溯（URL优先，简写需保证可定位）
+- 信息来源同步写入 MEMORY.md 的相关记忆区块
+
+<!-- RESEARCH-SOURCES-END -->
+
 <!-- WEB-TOOLS-STRATEGY-START -->
 ### Web Tools Strategy (CRITICAL)
 

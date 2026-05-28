@@ -1,0 +1,17 @@
+# WordPress 凭证存储
+
+> 最后更新：2026-05-13 06:53 北京时间
+
+## PhoneCaseWorld WooCommerce 独立站
+
+| 项目 | 内容 |
+|------|------|
+| 网站地址 | http://82.156.99.87 |
+| 商店前台 | http://82.156.99.87/shop |
+| 管理后台 | http://82.156.99.87/wp-admin |
+| 管理员账号 | admin |
+| 管理员密码 | G1EJviATjfar |
+
+## 备注
+- 密码格式：24位字母数字混合（看起来像WordPress hash格式）
+- 语言设置位置：wp-admin/options-general.php → WPLANG 下拉选 zh_CN
