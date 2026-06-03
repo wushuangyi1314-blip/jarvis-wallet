@@ -18,6 +18,27 @@
 - 操作：检查 /root/.openclaw/session-backups/ 是否有最近1小时内的备份
 - 如无备份且 Session 活跃，执行一次手动备份
 
+### Session Compaction 预警机制
+- 触发时机：每次 heartbeat 时
+- 核心原则：**图片/附件处理后立即备份**，不等到 compaction 前
+- 备份内容：
+  1. 图片 file_key + message_id + 来源说明 → 写入 `/workspace/session-compaction-backup/attachment-backup.md`
+  2. 当前进行中的任务状态 → 写入 MEMORY.md「当前进行中」区块
+  3. 用户待确认事项 → 写入 MEMORY.md「当前进行中」区块
+- 备份文件格式（attachment-backup.md）：
+  ```markdown
+  # 附件备份（Session Compaction 用）
+  > 最后更新：YYYY-MM-DD HH:mm
+
+  ## 图片
+  | file_key | message_id | 说明 | 时间 |
+  | img_xxx | om_xxx | 暑热养生水果原文图片 | 2026-05-29 |
+  ```
+- compaction 发生后的恢复流程：
+  1. 从 attachment-backup.md 读取 file_key
+  2. 用 feishu_im_bot_image 重新下载图片
+  3. 继续处理，避免用户重新发送
+
 ### 技能清单自动同步检查
 - 频率：每次 heartbeat（轻量级检查）
 - 操作：比对 `/workspace/skills/` 目录实际数量 vs SKILL-MANAGEMENT.md 记录数量

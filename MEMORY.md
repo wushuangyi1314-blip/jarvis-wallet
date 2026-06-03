@@ -857,3 +857,65 @@ lark-cli drive +upload --file ai_conversation.jpg
 - 飞书文档 **不支持** 通过 API 控制图片文字环绕（图文混排）
 - 图片只能控制水平对齐（left/center/right）
 - 如需图文混排效果，必须手动在飞书编辑器中调整
+
+---
+
+## 文件发送规则（2026-05-30 更新）
+
+**lightclawbot 发图片的正确方式：**
+
+| 方式 | 能否发图 | 说明 |
+|------|---------|------|
+| `message` 工具 + `attachments` | ❌ 图片被丢弃 | 需要配置 `apiBaseUrl` 才有效 |
+| `lightclaw_upload_file` + 回复 `localfile://` 链接 | ✅ 可用 | 前端识别后让用户点击下载 |
+| 直接在回复里写 `localfile://<path>` | ✅ 可用 | 前端识别后让用户点击下载 |
+
+**正确流程：**
+1. AI 生成图片后，调用 `lightclaw_upload_file` 注册文件
+2. 直接在回复里写入 `localfile://<绝对路径>` 链接
+3. LightClaw 前端识别到 `localfile://` 前缀后，通过 WS file:download 信令下载推送
+
+**错误方式：**
+- 用 `message` 工具传 attachments 发图 → 图片被丢弃，用户只看到文字
+
+**文件发送（图片/文档）：**
+| 场景 | 处理方式 |
+|------|---------|
+| 图片（发给用户看） | 直接写 `localfile://` 链接 |
+| 用户需要下载文件 | 先告知服务器路径，让用户自己下载 |
+| 飞书云空间文件 | 上传到飞书 drive → 发链接给用户 |
+| PDF/HTML 等文件 | 上传到飞书 drive → 发链接 |
+
+**飞书云空间上传命令：**
+```bash
+cd /workspace
+lark-cli drive +upload --file <文件名>  # 上传到飞书云空间，返回 url
+```
+
+**记录位置：** `/workspace/` 是服务器工作目录，文件常放这里，用户需要时告知路径即可。
+
+---
+
+## 简历制作项目记录（2026-05-29）
+
+### 完成状态：✅ 已交付
+
+**最终文件：**
+- `/workspace/张雅林简历-v2.html` — 最终版HTML简历（90KB）
+- `/workspace/张雅林简历-v2.pdf` — 转PDF文件（793KB）
+
+**设计规格：**
+- 上下布局，浅色底（白+极浅灰卡片）
+- 配色：深蓝 `#1E3A8A` + 金色 `#C4A35A` 点缀
+- 头像：Base64内嵌，圆形90px，深蓝边框
+- 联系方式：蓝色圆点 + 圆角胶囊chip样式
+- 头部底色：`#EEF3FA`（浅灰蓝）
+- 内容：01 About / 02 Education / 03 Experience（5段）/ 04 Projects（4个）/ 05 Skills
+
+**用户确认后的改动记录：**
+- v1：左右布局，深色渐变，内容有缺失
+- v2：上下布局，浅色底，内容完整，头像Base64内嵌
+
+### 头像文件
+- `/workspace/张雅林-头像.jpg` — 用户提供的原始头像（57KB）
+
