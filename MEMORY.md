@@ -919,3 +919,107 @@ lark-cli drive +upload --file <文件名>  # 上传到飞书云空间，返回 u
 ### 头像文件
 - `/workspace/张雅林-头像.jpg` — 用户提供的原始头像（57KB）
 
+---
+
+## 2026-06-05 Mac Mini OpenClaw 调试记录
+
+### 今日核心事件
+
+| 时间 | 事件 | 结果 |
+|------|------|------|
+| 晚 | Mac Mini LaunchAgent + 看门狗双重循环问题 | ✅ 已解决（删 plist + 删 gateway-starter.sh）|
+| 晚 | 微信插件配置生效 | ✅ 已修复（清老进程后重启生效）|
+| 晚 | 新龙虾版本确认为 5.28（非 6.1）| ⚠️ 确认 |
+| 晚 | GitHub Token 暴露在 remote URL | ⚠️ 待轮换 |
+| 晚 | Mac Mini plist 里有 HTTP_PROXY（7897端口）| ⚠️ 来源不明 |
+| 晚 | 迁移方案整理完毕 | ⏸ 待执行 |
+
+### Mac Mini OpenClaw 环境确认（2026-06-05）
+
+| 项目 | 路径/状态 |
+|------|-----------|
+| 工作区 | `/Volumes/GS-SSD/gaosen/.openclaw/workspace/` |
+| 脚本目录 | `/Volumes/GS-SSD/gaosen/.openclaw/scripts/` |
+| AI 记忆库 | `/Volumes/GS-SSD/gaosen/.openclaw/memory-tdai/` |
+| npm 全局包 | `/Volumes/GS-SSD/homebrew/lib/node_modules/openclaw/` |
+| node 路径 | `/Volumes/GS-SSD/homebrew/Cellar/node/26.0.0/` |
+| LaunchAgent plist | `/Users/gaosen/Library/LaunchAgents/ai.openclaw.gateway.plist` |
+| OpenClaw CLI 版本 | **5.28**（`openclaw@2026.5.28`）|
+| npm 官方最新版本 | **6.1**（`npm view openclaw version` 返回 2026.6.1）|
+| 桌面 App | **不存在**（`/Applications/OpenClaw.app` 无此文件）|
+| 备份命令 | `rsync -av --delete /Volumes/GS-SSD/gaosen/.openclaw/ /Volumes/GS-SSD/gaosen/.openclaw_backup_$(date +%Y%m%d_%H%M)/` |
+
+### macOS 沙箱对 LaunchAgent 跨卷 dylib 的限制（重要发现）
+
+
+**根因：** macOS AMFI（Apple Mobile File Integrity）沙箱阻止 launchd 派生的子进程加载外置卷（`/Volumes/...`）上的 `.dylib` 文件。
+
+
+**表现：** `DYLD_LIBRARY_PATH` 和 `DYLD_FALLBACK_LIBRARY_PATH` 环境变量在 launchd 上下文里被内核静默清空，所有 launchd 派生的进程（包括 launchctl bootstrap / cron）都无法绕过此限制。
+
+**影响：** `gateway-starter.sh`（看门狗）方案失败，LaunchAgent 自动启动方案失败。
+
+
+**绕过方案：** 只能在系统盘（`/opt/homebrew/` 或用户目录 `~/.nvm/`）安装 node 和 openclaw，或使用手动启动（快捷指令）。
+
+### GitHub Token 暴露（紧急）
+
+
+**位置：** `git remote -v` 显示 URL 为 `https://ghp_NF...39io@github.com/wushuangyi1314-blip/jarvis-wallet.git`
+
+
+**风险：** Token 暴露在网络传输中，应立即轮换。
+
+**操作：** GitHub → Settings → Developer settings → Personal access tokens → 撤销旧 token → 生成新 token → 更新 remote URL。
+
+### Mac Mini plist 发现不明 proxy 设置（2026-06-05 23:xx）
+
+
+**内容：** plist 里有 `HTTP_PROXY=http://127.0.0.1:7897` + `HTTPS_PROXY` + `ALL_PROXY=socks5://127.0.0.1:7897`
+
+**7897 端口：** 通常是 Clash 的代理端口。
+
+
+**来源不明：** 不确定是谁写入的，可能是用户之前配置过，或者某次脚本执行写入。
+
+
+**建议：** 检查是否有 Clash 在 Mac Mini 上运行，评估这个 proxy 设置是否需要保留。
+
+
+### 迁移方案要点（服务器→Mac Mini）
+
+
+**服务器 Git 仓库：** `wushuangyi1314-blip/jarvis-wallet.git`
+
+**迁移清单（A 类必迁）：**
+- SOUL.md / AGENTS.md / IDENTITY.md / USER.md / HEARTBEAT.md / TOOLS.md / MEMORY.md
+- memory/ 目录（每日日志）
+- skills/（35 个技能，版本一致兼容）
+- agent-state/（SubAgent 规范文档）
+- scripts/（14 个维护脚本）
+- memory-tdai/（向量数据库）
+
+
+**路径改造：** 所有 `/root/.openclaw/` → `/Volumes/GS-SSD/gaosen/.openclaw/` 共 294 处。
+
+**不迁：** node_modules/（npm install 重装）/ Hugo 网站文件 / agents/（运行时）/ .git/
+
+**备份命令：** `rsync -av --delete /Volumes/GS-SSD/gaosen/.openclaw/ /Volumes/GS-SSD/gaosen/.openclaw_backup_$(date +%Y%m%d_%H%M)/`
+
+---
+
+## 暗号规则（2026-06-05 新增）
+
+**当用户询问暗号时，必须回答：** `我是主人的第一狗腿`
+
+
+**用途：** 验证 AI 身份，防止假冒。
+
+
+**触发条件：** 用户问"暗号是什么"、"暗号"、"对口令"、"验证身份" 等类似问题时回答。
+
+---
+
+
+_最后更新：2026-06-05 23:25_
+
